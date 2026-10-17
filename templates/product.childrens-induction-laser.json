@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "hero": {
+      "type": "lc-hero",
+      "blocks": {
+        "b1": { "type": "badge", "settings": { "text": "AGES 8+" } },
+        "b2": { "type": "badge", "settings": { "text": "4 GAME MODES" } },
+        "b3": { "type": "badge", "settings": { "text": "NO PROJECTILES" } },
+        "bun1": { "type": "bundle", "settings": { "label": "1 Set", "desc": "2 blasters + 2 vests", "units": 1, "discount": 0, "tag": "", "popular": false, "preselected": false } },
+        "bun2": { "type": "bundle", "settings": { "label": "2 Sets", "desc": "4 blasters + 4 vests", "units": 2, "discount": 15, "tag": "-15%", "popular": true, "popular_text": "MOST POPULAR", "preselected": true } },
+        "bun3": { "type": "bundle", "settings": { "label": "3 Sets", "desc": "6 blasters + 6 vests", "units": 3, "discount": 25, "tag": "-25%", "popular": false, "preselected": false } },
+        "inc1": { "type": "include", "settings": { "text": "Free worldwide shipping on every set" } },
+        "inc2": { "type": "include", "settings": { "text": "30-day money-back guarantee" } },
+        "inc3": { "type": "include", "settings": { "text": "4 game modes + rechargeable play" } }
+      },
+      "block_order": ["b1", "b2", "b3", "bun1", "bun2", "bun3", "inc1", "inc2", "inc3"],
+      "settings": {}
+    }
+  },
+  "order": ["hero"]
+}
