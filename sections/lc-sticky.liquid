@@ -1,0 +1,58 @@
+{%- comment -%} LaserClash — Sticky add-to-cart bar (syncs with lc-hero bundle) {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+{%- assign p = product -%}
+{%- if p == blank -%}{%- assign p = all_products[section.settings.product] -%}{%- endif -%}
+<style>
+#lc-sticky-{{ section.id }}{position:fixed;left:0;right:0;bottom:0;z-index:50;transform:translateY(120%);transition:transform .25s ease;font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:10px 14px;pointer-events:none}
+#lc-sticky-{{ section.id }}.show{transform:translateY(0)}
+#lc-sticky-{{ section.id }} .bar{pointer-events:auto;max-width:1000px;margin:0 auto;background:{{ section.settings.bar_bg }};color:#fff;border-radius:16px;padding:10px 12px 10px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 10px 30px rgba(6,10,25,.3)}
+#lc-sticky-{{ section.id }} .th{width:48px;height:48px;border-radius:10px;object-fit:cover;flex:0 0 auto;background:#05070f}
+#lc-sticky-{{ section.id }} .meta{flex:1;min-width:0}
+#lc-sticky-{{ section.id }} .nm{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:14px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lc-sticky-{{ section.id }} .pr{font-size:13px;opacity:.85}
+#lc-sticky-{{ section.id }} button{flex:0 0 auto;border:none;cursor:pointer;background:{{ section.settings.accent }};color:{{ section.settings.accent_ink }};border-radius:11px;padding:14px 22px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:15px;letter-spacing:.02em}
+@media(max-width:560px){#lc-sticky-{{ section.id }} .nm{font-size:13px}#lc-sticky-{{ section.id }} button{padding:13px 16px;font-size:14px}}
+</style>
+<div id="lc-sticky-{{ section.id }}">
+  <form class="bar" method="post" action="/cart/add" id="lc-sform-{{ section.id }}">
+    {%- if p.featured_media -%}<img class="th" src="{{ p.featured_media.preview_image | image_url: width: 120 }}" alt="">{%- endif -%}
+    <div class="meta">
+      <div class="nm">{{ section.settings.label | default: p.title }}</div>
+      <div class="pr"><span data-sprice></span></div>
+    </div>
+    <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id | default: p.variants.first.id }}" data-svid>
+    <input type="hidden" name="quantity" value="1" data-sqty>
+    <button type="submit">{{ section.settings.button_text }}</button>
+  </form>
+</div>
+<script>
+(function(){
+  var S="{{ section.id }}";
+  var wrap=document.getElementById("lc-sticky-"+S);
+  if(!wrap) return;
+  var pr=wrap.querySelector("[data-sprice]"), vid=wrap.querySelector("[data-svid]"), qty=wrap.querySelector("[data-sqty]");
+  var CUR="{{ cart.currency.iso_code | default: shop.currency }}";
+  var nf; try{ nf=new Intl.NumberFormat(document.documentElement.lang||"en",{style:"currency",currency:CUR}); }catch(e){nf=null;}
+  function fmt(v){ try{return nf?nf.format(v):("$"+v.toFixed(2));}catch(e){return "$"+v.toFixed(2);} }
+  document.addEventListener("lc:update",function(e){ var d=e.detail||{}; if(d.vid&&vid)vid.value=d.vid; if(d.units&&qty)qty.value=d.units; if(typeof d.price==="number"&&pr)pr.textContent=fmt(d.price); });
+  // show after scrolling past threshold
+  function onScroll(){ if(window.scrollY>{{ section.settings.show_after }}){ wrap.classList.add("show"); } else { wrap.classList.remove("show"); } }
+  window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+})();
+</script>
+{% schema %}
+{
+  "name":"LC Sticky cart","tag":"section",
+  "settings":[
+    {"type":"product","id":"product","label":"Product (leave empty on a product page)"},
+    {"type":"text","id":"label","label":"Label (empty = product title)"},
+    {"type":"text","id":"button_text","label":"Button text","default":"BUY NOW"},
+    {"type":"range","id":"show_after","label":"Show after scroll (px)","min":200,"max":1600,"step":50,"default":600},
+    {"type":"color","id":"bar_bg","label":"Bar background","default":"#0B1429"},
+    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
+    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"}
+  ],
+  "presets":[{"name":"LC Sticky cart"}]
+}
+{% endschema %}
