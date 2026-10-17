@@ -127,7 +127,13 @@
       {%- endif -%}
 
       <!-- color variant -->
-      {%- if p and p.variants.size > 1 -%}
+      {%- assign show_colors = false -%}
+      {%- if p and p.variants.size > 1 -%}{%- assign show_colors = true -%}{%- endif -%}
+      {%- assign vm_check = section.blocks | where: "type", "bundle" -%}
+      {%- for b in vm_check -%}
+        {%- if b.settings.variant != blank -%}{%- assign show_colors = false -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if show_colors -%}
       <div class="lc-clabel">{{ section.settings.color_label }}</div>
       <div class="lc-colors" id="lc-colors-{{ section.id }}">
         {%- for v in p.variants -%}
@@ -138,6 +144,11 @@
 
       <!-- bundle -->
       {%- assign bundles = section.blocks | where: "type", "bundle" -%}
+      {%- comment -%} Bir bundle blokuna variant baglanibsa, secim variantlar uzre gedir: qiymet carpilmir, variantin oz qiymeti gosterilir {%- endcomment -%}
+      {%- assign variant_mode = false -%}
+      {%- for b in bundles -%}
+        {%- if b.settings.variant != blank -%}{%- assign variant_mode = true -%}{%- endif -%}
+      {%- endfor -%}
       {%- if bundles.size > 0 -%}
       <div class="lc-choose">
         <h3>{{ section.settings.bundle_heading }}</h3>
@@ -145,7 +156,15 @@
       </div>
       <div class="lc-opts" id="lc-opts-{{ section.id }}">
         {%- for b in bundles -%}
-          <label class="lc-opt {% if b.settings.preselected %}on{% endif %}" data-units="{{ b.settings.units }}" data-disc="{{ b.settings.discount }}" {{ b.shopify_attributes }}>
+          {%- assign bvid = '' -%}{%- assign bvprice = 0 -%}{%- assign bvcmp = 0 -%}
+          {%- if b.settings.variant != blank and p -%}
+            {%- for v in p.variants -%}
+              {%- if v.title == b.settings.variant -%}
+                {%- assign bvid = v.id -%}{%- assign bvprice = v.price -%}{%- assign bvcmp = v.compare_at_price | default: 0 -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          <label class="lc-opt {% if b.settings.preselected %}on{% endif %}" data-units="{{ b.settings.units }}" data-disc="{{ b.settings.discount }}"{% if bvid != '' %} data-vid="{{ bvid }}" data-vprice="{{ bvprice }}" data-vcmp="{{ bvcmp }}"{% endif %} {{ b.shopify_attributes }}>
             {%- if b.settings.popular -%}<span class="lc-popular">{{ b.settings.popular_text }}</span>{%- endif -%}
             <span class="lc-radio"></span>
             <span>
@@ -214,18 +233,36 @@
   var opts=document.getElementById("lc-opts-"+S);
   function recalc(){
     if(opts)opts.querySelectorAll(".lc-opt").forEach(function(o){
+      var cmp=o.querySelector("[data-cmp]"), nowE=o.querySelector("[data-now]"), perE=o.querySelector("[data-per]"), saveE=o.querySelector("[data-save]");
+      /* Variant rejimi: qiymet variantin oz qiymetidir, hec ne carpilmir */
+      if(o.dataset.vid){
+        var vnow=parseFloat(o.dataset.vprice)/100;
+        var vcmp=parseFloat(o.dataset.vcmp||0)/100;
+        if(nowE)nowE.textContent=fmt(vnow);
+        if(vcmp>vnow){ if(cmp)cmp.textContent=fmt(vcmp); if(saveE)saveE.textContent="You save "+fmt(vcmp-vnow); }
+        else { if(cmp)cmp.textContent=""; if(saveE)saveE.textContent=""; }
+        if(perE)perE.textContent="";
+        return;
+      }
       var u=parseInt(o.dataset.units)||1, d=parseFloat(o.dataset.disc)||0;
       var full=curPrice*u, now=full*(1-d/100);
       var per=now/u;
-      var cmp=o.querySelector("[data-cmp]"), nowE=o.querySelector("[data-now]"), perE=o.querySelector("[data-per]"), saveE=o.querySelector("[data-save]");
       if(nowE)nowE.textContent=fmt(now);
       if(d>0){ if(cmp)cmp.textContent=fmt(full); if(saveE)saveE.textContent="You save "+fmt(full-now); }
       else { if(cmp)cmp.textContent=""; if(saveE)saveE.textContent=""; }
       if(perE)perE.textContent=fmt(per)+" {{ section.settings.per_unit_suffix }}";
     });
     var sel=opts?opts.querySelector(".lc-opt.on"):null;
-    var u=sel?(parseInt(sel.dataset.units)||1):1, d=sel?(parseFloat(sel.dataset.disc)||0):0;
-    var now=curPrice*u*(1-d/100);
+    var now, u=1;
+    if(sel && sel.dataset.vid){
+      now=parseFloat(sel.dataset.vprice)/100;
+      curVid=sel.dataset.vid;
+      var vi=document.getElementById("lc-vid-"+S); if(vi)vi.value=curVid;
+    } else {
+      u=sel?(parseInt(sel.dataset.units)||1):1;
+      var d=sel?(parseFloat(sel.dataset.disc)||0):0;
+      now=curPrice*u*(1-d/100);
+    }
     var cp=root.querySelector("[data-ctaprice]"); if(cp)cp.textContent=fmt(now);
     var qty=document.getElementById("lc-qty-"+S); if(qty)qty.value=u;
     document.dispatchEvent(new CustomEvent("lc:update",{detail:{vid:curVid,units:u,price:now}}));
@@ -278,6 +315,7 @@
     {"type":"bundle","name":"Bundle option","settings":[
       {"type":"text","id":"label","label":"Label","default":"1 Set"},
       {"type":"text","id":"desc","label":"Description","default":"2 blasters + 2 vests"},
+      {"type":"text","id":"variant","label":"Product variant","info":"Exact variant title, e.g. 4 Guns And 4 Vests. Leave empty to use quantity x discount instead."},
       {"type":"number","id":"units","label":"Quantity (sets)","default":1},
       {"type":"range","id":"discount","label":"Discount %","min":0,"max":60,"step":5,"unit":"%","default":0},
       {"type":"text","id":"tag","label":"Tag (e.g. -20%)"},

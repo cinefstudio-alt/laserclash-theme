@@ -1,0 +1,337 @@
+{
+  "sections": {
+    "hero": {
+      "type": "lc-hero",
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "text": "AGES 8+"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "text": "4 GAME MODES"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "text": "NO PROJECTILES"
+          }
+        },
+        "inc1": {
+          "type": "include",
+          "settings": {
+            "text": "Free worldwide shipping on every set"
+          }
+        },
+        "inc2": {
+          "type": "include",
+          "settings": {
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "inc3": {
+          "type": "include",
+          "settings": {
+            "text": "4 game modes + rechargeable play"
+          }
+        },
+        "bun1": {
+          "type": "bundle",
+          "settings": {
+            "label": "2 Guns + 2 Vests",
+            "desc": "One-on-one duels",
+            "variant": "2 Guns And 2 Vests",
+            "units": 1,
+            "discount": 0,
+            "tag": "",
+            "popular": false,
+            "preselected": false
+          }
+        },
+        "bun2": {
+          "type": "bundle",
+          "settings": {
+            "label": "4 Guns + 4 Vests",
+            "desc": "Team play — 2 vs 2",
+            "variant": "4 Guns And 4 Vests",
+            "units": 1,
+            "discount": 0,
+            "tag": "",
+            "popular": true,
+            "popular_text": "MOST POPULAR",
+            "preselected": true
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "bun1",
+        "bun2",
+        "inc1",
+        "inc2",
+        "inc3"
+      ],
+      "settings": {
+        "title": "NEON LASER TAG BATTLE SET",
+        "bundle_heading": "Choose your set",
+        "bundle_note": "Pick the size of your battle"
+      }
+    },
+    "benefits": {
+      "type": "lc-split",
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "icon": "🎯",
+            "title": "Keep them moving",
+            "text": "An active, screen-free game that gets kids off the couch."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "icon": "👨‍👩‍👧‍👦",
+            "title": "Family time made easy",
+            "text": "Everyone from 8 to adult jumps in — no setup headaches."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "icon": "🎉",
+            "title": "Perfect for any night",
+            "text": "Siblings, sleepovers, birthdays — instant fun at home."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "image_side": "left",
+        "heading1": "SAME LIVING ROOM",
+        "heading2": "MORE TIME TOGETHER",
+        "body": "Turn an ordinary evening into a full-on laser battle the whole family can join."
+      }
+    },
+    "features": {
+      "type": "lc-split",
+      "blocks": {
+        "t1": {
+          "type": "tag",
+          "settings": {
+            "text": "LIGHT-UP GEAR"
+          }
+        },
+        "t2": {
+          "type": "tag",
+          "settings": {
+            "text": "DIGITAL LIFE TRACKING"
+          }
+        },
+        "t3": {
+          "type": "tag",
+          "settings": {
+            "text": "4 WAYS TO PLAY"
+          }
+        },
+        "t4": {
+          "type": "tag",
+          "settings": {
+            "text": "SCREEN-FREE FUN"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {
+        "image_side": "right",
+        "bg": "#F3F7FF",
+        "heading1": "LESS SCROLLING",
+        "heading2": "MORE PLAY",
+        "body": "Glowing blasters, light-up vests, and real hit feedback — lights, sound and vibration on every tag.",
+        "cta_text": "GET YOURS",
+        "cta_link": "#lc-buy"
+      }
+    },
+    "modes": {
+      "type": "lc-steps",
+      "blocks": {
+        "m1": {
+          "type": "step",
+          "settings": {
+            "title": "Single Shot",
+            "text": "Precision mode — make every tag count."
+          }
+        },
+        "m2": {
+          "type": "step",
+          "settings": {
+            "title": "Rapid Fire",
+            "text": "Fast bursts for close-range chaos."
+          }
+        },
+        "m3": {
+          "type": "step",
+          "settings": {
+            "title": "Laser",
+            "text": "Longer range for open-space battles."
+          }
+        },
+        "m4": {
+          "type": "step",
+          "settings": {
+            "title": "Plasma",
+            "text": "Heavy hits that drain more lives."
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ],
+      "settings": {
+        "heading": "WHAT'S YOUR GAME PLAN?",
+        "subheading": "Switch between 4 modes right on the blaster.",
+        "columns": 4,
+        "bg": "#F3F7FF"
+      }
+    },
+    "howto": {
+      "type": "lc-steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Choose your color",
+            "text": "Grab a blaster and strap on your vest."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Find your cover",
+            "text": "Spread out across the room or backyard."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Make your move",
+            "text": "Tag rival vests and watch their lives drop."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "heading": "THIS IS WHAT GAME NIGHT LOOKS LIKE",
+        "columns": 3,
+        "cta_text": "BUILD YOUR GAME NIGHT",
+        "cta_link": "#lc-buy"
+      }
+    },
+    "faq": {
+      "type": "lc-faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "q": "What's included in each set?",
+            "a": "Each set comes with one blaster and one digital chest vest per player, with adjustable straps and rechargeable play."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "q": "How does the game work?",
+            "a": "Blasters fire safe infrared beams. Tag a rival's vest to score a hit — the vest reacts with lights, sound and vibration, and tracks each player's remaining lives."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "q": "Does it shoot anything?",
+            "a": "No projectiles at all. It uses invisible infrared light only, so it's completely safe for indoor play."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "q": "What age is it for?",
+            "a": "Designed for ages 8 and up — but adults have just as much fun."
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "q": "Can we play indoors and outside?",
+            "a": "Both. It works great in the living room and in the backyard."
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "q": "Shipping and returns?",
+            "a": "We ship worldwide with free shipping on every set, and back it with a 30-day money-back guarantee."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "heading": "YOUR QUESTIONS ANSWERED"
+      }
+    },
+    "finalcta": {
+      "type": "lc-cta",
+      "settings": {
+        "eyebrow": "GIVE THEM A REASON TO PLAY TOGETHER",
+        "heading": "MAKE TIME FOR ONE MORE ROUND",
+        "cta_text": "START THE BATTLE",
+        "cta_link": "#lc-buy",
+        "trust": "Free worldwide shipping · 30-day money-back guarantee"
+      }
+    },
+    "sticky": {
+      "type": "lc-sticky",
+      "settings": {
+        "button_text": "BUY NOW"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "benefits",
+    "features",
+    "modes",
+    "howto",
+    "faq",
+    "finalcta",
+    "sticky"
+  ]
+}
