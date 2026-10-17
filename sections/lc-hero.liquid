@@ -262,7 +262,7 @@
       var vi=document.getElementById("lc-vid-"+S); if(vi)vi.value=curVid;
       var cpv=root.querySelector("[data-ctaprice]"); if(cpv)cpv.textContent=sel.dataset.vmoney||"";
       var qv=document.getElementById("lc-qty-"+S); if(qv)qv.value=1;
-      document.dispatchEvent(new CustomEvent("lc:update",{detail:{vid:curVid,units:1,price:now}}));
+      document.dispatchEvent(new CustomEvent("lc:update",{detail:{vid:curVid,units:1,price:now,money:sel.dataset.vmoney||""}}));
       return;
     } else {
       u=sel?(parseInt(sel.dataset.units)||1):1;
@@ -278,6 +278,10 @@
   if(colors)colors.querySelectorAll("button").forEach(function(c){ c.addEventListener("click",function(){ colors.querySelectorAll("button").forEach(function(x){x.classList.remove("on");}); c.classList.add("on"); curVid=c.dataset.vid; curPrice=parseFloat(c.dataset.price)/100; var vi=document.getElementById("lc-vid-"+S); if(vi)vi.value=curVid; recalc(); }); });
   if(opts && !opts.querySelector(".lc-opt.on")){ var f=opts.querySelector(".lc-opt"); if(f)f.classList.add("on"); }
   recalc();
+  /* Yapisqan panel bu bolmeden sonra yuklenir - ilk hadiseni qacirir.
+     Ona gore sehife tam yuklenende bir de gonderilir. */
+  window.addEventListener("load", recalc);
+  setTimeout(recalc, 600);
 })();
 </script>
 

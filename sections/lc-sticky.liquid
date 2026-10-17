@@ -35,7 +35,7 @@
   var CUR="{{ cart.currency.iso_code | default: shop.currency }}";
   var nf; try{ nf=new Intl.NumberFormat(document.documentElement.lang||"en",{style:"currency",currency:CUR}); }catch(e){nf=null;}
   function fmt(v){ try{return nf?nf.format(v):("$"+v.toFixed(2));}catch(e){return "$"+v.toFixed(2);} }
-  document.addEventListener("lc:update",function(e){ var d=e.detail||{}; if(d.vid&&vid)vid.value=d.vid; if(d.units&&qty)qty.value=d.units; if(typeof d.price==="number"&&pr)pr.textContent=fmt(d.price); });
+  document.addEventListener("lc:update",function(e){ var d=e.detail||{}; if(d.vid&&vid)vid.value=d.vid; if(d.units&&qty)qty.value=d.units; if(pr){ if(d.money){ pr.textContent=d.money; } else if(typeof d.price==="number"){ pr.textContent=fmt(d.price); } } });
   // show after scrolling past threshold
   function onScroll(){ if(window.scrollY>{{ section.settings.show_after }}){ wrap.classList.add("show"); } else { wrap.classList.remove("show"); } }
   window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
