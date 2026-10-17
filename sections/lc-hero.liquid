@@ -1,0 +1,285 @@
+{%- comment -%} LaserClash — Hero + Bundle selector (self-contained, reusable) {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+{%- assign p = product -%}
+{%- if p == blank -%}{%- assign p = all_products[section.settings.product] -%}{%- endif -%}
+
+<style>
+#lc-hero-{{ section.id }}{
+  --lc-bg: {{ section.settings.bg }};
+  --lc-ink: {{ section.settings.ink }};
+  --lc-blue: {{ section.settings.blue }};
+  --lc-accent: {{ section.settings.accent }};
+  --lc-accent-ink: {{ section.settings.accent_ink }};
+  --lc-card: {{ section.settings.card }};
+  --lc-line: {{ section.settings.line }};
+  --lc-muted: {{ section.settings.muted }};
+  --lc-radius: {{ section.settings.radius }}px;
+}
+#lc-hero-{{ section.id }} *{box-sizing:border-box}
+#lc-hero-{{ section.id }}{background:var(--lc-bg);color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:28px 16px 40px}
+#lc-hero-{{ section.id }} .lc-wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+#lc-hero-{{ section.id }} h1,#lc-hero-{{ section.id }} h2,#lc-hero-{{ section.id }} h3{font-family:'Barlow',sans-serif;text-transform:uppercase;line-height:.98;margin:0;letter-spacing:-.01em}
+/* gallery */
+#lc-hero-{{ section.id }} .lc-gal{position:sticky;top:16px}
+#lc-hero-{{ section.id }} .lc-main{position:relative;border-radius:var(--lc-radius);overflow:hidden;background:#05070f;aspect-ratio:1/1}
+#lc-hero-{{ section.id }} .lc-main img{width:100%;height:100%;object-fit:cover;display:none}
+#lc-hero-{{ section.id }} .lc-main img.on{display:block}
+#lc-hero-{{ section.id }} .lc-thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:4px}
+#lc-hero-{{ section.id }} .lc-thumbs button{flex:0 0 auto;width:64px;height:64px;border-radius:12px;overflow:hidden;border:2px solid var(--lc-line);background:#05070f;cursor:pointer;padding:0}
+#lc-hero-{{ section.id }} .lc-thumbs button.on{border-color:var(--lc-blue)}
+#lc-hero-{{ section.id }} .lc-thumbs img{width:100%;height:100%;object-fit:cover}
+/* info */
+#lc-hero-{{ section.id }} .lc-eyebrow{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--lc-blue)}
+#lc-hero-{{ section.id }} h1{font-size:clamp(34px,4.4vw,56px);font-weight:900;color:var(--lc-blue);margin:10px 0 0}
+#lc-hero-{{ section.id }} .lc-sub{color:var(--lc-muted);font-size:17px;line-height:1.5;margin:14px 0 0;max-width:46ch}
+#lc-hero-{{ section.id }} .lc-pills{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+#lc-hero-{{ section.id }} .lc-pill{background:var(--lc-card);color:var(--lc-ink);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-radius:999px}
+/* bundle */
+#lc-hero-{{ section.id }} .lc-choose{display:flex;justify-content:space-between;align-items:baseline;margin:26px 0 12px;gap:12px}
+#lc-hero-{{ section.id }} .lc-choose h3{font-size:22px;font-weight:800}
+#lc-hero-{{ section.id }} .lc-choose span{color:var(--lc-muted);font-size:13px;text-align:right}
+#lc-hero-{{ section.id }} .lc-opts{display:flex;flex-direction:column;gap:12px}
+#lc-hero-{{ section.id }} .lc-opt{position:relative;display:grid;grid-template-columns:22px 1fr auto;gap:14px;align-items:center;border:2px solid var(--lc-line);border-radius:14px;padding:16px 18px;cursor:pointer;background:#fff;transition:border-color .15s,box-shadow .15s}
+#lc-hero-{{ section.id }} .lc-opt:hover{border-color:var(--lc-blue)}
+#lc-hero-{{ section.id }} .lc-opt.on{border-color:var(--lc-blue);box-shadow:0 0 0 3px rgba(23,66,162,.12)}
+#lc-hero-{{ section.id }} .lc-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--lc-line);position:relative}
+#lc-hero-{{ section.id }} .lc-opt.on .lc-radio{border-color:var(--lc-blue)}
+#lc-hero-{{ section.id }} .lc-opt.on .lc-radio:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--lc-blue)}
+#lc-hero-{{ section.id }} .lc-opt .lc-t{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px}
+#lc-hero-{{ section.id }} .lc-opt .lc-d{color:var(--lc-muted);font-size:13px;margin-top:4px;display:block}
+#lc-hero-{{ section.id }} .lc-save{color:#128a3a;font-size:12px;font-weight:700;margin-top:4px;display:block}
+#lc-hero-{{ section.id }} .lc-tag{background:var(--lc-accent);color:var(--lc-accent-ink);font-weight:800;font-size:11px;letter-spacing:.04em;padding:3px 8px;border-radius:999px}
+#lc-hero-{{ section.id }} .lc-price{text-align:right}
+#lc-hero-{{ section.id }} .lc-price .cmp{color:var(--lc-muted);text-decoration:line-through;font-size:13px;display:block}
+#lc-hero-{{ section.id }} .lc-price .now{font-family:'Barlow',sans-serif;font-weight:800;font-size:22px;display:block}
+#lc-hero-{{ section.id }} .lc-price .per{color:var(--lc-muted);font-size:12px;display:block}
+#lc-hero-{{ section.id }} .lc-popular{position:absolute;top:-11px;right:16px;background:var(--lc-blue);color:#fff;font-family:'Barlow',sans-serif;font-weight:800;font-size:11px;letter-spacing:.04em;padding:4px 10px;border-radius:999px}
+/* colors */
+#lc-hero-{{ section.id }} .lc-colors{display:flex;gap:10px;margin:20px 0 0;flex-wrap:wrap}
+#lc-hero-{{ section.id }} .lc-colors button{border:2px solid var(--lc-line);background:var(--lc-card);border-radius:10px;padding:9px 14px;font-weight:700;font-size:13px;cursor:pointer;color:var(--lc-ink)}
+#lc-hero-{{ section.id }} .lc-colors button.on{border-color:var(--lc-blue);background:#fff}
+#lc-hero-{{ section.id }} .lc-clabel{font-weight:700;font-size:13px;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.06em}
+/* cta */
+#lc-hero-{{ section.id }} .lc-cta{display:block;width:100%;margin-top:18px;background:var(--lc-accent);color:var(--lc-accent-ink);border:none;border-radius:12px;padding:18px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:19px;letter-spacing:.02em;cursor:pointer;transition:transform .1s,filter .15s}
+#lc-hero-{{ section.id }} .lc-cta:hover{filter:brightness(1.05)}
+#lc-hero-{{ section.id }} .lc-cta:active{transform:translateY(1px)}
+/* included + trust */
+#lc-hero-{{ section.id }} .lc-inc{margin-top:18px;background:var(--lc-card);border-radius:14px;padding:16px 18px}
+#lc-hero-{{ section.id }} .lc-inc .hd{font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:12px;color:var(--lc-blue);display:flex;align-items:center;gap:8px}
+#lc-hero-{{ section.id }} .lc-inc ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+#lc-hero-{{ section.id }} .lc-inc li{display:flex;gap:10px;font-size:14px;align-items:flex-start}
+#lc-hero-{{ section.id }} .lc-inc li svg{flex:0 0 auto;margin-top:2px}
+#lc-hero-{{ section.id }} .lc-trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;justify-content:center}
+#lc-hero-{{ section.id }} .lc-trust div{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--lc-muted)}
+@media(max-width:860px){
+  #lc-hero-{{ section.id }} .lc-wrap{grid-template-columns:1fr;gap:24px}
+  #lc-hero-{{ section.id }} .lc-gal{position:static}
+}
+</style>
+
+<section id="lc-hero-{{ section.id }}">
+  <div class="lc-wrap">
+    <!-- GALLERY -->
+    <div class="lc-gal">
+      <div class="lc-main" id="lc-main-{{ section.id }}">
+        {%- if p and p.media.size > 0 -%}
+          {%- for m in p.media -%}
+            <img src="{{ m.preview_image | image_url: width: 1000 }}" alt="{{ m.preview_image.alt | escape }}" class="{% if forloop.first %}on{% endif %}" data-i="{{ forloop.index0 }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+          {%- endfor -%}
+        {%- else -%}
+          <img src="{{ 'product-1' | placeholder_svg_tag }}" class="on">
+        {%- endif -%}
+      </div>
+      {%- if p and p.media.size > 1 -%}
+      <div class="lc-thumbs" id="lc-thumbs-{{ section.id }}">
+        {%- for m in p.media -%}
+          <button class="{% if forloop.first %}on{% endif %}" data-i="{{ forloop.index0 }}"><img src="{{ m.preview_image | image_url: width: 160 }}" alt=""></button>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+
+    <!-- INFO -->
+    <div class="lc-info">
+      {%- if section.settings.eyebrow != blank -%}<div class="lc-eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h1>{{ section.settings.title | default: p.title }}</h1>
+      {%- if section.settings.subtitle != blank -%}<p class="lc-sub">{{ section.settings.subtitle }}</p>{%- endif -%}
+
+      {%- assign badges = section.blocks | where: "type", "badge" -%}
+      {%- if badges.size > 0 -%}
+      <div class="lc-pills">
+        {%- for b in badges -%}<span class="lc-pill" {{ b.shopify_attributes }}>{{ b.settings.text }}</span>{%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <!-- color variant -->
+      {%- if p and p.variants.size > 1 -%}
+      <div class="lc-clabel">{{ section.settings.color_label }}</div>
+      <div class="lc-colors" id="lc-colors-{{ section.id }}">
+        {%- for v in p.variants -%}
+          <button type="button" data-vid="{{ v.id }}" data-price="{{ v.price }}" class="{% if forloop.first %}on{% endif %}">{{ v.title }}</button>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <!-- bundle -->
+      {%- assign bundles = section.blocks | where: "type", "bundle" -%}
+      {%- if bundles.size > 0 -%}
+      <div class="lc-choose">
+        <h3>{{ section.settings.bundle_heading }}</h3>
+        <span>{{ section.settings.bundle_note }}</span>
+      </div>
+      <div class="lc-opts" id="lc-opts-{{ section.id }}">
+        {%- for b in bundles -%}
+          <label class="lc-opt {% if b.settings.preselected %}on{% endif %}" data-units="{{ b.settings.units }}" data-disc="{{ b.settings.discount }}" {{ b.shopify_attributes }}>
+            {%- if b.settings.popular -%}<span class="lc-popular">{{ b.settings.popular_text }}</span>{%- endif -%}
+            <span class="lc-radio"></span>
+            <span>
+              <span class="lc-t">{{ b.settings.label }}{% if b.settings.tag != blank %}<span class="lc-tag">{{ b.settings.tag }}</span>{% endif %}</span>
+              {%- if b.settings.desc != blank -%}<span class="lc-d">{{ b.settings.desc }}</span>{%- endif -%}
+              <span class="lc-save" data-save></span>
+            </span>
+            <span class="lc-price">
+              <span class="cmp" data-cmp></span>
+              <span class="now" data-now></span>
+              <span class="per" data-per></span>
+            </span>
+          </label>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <!-- add to cart -->
+      <form method="post" action="/cart/add" id="lc-form-{{ section.id }}">
+        <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id | default: p.variants.first.id }}" id="lc-vid-{{ section.id }}">
+        <input type="hidden" name="quantity" value="1" id="lc-qty-{{ section.id }}">
+        <button type="submit" class="lc-cta" id="lc-cta-{{ section.id }}">{{ section.settings.cta_text }} <span data-ctaprice></span></button>
+      </form>
+
+      <!-- included -->
+      {%- assign incs = section.blocks | where: "type", "include" -%}
+      {%- if incs.size > 0 -%}
+      <div class="lc-inc">
+        <div class="hd">{{ section.settings.included_heading }}</div>
+        <ul>
+          {%- for i in incs -%}
+          <li {{ i.shopify_attributes }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="{{ section.settings.blue }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ i.settings.text }}</span></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
+
+      <!-- trust -->
+      <div class="lc-trust">
+        {%- if section.settings.trust1 != blank -%}<div>🔒 {{ section.settings.trust1 }}</div>{%- endif -%}
+        {%- if section.settings.trust2 != blank -%}<div>✈️ {{ section.settings.trust2 }}</div>{%- endif -%}
+        {%- if section.settings.trust3 != blank -%}<div>↩️ {{ section.settings.trust3 }}</div>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var S="{{ section.id }}";
+  var root=document.getElementById("lc-hero-"+S);
+  if(!root) return;
+  var CUR="{{ cart.currency.iso_code | default: shop.currency }}";
+  var LOC=(document.documentElement.lang||"en");
+  var nf;
+  try{ nf=new Intl.NumberFormat(LOC,{style:"currency",currency:CUR}); }catch(e){ nf=null; }
+  function fmt(v){ try{ return nf?nf.format(v):("$"+v.toFixed(2)); }catch(e){ return "$"+v.toFixed(2);} }
+  var curPrice={{ p.selected_or_first_available_variant.price | default: p.variants.first.price | default: 0 | divided_by: 100.0 }};
+  var curVid="{{ p.selected_or_first_available_variant.id | default: p.variants.first.id }}";
+  // gallery
+  var main=document.getElementById("lc-main-"+S);
+  var thumbs=document.getElementById("lc-thumbs-"+S);
+  function showImg(i){ if(!main)return; main.querySelectorAll("img").forEach(function(im){im.classList.toggle("on",im.dataset.i==i);}); if(thumbs)thumbs.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.dataset.i==i);}); }
+  if(thumbs)thumbs.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){showImg(b.dataset.i);});});
+  // bundle
+  var opts=document.getElementById("lc-opts-"+S);
+  function recalc(){
+    if(opts)opts.querySelectorAll(".lc-opt").forEach(function(o){
+      var u=parseInt(o.dataset.units)||1, d=parseFloat(o.dataset.disc)||0;
+      var full=curPrice*u, now=full*(1-d/100);
+      var per=now/u;
+      var cmp=o.querySelector("[data-cmp]"), nowE=o.querySelector("[data-now]"), perE=o.querySelector("[data-per]"), saveE=o.querySelector("[data-save]");
+      if(nowE)nowE.textContent=fmt(now);
+      if(d>0){ if(cmp)cmp.textContent=fmt(full); if(saveE)saveE.textContent="You save "+fmt(full-now); }
+      else { if(cmp)cmp.textContent=""; if(saveE)saveE.textContent=""; }
+      if(perE)perE.textContent=fmt(per)+" {{ section.settings.per_unit_suffix }}";
+    });
+    var sel=opts?opts.querySelector(".lc-opt.on"):null;
+    var u=sel?(parseInt(sel.dataset.units)||1):1, d=sel?(parseFloat(sel.dataset.disc)||0):0;
+    var now=curPrice*u*(1-d/100);
+    var cp=root.querySelector("[data-ctaprice]"); if(cp)cp.textContent=fmt(now);
+    var qty=document.getElementById("lc-qty-"+S); if(qty)qty.value=u;
+    document.dispatchEvent(new CustomEvent("lc:update",{detail:{vid:curVid,units:u,price:now}}));
+  }
+  if(opts)opts.querySelectorAll(".lc-opt").forEach(function(o){ o.addEventListener("click",function(){ opts.querySelectorAll(".lc-opt").forEach(function(x){x.classList.remove("on");}); o.classList.add("on"); recalc(); }); });
+  var colors=document.getElementById("lc-colors-"+S);
+  if(colors)colors.querySelectorAll("button").forEach(function(c){ c.addEventListener("click",function(){ colors.querySelectorAll("button").forEach(function(x){x.classList.remove("on");}); c.classList.add("on"); curVid=c.dataset.vid; curPrice=parseFloat(c.dataset.price)/100; var vi=document.getElementById("lc-vid-"+S); if(vi)vi.value=curVid; recalc(); }); });
+  if(opts && !opts.querySelector(".lc-opt.on")){ var f=opts.querySelector(".lc-opt"); if(f)f.classList.add("on"); }
+  recalc();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "LC Hero + Bundle",
+  "tag": "section",
+  "settings": [
+    {"type":"product","id":"product","label":"Product (leave empty on a product page)"},
+    {"type":"header","content":"Text"},
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"LASERCLASH"},
+    {"type":"text","id":"title","label":"Title (empty = product title)","default":"LASER BATTLE SET"},
+    {"type":"textarea","id":"subtitle","label":"Subtitle","default":"A team-based infrared laser battle that gets everyone off the couch and into the game."},
+    {"type":"header","content":"Color selector"},
+    {"type":"text","id":"color_label","label":"Color label","default":"CHOOSE YOUR COLORS"},
+    {"type":"header","content":"Bundle"},
+    {"type":"text","id":"bundle_heading","label":"Bundle heading","default":"Choose your set"},
+    {"type":"text","id":"bundle_note","label":"Bundle note","default":"The more you gear up, the more you save"},
+    {"type":"text","id":"per_unit_suffix","label":"Per-unit suffix","default":"/ set"},
+    {"type":"header","content":"Included box"},
+    {"type":"text","id":"included_heading","label":"Included heading","default":"✦ INCLUDED WITH YOUR SET ✦"},
+    {"type":"header","content":"CTA"},
+    {"type":"text","id":"cta_text","label":"Button text","default":"ADD TO CART —"},
+    {"type":"header","content":"Trust badges"},
+    {"type":"text","id":"trust1","label":"Trust 1","default":"Secure checkout"},
+    {"type":"text","id":"trust2","label":"Trust 2","default":"Free worldwide shipping"},
+    {"type":"text","id":"trust3","label":"Trust 3","default":"30-day money-back"},
+    {"type":"header","content":"Colors"},
+    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
+    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
+    {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
+    {"type":"color","id":"accent","label":"Button / accent","default":"#BFFF0F"},
+    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"},
+    {"type":"color","id":"card","label":"Card background","default":"#F3F7FF"},
+    {"type":"color","id":"line","label":"Borders","default":"#DDE6F5"},
+    {"type":"color","id":"muted","label":"Muted text","default":"#5B6B8C"},
+    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16}
+  ],
+  "blocks": [
+    {"type":"badge","name":"Badge pill","settings":[{"type":"text","id":"text","label":"Text","default":"AGES 8+"}]},
+    {"type":"bundle","name":"Bundle option","settings":[
+      {"type":"text","id":"label","label":"Label","default":"1 Set"},
+      {"type":"text","id":"desc","label":"Description","default":"2 blasters + 2 vests"},
+      {"type":"number","id":"units","label":"Quantity (sets)","default":1},
+      {"type":"range","id":"discount","label":"Discount %","min":0,"max":60,"step":5,"unit":"%","default":0},
+      {"type":"text","id":"tag","label":"Tag (e.g. -20%)"},
+      {"type":"checkbox","id":"popular","label":"Show 'popular' ribbon","default":false},
+      {"type":"text","id":"popular_text","label":"Ribbon text","default":"MOST POPULAR"},
+      {"type":"checkbox","id":"preselected","label":"Preselected","default":false}
+    ]},
+    {"type":"include","name":"Included item","settings":[{"type":"text","id":"text","label":"Text","default":"Free worldwide shipping"}]}
+  ],
+  "presets": [{"name":"LC Hero + Bundle","blocks":[
+    {"type":"badge"},{"type":"badge"},{"type":"badge"},
+    {"type":"bundle"},{"type":"bundle"},{"type":"bundle"},
+    {"type":"include"},{"type":"include"}
+  ]}]
+}
+{% endschema %}
