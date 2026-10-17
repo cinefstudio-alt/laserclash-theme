@@ -21,6 +21,8 @@
 #lc-hero-{{ section.id }} *{box-sizing:border-box}
 #lc-hero-{{ section.id }}{background:var(--lc-bg);color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:28px 16px 40px}
 #lc-hero-{{ section.id }} .lc-wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+/* grid sutunu 1fr = minmax(auto,1fr) demekdir: icindeki en enli element (minatur lenti) sutunu sisirdirdi, mobilde ise kenar kesilirdi */
+#lc-hero-{{ section.id }} .lc-wrap > *{min-width:0}
 #lc-hero-{{ section.id }} h1,#lc-hero-{{ section.id }} h2,#lc-hero-{{ section.id }} h3{font-family:'Barlow',sans-serif;text-transform:uppercase;line-height:.98;margin:0;letter-spacing:-.01em}
 /* gallery */
 #lc-hero-{{ section.id }} .lc-gal{position:sticky;top:16px}
