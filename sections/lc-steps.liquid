@@ -1,0 +1,67 @@
+{%- comment -%} LaserClash — Numbered steps (how it works / quick start) {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+#lc-steps-{{ section.id }}{--lc-ink:{{ section.settings.ink }};--lc-blue:{{ section.settings.blue }};--lc-muted:{{ section.settings.muted }};--lc-card:{{ section.settings.card }};--lc-accent:{{ section.settings.accent }};--lc-accent-ink:{{ section.settings.accent_ink }};--lc-radius:{{ section.settings.radius }}px;background:{{ section.settings.bg }};color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
+#lc-steps-{{ section.id }} *{box-sizing:border-box}
+#lc-steps-{{ section.id }} .w{max-width:1100px;margin:0 auto}
+#lc-steps-{{ section.id }} .hd{text-align:center;max-width:720px;margin:0 auto 36px}
+#lc-steps-{{ section.id }} h2{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;line-height:1;letter-spacing:-.01em;font-size:clamp(28px,3.6vw,44px);margin:0;color:var(--lc-ink)}
+#lc-steps-{{ section.id }} .sub{color:var(--lc-muted);font-size:17px;margin:12px 0 0}
+#lc-steps-{{ section.id }} .grid{display:grid;grid-template-columns:repeat({{ section.settings.columns }},1fr);gap:18px}
+#lc-steps-{{ section.id }} .st{background:var(--lc-card);border-radius:var(--lc-radius);padding:26px 22px}
+#lc-steps-{{ section.id }} .n{font-family:'Barlow',sans-serif;font-weight:900;font-size:16px;color:#fff;background:var(--lc-blue);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+#lc-steps-{{ section.id }} .st h3{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:19px;margin:0 0 6px}
+#lc-steps-{{ section.id }} .st p{margin:0;color:var(--lc-muted);font-size:14px;line-height:1.5}
+#lc-steps-{{ section.id }} .note{text-align:center;color:var(--lc-muted);font-size:13px;margin:22px 0 0}
+#lc-steps-{{ section.id }} .cta{display:block;width:max-content;margin:26px auto 0;background:var(--lc-accent);color:var(--lc-accent-ink);text-decoration:none;border-radius:12px;padding:15px 30px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:16px}
+@media(max-width:800px){#lc-steps-{{ section.id }} .grid{grid-template-columns:1fr}}
+</style>
+<section id="lc-steps-{{ section.id }}">
+  <div class="w">
+    <div class="hd">
+      <h2>{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}<p class="sub">{{ section.settings.subheading }}</p>{%- endif -%}
+    </div>
+    <div class="grid">
+      {%- for b in section.blocks -%}
+        <div class="st" {{ b.shopify_attributes }}>
+          <div class="n">{{ forloop.index }}</div>
+          <h3>{{ b.settings.title }}</h3>
+          <p>{{ b.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.note != blank -%}<p class="note">{{ section.settings.note }}</p>{%- endif -%}
+    {%- if section.settings.cta_text != blank -%}<a class="cta" href="{{ section.settings.cta_link | default: '#lc-buy' }}">{{ section.settings.cta_text }}</a>{%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name":"LC Steps","tag":"section",
+  "settings":[
+    {"type":"text","id":"heading","label":"Heading","default":"READY FOR YOUR FIRST ROUND?"},
+    {"type":"text","id":"subheading","label":"Subheading"},
+    {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
+    {"type":"text","id":"note","label":"Note under steps"},
+    {"type":"text","id":"cta_text","label":"Button text"},
+    {"type":"url","id":"cta_link","label":"Button link"},
+    {"type":"header","content":"Spacing & colors"},
+    {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
+    {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
+    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
+    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
+    {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
+    {"type":"color","id":"muted","label":"Muted","default":"#5B6B8C"},
+    {"type":"color","id":"card","label":"Card bg","default":"#F3F7FF"},
+    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
+    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"},
+    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16}
+  ],
+  "blocks":[{"type":"step","name":"Step","settings":[
+    {"type":"text","id":"title","label":"Title","default":"Power up"},
+    {"type":"textarea","id":"text","label":"Text","default":"Add 3 AAA batteries per blaster and vest."}
+  ]}],
+  "presets":[{"name":"LC Steps","blocks":[{"type":"step"},{"type":"step"},{"type":"step"}]}]
+}
+{% endschema %}
