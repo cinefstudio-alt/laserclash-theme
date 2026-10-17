@@ -21,7 +21,7 @@
 #lc-split-{{ section.id }} .tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
 #lc-split-{{ section.id }} .tag{background:var(--lc-card);font-weight:700;font-size:12px;letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;border-radius:999px}
 #lc-split-{{ section.id }} .cta{display:inline-block;margin:24px 0 0;background:var(--lc-accent);color:var(--lc-accent-ink);text-decoration:none;border-radius:12px;padding:15px 26px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:16px;letter-spacing:.02em}
-@media(max-width:860px){#lc-split-{{ section.id }} .w{grid-template-columns:1fr;gap:22px}#lc-split-{{ section.id }}.rev .w{direction:ltr}#lc-split-{{ section.id }} .imgfirst .im{order:-1}}
+@media(max-width:860px){#lc-split-{{ section.id }}{overflow-x:clip}#lc-split-{{ section.id }} .w{grid-template-columns:minmax(0,1fr);gap:22px}#lc-split-{{ section.id }}.rev .w{direction:ltr}#lc-split-{{ section.id }} .imgfirst .im{order:-1}#lc-split-{{ section.id }} .body{max-width:100%}}
 </style>
 <section id="lc-split-{{ section.id }}" class="{% if section.settings.image_side == 'right' %}rev{% endif %}">
   <div class="w {% if section.settings.image_first_mobile %}imgfirst{% endif %}">
