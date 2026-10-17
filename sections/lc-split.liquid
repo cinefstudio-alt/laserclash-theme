@@ -5,7 +5,7 @@
 <style>
 #lc-split-{{ section.id }}{--lc-ink:{{ section.settings.ink }};--lc-blue:{{ section.settings.blue }};--lc-muted:{{ section.settings.muted }};--lc-accent:{{ section.settings.accent }};--lc-accent-ink:{{ section.settings.accent_ink }};--lc-card:{{ section.settings.card }};--lc-radius:{{ section.settings.radius }}px;background:{{ section.settings.bg }};color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
 #lc-split-{{ section.id }} *{box-sizing:border-box}
-#lc-split-{{ section.id }} .w{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+#lc-split-{{ section.id }} .w{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
 #lc-split-{{ section.id }}.rev .w{direction:rtl}#lc-split-{{ section.id }}.rev .w>*{direction:ltr}
 #lc-split-{{ section.id }} .im{border-radius:var(--lc-radius);overflow:hidden;background:var(--lc-card);aspect-ratio:{{ section.settings.ratio }}}
 #lc-split-{{ section.id }} .im img{width:100%;height:100%;object-fit:cover;display:block}
