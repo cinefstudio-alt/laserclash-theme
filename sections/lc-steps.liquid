@@ -102,6 +102,9 @@
 #lc-steps-{{ section.id }} .topmedia img,
 #lc-steps-{{ section.id }} .topmedia video{width:100%;height:100%;object-fit:cover;display:block}
 #lc-steps-{{ section.id }} .grid{display:grid;grid-template-columns:repeat({{ section.settings.columns }},minmax(0,1fr));gap:16px}
+/* video/sekil varsa kartlar da onunla eyni ende dayanir - kenarlar uz-uze dusur */
+#lc-steps-{{ section.id }}.hasmedia .grid,
+#lc-steps-{{ section.id }}.hasmedia .hd{max-width:{{ section.settings.media_width }}px;margin-left:auto;margin-right:auto}
 #lc-steps-{{ section.id }} .st{background:var(--lc-card);border:1px solid var(--lc-line);border-radius:var(--lc-radius);padding:22px 20px}
 #lc-steps-{{ section.id }} .st .n{
   font-family:'Barlow',sans-serif;font-weight:900;font-size:15px;color:#fff;background:var(--lc-blue);
@@ -121,7 +124,7 @@
 }
 </style>
 
-<section id="lc-steps-{{ section.id }}" class="{% if section.settings.media_side == 'right' %}mediaRight{% endif %}">
+<section id="lc-steps-{{ section.id }}" class="{% if section.settings.media_side == 'right' %}mediaRight{% endif %}{% if lc_layout == 'grid' and lc_has_media %} hasmedia{% endif %}">
   <div class="w">
 
     {%- if lc_layout == 'media' -%}
