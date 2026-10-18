@@ -2178,12 +2178,12 @@ theme-drawer[open] dialog[open] {
    Egri oz elimizle yazilib (SVG path), hazir fayldan goturulmeyib.
    Ag forma mavinin ustune oturur, yuxaridaki ag bolme ile birlesir.
    ========================================================================== */
-.shopify-section-group-footer-group > .shopify-section:first-child {
+[id$="__section_Ldcdxw"] {
   position: relative;
   isolation: isolate;
 }
 
-.shopify-section-group-footer-group > .shopify-section:first-child::before {
+[id$="__section_Ldcdxw"]::before {
   content: '';
   position: absolute;
   left: 0;
@@ -2198,7 +2198,7 @@ theme-drawer[open] dialog[open] {
 }
 
 @media screen and (max-width: 749px) {
-  .shopify-section-group-footer-group > .shopify-section:first-child::before {
+  [id$="__section_Ldcdxw"]::before {
     height: 38px;
   }
 }
