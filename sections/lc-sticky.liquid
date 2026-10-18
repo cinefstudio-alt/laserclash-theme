@@ -115,6 +115,10 @@
     document.addEventListener('theme-drawer:open', function (e) {
       var td = e.target && e.target.closest ? e.target.closest('theme-drawer') : null;
       if (td && td.id !== 'cart-drawer') return;
+      /* Panel hansi yolla acilirsa acilsin - loqo ve zolaq hemise olsun */
+      if (window.lcCartNote) {
+        window.lcCartNote(window.lcCartNoteText || '', window.lcCartNoteSub || '');
+      }
       setTimeout(function () {
         document.addEventListener('click', lcOutside);
         document.addEventListener('keydown', lcEsc);
