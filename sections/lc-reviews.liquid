@@ -108,10 +108,9 @@
 
 /* --- mobil: yana surusen lent --- */
 @media (max-width:860px){
-  /* mobilde sekil kesilmesin - oz tebii nisbetinde gorunsun */
-  #lc-rev-{{ section.id }} .lc-rev__media{aspect-ratio:auto}
-  #lc-rev-{{ section.id }} .lc-rev__media img,
-  #lc-rev-{{ section.id }} .lc-rev__media video{height:auto;object-fit:fill}
+  /* mobilde qutu sekilin oz nisbetini goturur: ne kesilir, ne de cokur */
+  #lc-rev-{{ section.id }} .lc-rev__media{aspect-ratio:var(--lc-nat, 1)}
+  #lc-rev-{{ section.id }} .lc-rev__media img{height:100%;object-fit:cover}
 
   #lc-rev-{{ section.id }} .lc-rev__grid{
     display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
@@ -162,14 +161,11 @@
         {%- assign pct = block.settings.stars | times: 20.0 -%}
         <article class="lc-rev__card" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
-            <div class="lc-rev__media">
-              {%- comment -%}
-                width/height yazilmir: brauzer onlardan nisbet cixarir ve
-                mobilde sekli kvadrata sixisdirirdi. Masaustunde nisbeti
-                .lc-rev__media-nin aspect-ratio-su idare edir.
-              {%- endcomment -%}
+            <div class="lc-rev__media" style="--lc-nat: {{ block.settings.image.aspect_ratio | default: 1 }};">
               <img src="{{ block.settings.image | image_url: width: 900 }}"
                    alt="{{ block.settings.name | escape }}"
+                   width="{{ block.settings.image.width }}"
+                   height="{{ block.settings.image.height }}"
                    loading="lazy">
               {%- if block.settings.verified -%}
                 <span class="lc-rev__badge">{{ block.settings.verified_text | default: 'Verified buyer' }}</span>
