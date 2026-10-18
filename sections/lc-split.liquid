@@ -8,7 +8,7 @@
 #lc-split-{{ section.id }} .w{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
 #lc-split-{{ section.id }}.rev .w{direction:rtl}#lc-split-{{ section.id }}.rev .w>*{direction:ltr}
 #lc-split-{{ section.id }} .im{border-radius:var(--lc-radius);overflow:hidden;background:var(--lc-card);aspect-ratio:{{ section.settings.ratio }}}
-#lc-split-{{ section.id }} .im img{width:100%;height:100%;object-fit:cover;display:block}
+#lc-split-{{ section.id }} .im img,#lc-split-{{ section.id }} .im video{width:100%;height:100%;object-fit:cover;display:block}
 #lc-split-{{ section.id }} .eye{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--lc-blue);margin-bottom:12px}
 #lc-split-{{ section.id }} h2{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;line-height:.98;letter-spacing:-.01em;font-size:clamp(28px,3.6vw,46px);margin:0;color:var(--lc-ink)}
 #lc-split-{{ section.id }} h2 .l2{display:block;color:var(--lc-blue)}
@@ -26,7 +26,20 @@
 <section id="lc-split-{{ section.id }}" class="{% if section.settings.image_side == 'right' %}rev{% endif %}">
   <div class="w {% if section.settings.image_first_mobile %}imgfirst{% endif %}">
     <div class="im">
-      {%- if section.settings.image != blank -%}<img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading1 | escape }}" loading="lazy">{%- else -%}{{ 'lifestyle-1' | placeholder_svg_tag }}{%- endif -%}
+      {%- liquid
+        assign lc_vid_url = section.settings.video_url | strip
+      -%}
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1200x' }}
+      {%- elsif lc_vid_url != blank -%}
+        <video loop muted playsinline preload="none" data-lc-video
+               {% if section.settings.image != blank %}poster="{{ section.settings.image | image_url: width: 1200 }}"{% endif %}
+               src="{{ lc_vid_url }}"></video>
+      {%- elsif section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading1 | escape }}" loading="lazy">
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      {%- endif -%}
     </div>
     <div class="tx">
       {%- if section.settings.eyebrow != blank -%}<div class="eye">{{ section.settings.eyebrow }}</div>{%- endif -%}
@@ -40,13 +53,51 @@
     </div>
   </div>
 </section>
+<script>
+  (() => {
+    var root = document.getElementById("lc-split-{{ section.id }}");
+    if (!root) return;
+    var vids = root.querySelectorAll("video");
+    if (!vids.length) return;
+
+    vids.forEach(function (v) {
+      v.removeAttribute("autoplay");
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      vids.forEach(function (v) { v.play().catch(function () {}); });
+      return;
+    }
+
+    /* Yalniz ekranda gorunende oynayir - mobil batareyani yemesin */
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) {
+          if (v.preload === "none") { v.preload = "auto"; v.load(); }
+          v.play().catch(function () {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { rootMargin: "150px" });
+
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
+
 {% schema %}
 {
   "name":"LC Split (image+text)","tag":"section",
   "settings":[
     {"type":"select","id":"image_side","label":"Image side","options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}],"default":"left"},
     {"type":"checkbox","id":"image_first_mobile","label":"Image first on mobile","default":true},
-    {"type":"image_picker","id":"image","label":"Image"},
+    {"type":"image_picker","id":"image","label":"Image","info":"Used as the poster when a video is set."},
+    {"type":"video","id":"video","label":"Video"},
+    {"type":"text","id":"video_url","label":"Or direct .webm / .mp4 URL"},
     {"type":"text","id":"ratio","label":"Image ratio (e.g. 4/3)","default":"4/3"},
     {"type":"text","id":"eyebrow","label":"Eyebrow"},
     {"type":"text","id":"heading1","label":"Heading line 1","default":"SAME LIVING ROOM"},
