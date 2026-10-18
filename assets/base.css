@@ -1898,3 +1898,64 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   line-height: 1.5;
   overflow: visible;
 }
+
+/* ==========================================================================
+   LaserClash - duymelerde isiq suzmesi (light sweep).
+   Uzerine gelende isiq zolagi soldan saga suzulur. Qisa saxlanilib (.45s)
+   ki, canli hiss olunsun, gozlentiye cevrilmesin.
+   ========================================================================== */
+[id^="lc-hero-"] .lc-cta,
+[id^="lc-split-"] .cta,
+[id^="lc-steps-"] .cta,
+[id^="lc-cta-"] a,
+[id^="lc-sticky-"] button[type="submit"] {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+[id^="lc-hero-"] .lc-cta::after,
+[id^="lc-split-"] .cta::after,
+[id^="lc-steps-"] .cta::after,
+[id^="lc-cta-"] a::after,
+[id^="lc-sticky-"] button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -75%;
+  width: 45%;
+  height: 140%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-18deg);
+  opacity: 0;
+}
+
+[id^="lc-hero-"] .lc-cta:hover::after,
+[id^="lc-split-"] .cta:hover::after,
+[id^="lc-steps-"] .cta:hover::after,
+[id^="lc-cta-"] a:hover::after,
+[id^="lc-sticky-"] button[type="submit"]:hover::after {
+  animation: lcSweep 0.45s ease-out forwards;
+}
+
+@keyframes lcSweep {
+  0%   { left: -75%; opacity: 0; }
+  10%  { opacity: 1; }
+  100% { left: 130%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [id^="lc-hero-"] .lc-cta:hover::after,
+  [id^="lc-split-"] .cta:hover::after,
+  [id^="lc-steps-"] .cta:hover::after,
+  [id^="lc-cta-"] a:hover::after,
+  [id^="lc-sticky-"] button[type="submit"]:hover::after {
+    animation: none;
+  }
+}
