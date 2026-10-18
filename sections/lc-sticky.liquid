@@ -173,6 +173,17 @@
 
       if (head.childNodes.length) host.insertBefore(head, host.firstChild);
     };
+
+    /* Panel sehife yuklenende artiq aciq ola biler (tema onu bərpa edir) -
+       o halda acilma hadisesi bas vermir, ona gore burada bir defe cagiririq. */
+    var lcInitHead = function () {
+      var td = document.getElementById('cart-drawer');
+      if (td && td.hasAttribute('open')) {
+        window.lcCartNote(window.lcCartNoteText || '', window.lcCartNoteSub || '');
+      }
+    };
+    if (document.readyState === 'complete') setTimeout(lcInitHead, 300);
+    else window.addEventListener('load', function () { setTimeout(lcInitHead, 300); });
   }
 
   var sform = document.getElementById("lc-sform-" + S);
