@@ -2172,3 +2172,33 @@ theme-drawer[open] dialog[open] {
 .shopify-section-group-footer-group input[type="email"]::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
+
+/* ==========================================================================
+   Footer-in ust kenari - dalga.
+   Egri oz elimizle yazilib (SVG path), hazir fayldan goturulmeyib.
+   Ag forma mavinin ustune oturur, yuxaridaki ag bolme ile birlesir.
+   ========================================================================== */
+.shopify-section-group-footer-group > .shopify-section:first-child {
+  position: relative;
+  isolation: isolate;
+}
+
+.shopify-section-group-footer-group > .shopify-section:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 64px;
+  z-index: 2;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 64' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' d='M0 0h1440v14c-150 34-298 2-446 14-148 12-262 36-420 24C416 40 300 8 150 20 100 24 48 32 0 42Z'/%3E%3C/svg%3E");
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section-group-footer-group > .shopify-section:first-child::before {
+    height: 38px;
+  }
+}
