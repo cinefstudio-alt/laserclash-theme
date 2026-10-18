@@ -2040,3 +2040,13 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 @media (prefers-reduced-motion: reduce) {
   .page-wrapper--drawer-open::after { animation: none; }
 }
+
+/* Sixilma legv olundugu ucun panelin acig veziyyetdeki yeri de elle teyin olunur:
+   tema onu sehifenin kenara cekilmesi ile uzlasdirirdi, indi sag kenara yapisir. */
+@media screen and (min-width: 990px) {
+  theme-drawer[open] > dialog[open],
+  theme-drawer[open] dialog[open] {
+    right: 0 !important;
+    left: auto !important;
+  }
+}
