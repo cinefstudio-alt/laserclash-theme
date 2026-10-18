@@ -2174,12 +2174,12 @@ theme-drawer[open] dialog[open] {
 }
 
 /* ==========================================================================
-   Footer-in ust kenari - uzun, hamar, iki qatli dalga.
-   Egri iki simmetrik kub hissedən ibaretdir: nezaret noqteleri
-   W/6, W/3 ve W*2/3, W*5/6 noqtelerindedir - birlesme yerinde toxunan
-   kesilmir, ona gore heç bir kuncluk/qirilma olmur. Baslangic ve son
-   noqtelerin meyli eynidir, yeni tekrarlananda tikis de gorunmur.
-   Hər iki qat eyni istiqamete, sadece ferqli suretle axir.
+   Footer-in ust kenari - iki ferqli uzunluqda dalga.
+   Vacib: qatlar paralel deyil. On dalganin dovru 1800px, arxadakinin
+   2600px - ona gore bir-birini kesirler ve acig calar bir yerde gorunur,
+   basqa yerde itir. Paralel kopya mexaniki gorunurdu.
+   Her iki egri simmetrik kub hisselerden qurulub (nezaret noqteleri
+   dovrun 1/6, 1/3 ve 2/3, 5/6 noqtelerinde) - kuncluk yaranmir.
    ========================================================================== */
 [id$="__section_Ldcdxw"] {
   position: relative;
@@ -2192,26 +2192,26 @@ theme-drawer[open] dialog[open] {
   position: absolute;
   left: 0;
   right: 0;
-  height: 56px;
+  top: -1px;
+  height: 58px;
   pointer-events: none;
   background-repeat: repeat-x;
-  background-size: 1800px 56px;
 }
 
-/* arxa qat: yari seffaf ag - incə bir calar zolagi */
+/* arxa qat: daha uzun dovr, yari seffaf - lent kimi kesib kecir */
 [id$="__section_Ldcdxw"]::after {
-  top: 9px;
   z-index: 1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 56' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' fill-opacity='0.2' d='M0 34C300 24 600 24 900 34s600 10 900 0V0H0Z'/%3E%3C/svg%3E");
-  animation: lcWaveBack 46s linear infinite;
+  background-size: 2600px 58px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2600 58' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' fill-opacity='0.22' d='M0 36C433 18 866 18 1300 36s867 18 1300 0V0H0Z'/%3E%3C/svg%3E");
+  animation: lcWaveBack 52s linear infinite;
 }
 
 /* on qat: sehifenin ag fonu */
 [id$="__section_Ldcdxw"]::before {
-  top: -1px;
   z-index: 2;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 56' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' d='M0 30C300 16 600 16 900 30s600 14 900 0V0H0Z'/%3E%3C/svg%3E");
-  animation: lcWaveFront 34s linear infinite;
+  background-size: 1800px 58px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 58' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' d='M0 30C300 16 600 16 900 30s600 14 900 0V0H0Z'/%3E%3C/svg%3E");
+  animation: lcWaveFront 38s linear infinite;
 }
 
 @keyframes lcWaveFront {
@@ -2221,16 +2221,14 @@ theme-drawer[open] dialog[open] {
 
 @keyframes lcWaveBack {
   from { background-position-x: 0; }
-  to   { background-position-x: -1800px; }
+  to   { background-position-x: -2600px; }
 }
 
 @media screen and (max-width: 749px) {
   [id$="__section_Ldcdxw"]::before,
-  [id$="__section_Ldcdxw"]::after {
-    height: 30px;
-    background-size: 1000px 30px;
-  }
-  [id$="__section_Ldcdxw"]::after { top: 5px; }
+  [id$="__section_Ldcdxw"]::after { height: 32px; }
+  [id$="__section_Ldcdxw"]::before { background-size: 1000px 32px; }
+  [id$="__section_Ldcdxw"]::after { background-size: 1450px 32px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
