@@ -89,6 +89,9 @@
       ],
       "settings": {
         "product": "",
+        "show_rating": true,
+        "rating_value": 5,
+        "rating_text": "10,000+",
         "eyebrow": "LASERCLASH",
         "title": "NEON LASER TAG BATTLE SET",
         "subtitle": "A team-based infrared laser battle that gets everyone off the couch and into the game.",
@@ -331,6 +334,72 @@
         "radius": 16
       }
     },
+    "reviews": {
+      "type": "lc-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/1.00_04_26_10.Still001.png",
+            "stars": 5,
+            "quote": "Bought it for my son's birthday and ended up playing myself until midnight. The vests actually buzz when you get hit.",
+            "name": "Sarah M.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/1.00_00_47_18.Still002.png",
+            "stars": 5,
+            "quote": "Two minutes to set up, no app, no screens. The kids disappear into the garden and come back exhausted.",
+            "name": "Daniel K.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/409bae44-a16f-40fe-972c-6a27e67f0827.jpg",
+            "stars": 4.5,
+            "quote": "Sturdier than I expected for the price. We play 2 vs 2 and nobody argues about the score any more.",
+            "name": "Priya R.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "kicker": "FROM REAL CUSTOMERS",
+        "title": "SEEN IN THEIR LIVING ROOMS",
+        "subtext": "Photos and words from people who already play.",
+        "show_summary": true,
+        "summary_rating": 4.8,
+        "summary_text": "based on 2,000+ reviews",
+        "columns": 3,
+        "image_ratio": "1 / 1",
+        "radius": 16,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "card": "#f3f7ff",
+        "line": "#dde6f5",
+        "muted": "#5b6b8c",
+        "star": "#ffc107"
+      }
+    },
     "faq": {
       "type": "lc-faq",
       "blocks": {
@@ -426,69 +495,6 @@
         "bar_bg": "#0b1429",
         "accent": "#bfff0f",
         "accent_ink": "#0b1429"
-      }
-    },
-    "reviews": {
-      "type": "lc-reviews",
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Bought it for my son's birthday and ended up playing myself until midnight. The vests actually buzz when you get hit.",
-            "name": "Sarah M.",
-            "meta": "Verified purchase",
-            "verified": true,
-            "verified_text": "Verified buyer"
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "stars": 5,
-            "quote": "Two minutes to set up, no app, no screens. The kids disappear into the garden and come back exhausted.",
-            "name": "Daniel K.",
-            "meta": "Verified purchase",
-            "verified": true,
-            "verified_text": "Verified buyer"
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "stars": 4.5,
-            "quote": "Sturdier than I expected for the price. We play 2 vs 2 and nobody argues about the score any more.",
-            "name": "Priya R.",
-            "meta": "Verified purchase",
-            "verified": true,
-            "verified_text": "Verified buyer"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3"
-      ],
-      "settings": {
-        "kicker": "FROM REAL CUSTOMERS",
-        "title": "SEEN IN THEIR LIVING ROOMS",
-        "subtext": "Photos and words from people who already play.",
-        "show_summary": true,
-        "summary_rating": 4.8,
-        "summary_text": "based on 2,000+ reviews",
-        "columns": 3,
-        "image_ratio": "1 / 1",
-        "radius": 16,
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "bg": "#FFFFFF",
-        "ink": "#10204A",
-        "blue": "#1742A2",
-        "card": "#F3F7FF",
-        "line": "#DDE6F5",
-        "muted": "#5B6B8C",
-        "star": "#FFC107"
       }
     }
   },
