@@ -1,51 +1,243 @@
-{%- comment -%} LaserClash — Numbered steps (how it works / quick start) {%- endcomment -%}
+{%- comment -%}
+  LC - Numbered steps.
+  Iki quruluş:
+    grid  - kartlar yan-yana (evvelki davranis)
+    media - solda/sagda video ve ya sekil, yaninda nomrelenmis siyahi.
+            Bos sahe yaranmir, mezmun bir-birini tamamlayir.
+  Oz-ozune yeterli: CSS/JS iceridedir, rengler ayarlardan gelir.
+{%- endcomment -%}
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+{%- liquid
+  assign lc_media_url = section.settings.video_url | strip
+  assign lc_has_media = false
+  if section.settings.video != blank or lc_media_url != blank or section.settings.image != blank
+    assign lc_has_media = true
+  endif
+  assign lc_layout = section.settings.layout
+  if lc_layout == 'media' and lc_has_media == false
+    assign lc_layout = 'grid'
+  endif
+-%}
+
 <style>
-#lc-steps-{{ section.id }}{--lc-ink:{{ section.settings.ink }};--lc-blue:{{ section.settings.blue }};--lc-muted:{{ section.settings.muted }};--lc-card:{{ section.settings.card }};--lc-accent:{{ section.settings.accent }};--lc-accent-ink:{{ section.settings.accent_ink }};--lc-radius:{{ section.settings.radius }}px;background:{{ section.settings.bg }};color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
+#lc-steps-{{ section.id }}{
+  --lc-ink:{{ section.settings.ink }};
+  --lc-blue:{{ section.settings.blue }};
+  --lc-muted:{{ section.settings.muted }};
+  --lc-card:{{ section.settings.card }};
+  --lc-accent:{{ section.settings.accent }};
+  --lc-accent-ink:{{ section.settings.accent_ink }};
+  --lc-line:{{ section.settings.line }};
+  --lc-radius:{{ section.settings.radius }}px;
+  background:{{ section.settings.bg }};
+  color:var(--lc-ink);
+  font-family:'DM Sans',-apple-system,Arial,sans-serif;
+  padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px;
+}
 #lc-steps-{{ section.id }} *{box-sizing:border-box}
 #lc-steps-{{ section.id }} .w{max-width:1100px;margin:0 auto}
-#lc-steps-{{ section.id }} .hd{text-align:center;max-width:720px;margin:0 auto 36px}
 #lc-steps-{{ section.id }} h2{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;line-height:1;letter-spacing:-.01em;font-size:clamp(28px,3.6vw,44px);margin:0;color:var(--lc-ink)}
-#lc-steps-{{ section.id }} .sub{color:var(--lc-muted);font-size:17px;margin:12px 0 0}
-#lc-steps-{{ section.id }} .grid{display:grid;grid-template-columns:repeat({{ section.settings.columns }},1fr);gap:18px}
-#lc-steps-{{ section.id }} .st{background:var(--lc-card);border-radius:var(--lc-radius);padding:26px 22px}
-#lc-steps-{{ section.id }} .n{font-family:'Barlow',sans-serif;font-weight:900;font-size:16px;color:#fff;background:var(--lc-blue);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-#lc-steps-{{ section.id }} .st h3{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:19px;margin:0 0 6px}
+#lc-steps-{{ section.id }} .kick{font-family:'Montserrat',sans-serif;font-size:11.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--lc-blue);margin:0 0 10px}
+#lc-steps-{{ section.id }} .sub{color:var(--lc-muted);font-size:16.5px;line-height:1.55;margin:12px 0 0}
+#lc-steps-{{ section.id }} .note{color:var(--lc-muted);font-size:13px;margin:18px 0 0}
+#lc-steps-{{ section.id }} .cta{
+  display:inline-block;background:var(--lc-accent);color:var(--lc-accent-ink);text-decoration:none;
+  border-radius:999px;padding:15px 30px;
+  font-family:'Montserrat',sans-serif;text-transform:uppercase;font-weight:800;font-size:14px;letter-spacing:.05em;
+  position:relative;overflow:hidden;transition:filter .2s ease,transform .15s ease;
+}
+#lc-steps-{{ section.id }} .cta:hover{filter:brightness(1.05);transform:translateY(-1px)}
+
+/* ---------- media quruluşu ---------- */
+#lc-steps-{{ section.id }} .split{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:44px;
+  align-items:center;
+}
+#lc-steps-{{ section.id }} .split > *{min-width:0}
+#lc-steps-{{ section.id }}.mediaRight .split{direction:rtl}
+#lc-steps-{{ section.id }}.mediaRight .split > *{direction:ltr}
+
+#lc-steps-{{ section.id }} .media{
+  position:relative;border-radius:var(--lc-radius);overflow:hidden;background:#0b1020;
+  aspect-ratio:{{ section.settings.media_ratio }};
+}
+#lc-steps-{{ section.id }} .media img,
+#lc-steps-{{ section.id }} .media video{width:100%;height:100%;object-fit:cover;display:block}
+
+/* nomrelenmis siyahi - addimlar arasinda xett */
+#lc-steps-{{ section.id }} .list{list-style:none;margin:22px 0 0;padding:0}
+#lc-steps-{{ section.id }} .list li{position:relative;padding:0 0 22px 56px}
+#lc-steps-{{ section.id }} .list li:last-child{padding-bottom:0}
+#lc-steps-{{ section.id }} .list li::before{
+  content:attr(data-n);
+  position:absolute;left:0;top:-2px;
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--lc-blue);color:#fff;
+  font-family:'Barlow',sans-serif;font-weight:900;font-size:15px;
+}
+#lc-steps-{{ section.id }} .list li::after{
+  content:'';position:absolute;left:18px;top:42px;bottom:10px;width:2px;
+  background:linear-gradient(180deg,var(--lc-line),transparent);
+}
+#lc-steps-{{ section.id }} .list li:last-child::after{display:none}
+#lc-steps-{{ section.id }} .list h3{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:18px;margin:0 0 4px}
+#lc-steps-{{ section.id }} .list p{margin:0;color:var(--lc-muted);font-size:14.5px;line-height:1.55}
+
+/* ---------- grid quruluşu ---------- */
+#lc-steps-{{ section.id }} .hd{text-align:center;max-width:720px;margin:0 auto 32px}
+#lc-steps-{{ section.id }} .grid{display:grid;grid-template-columns:repeat({{ section.settings.columns }},minmax(0,1fr));gap:16px}
+#lc-steps-{{ section.id }} .st{background:var(--lc-card);border:1px solid var(--lc-line);border-radius:var(--lc-radius);padding:22px 20px}
+#lc-steps-{{ section.id }} .st .n{
+  font-family:'Barlow',sans-serif;font-weight:900;font-size:15px;color:#fff;background:var(--lc-blue);
+  width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+}
+#lc-steps-{{ section.id }} .st h3{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:18px;margin:0 0 5px}
 #lc-steps-{{ section.id }} .st p{margin:0;color:var(--lc-muted);font-size:14px;line-height:1.5}
-#lc-steps-{{ section.id }} .note{text-align:center;color:var(--lc-muted);font-size:13px;margin:22px 0 0}
-#lc-steps-{{ section.id }} .cta{display:block;width:max-content;margin:26px auto 0;background:var(--lc-accent);color:var(--lc-accent-ink);text-decoration:none;border-radius:12px;padding:15px 30px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:16px}
-@media(max-width:800px){#lc-steps-{{ section.id }} .grid{grid-template-columns:1fr}}
+#lc-steps-{{ section.id }} .foot{text-align:center;margin-top:24px}
+
+@media(max-width:860px){
+  #lc-steps-{{ section.id }} .split{grid-template-columns:minmax(0,1fr);gap:24px}
+  #lc-steps-{{ section.id }}.mediaRight .split{direction:ltr}
+  #lc-steps-{{ section.id }} .media{order:-1}
+  #lc-steps-{{ section.id }} .grid{grid-template-columns:minmax(0,1fr)}
+}
 </style>
-<section id="lc-steps-{{ section.id }}">
+
+<section id="lc-steps-{{ section.id }}" class="{% if section.settings.media_side == 'right' %}mediaRight{% endif %}">
   <div class="w">
-    <div class="hd">
-      <h2>{{ section.settings.heading }}</h2>
-      {%- if section.settings.subheading != blank -%}<p class="sub">{{ section.settings.subheading }}</p>{%- endif -%}
-    </div>
-    <div class="grid">
-      {%- for b in section.blocks -%}
-        <div class="st" {{ b.shopify_attributes }}>
-          <div class="n">{{ forloop.index }}</div>
-          <h3>{{ b.settings.title }}</h3>
-          <p>{{ b.settings.text }}</p>
+
+    {%- if lc_layout == 'media' -%}
+      <div class="split">
+        <div class="media">
+          {%- if section.settings.video != blank -%}
+            {{ section.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1200x' }}
+          {%- elsif lc_media_url != blank -%}
+            <video loop muted playsinline preload="none"
+                   {% if section.settings.image != blank %}poster="{{ section.settings.image | image_url: width: 1200 }}"{% endif %}
+                   src="{{ lc_media_url }}"></video>
+          {%- else -%}
+            <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
+          {%- endif -%}
         </div>
-      {%- endfor -%}
-    </div>
-    {%- if section.settings.note != blank -%}<p class="note">{{ section.settings.note }}</p>{%- endif -%}
-    {%- if section.settings.cta_text != blank -%}<a class="cta" href="{{ section.settings.cta_link | default: '#lc-buy' }}">{{ section.settings.cta_text }}</a>{%- endif -%}
+
+        <div class="tx">
+          {%- if section.settings.kicker != blank -%}<p class="kick">{{ section.settings.kicker }}</p>{%- endif -%}
+          <h2>{{ section.settings.heading }}</h2>
+          {%- if section.settings.subheading != blank -%}<p class="sub">{{ section.settings.subheading }}</p>{%- endif -%}
+
+          <ul class="list">
+            {%- for b in section.blocks -%}
+              <li data-n="{{ forloop.index }}" {{ b.shopify_attributes }}>
+                <h3>{{ b.settings.title }}</h3>
+                {%- if b.settings.text != blank -%}<p>{{ b.settings.text }}</p>{%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          {%- if section.settings.note != blank -%}<p class="note">{{ section.settings.note }}</p>{%- endif -%}
+          {%- if section.settings.cta_text != blank -%}
+            <p style="margin:24px 0 0"><a class="cta" href="{{ section.settings.cta_link | default: '#lc-buy' }}">{{ section.settings.cta_text }}</a></p>
+          {%- endif -%}
+        </div>
+      </div>
+
+    {%- else -%}
+      <div class="hd">
+        {%- if section.settings.kicker != blank -%}<p class="kick">{{ section.settings.kicker }}</p>{%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}<p class="sub">{{ section.settings.subheading }}</p>{%- endif -%}
+      </div>
+
+      <div class="grid">
+        {%- for b in section.blocks -%}
+          <div class="st" {{ b.shopify_attributes }}>
+            <div class="n">{{ forloop.index }}</div>
+            <h3>{{ b.settings.title }}</h3>
+            {%- if b.settings.text != blank -%}<p>{{ b.settings.text }}</p>{%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.note != blank or section.settings.cta_text != blank -%}
+        <div class="foot">
+          {%- if section.settings.note != blank -%}<p class="note">{{ section.settings.note }}</p>{%- endif -%}
+          {%- if section.settings.cta_text != blank -%}
+            <p style="margin:18px 0 0"><a class="cta" href="{{ section.settings.cta_link | default: '#lc-buy' }}">{{ section.settings.cta_text }}</a></p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
   </div>
 </section>
+
+<script>
+  (() => {
+    var root = document.getElementById("lc-steps-{{ section.id }}");
+    if (!root) return;
+    var vids = root.querySelectorAll("video");
+    if (!vids.length) return;
+
+    vids.forEach(function (v) { v.removeAttribute("autoplay"); v.muted = true; v.loop = true; v.playsInline = true; });
+
+    if (!("IntersectionObserver" in window)) {
+      vids.forEach(function (v) { v.play().catch(function () {}); });
+      return;
+    }
+
+    /* yalniz ekranda gorunende oynayir */
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) {
+          if (v.preload === "none") { v.preload = "auto"; v.load(); }
+          v.play().catch(function () {});
+        } else { v.pause(); }
+      });
+    }, { rootMargin: "150px" });
+
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
+
 {% schema %}
 {
   "name":"LC Steps","tag":"section",
   "settings":[
+    {"type":"select","id":"layout","label":"Layout","default":"grid",
+      "options":[
+        {"value":"grid","label":"Cards side by side"},
+        {"value":"media","label":"Video / image + numbered list"}
+      ],
+      "info":"The media layout needs a video or image below."},
+    {"type":"header","content":"Media"},
+    {"type":"video","id":"video","label":"Video"},
+    {"type":"text","id":"video_url","label":"Or direct .webm / .mp4 URL"},
+    {"type":"image_picker","id":"image","label":"Image","info":"Also used as the video poster."},
+    {"type":"select","id":"media_side","label":"Media side","default":"left",
+      "options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}]},
+    {"type":"select","id":"media_ratio","label":"Media shape","default":"4 / 5",
+      "options":[
+        {"value":"1 / 1","label":"Square"},
+        {"value":"4 / 5","label":"Portrait"},
+        {"value":"9 / 16","label":"Tall"},
+        {"value":"16 / 9","label":"Landscape"}
+      ]},
+    {"type":"header","content":"Text"},
+    {"type":"text","id":"kicker","label":"Kicker"},
     {"type":"text","id":"heading","label":"Heading","default":"READY FOR YOUR FIRST ROUND?"},
     {"type":"text","id":"subheading","label":"Subheading"},
-    {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
     {"type":"text","id":"note","label":"Note under steps"},
     {"type":"text","id":"cta_text","label":"Button text"},
     {"type":"url","id":"cta_link","label":"Button link"},
+    {"type":"header","content":"Cards layout only"},
+    {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
     {"type":"header","content":"Spacing & colors"},
     {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
     {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
@@ -54,6 +246,7 @@
     {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
     {"type":"color","id":"muted","label":"Muted","default":"#5B6B8C"},
     {"type":"color","id":"card","label":"Card bg","default":"#F3F7FF"},
+    {"type":"color","id":"line","label":"Borders","default":"#DDE6F5"},
     {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
     {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"},
     {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16}

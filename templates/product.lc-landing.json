@@ -351,8 +351,8 @@
         "note": "",
         "cta_text": "",
         "cta_link": "",
-        "pad_top": 56,
-        "pad_bottom": 56,
+        "pad_top": 52,
+        "pad_bottom": 52,
         "bg": "#f3f7ff",
         "ink": "#10204a",
         "blue": "#1742a2",
@@ -360,7 +360,8 @@
         "card": "#f3f7ff",
         "accent": "#bfff0f",
         "accent_ink": "#0b1429",
-        "radius": 16
+        "radius": 16,
+        "kicker": "FOUR WAYS TO PLAY"
       }
     },
     "howto": {
@@ -395,13 +396,13 @@
       ],
       "settings": {
         "heading": "THIS IS WHAT GAME NIGHT LOOKS LIKE",
-        "subheading": "",
+        "subheading": "Out of the box and into the first round in under two minutes.",
         "columns": 3,
         "note": "",
         "cta_text": "BUILD YOUR GAME NIGHT",
         "cta_link": "#lc-buy",
-        "pad_top": 56,
-        "pad_bottom": 56,
+        "pad_top": 64,
+        "pad_bottom": 64,
         "bg": "#ffffff",
         "ink": "#10204a",
         "blue": "#1742a2",
@@ -409,7 +410,11 @@
         "card": "#f3f7ff",
         "accent": "#bfff0f",
         "accent_ink": "#0b1429",
-        "radius": 16
+        "radius": 16,
+        "layout": "media",
+        "media_side": "left",
+        "media_ratio": "4 / 5",
+        "kicker": "UP AND RUNNING FAST"
       }
     },
     "faq": {
