@@ -29,7 +29,10 @@
 #lc-hero-{{ section.id }} .lc-main{position:relative;border-radius:var(--lc-radius);overflow:hidden;background:#05070f;aspect-ratio:1/1}
 #lc-hero-{{ section.id }} .lc-main img{width:100%;height:100%;object-fit:cover;display:none}
 #lc-hero-{{ section.id }} .lc-main img.on{display:block}
-#lc-hero-{{ section.id }} .lc-thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:4px}
+#lc-hero-{{ section.id }} .lc-thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:4px;justify-content:safe center;scrollbar-width:none}
+#lc-hero-{{ section.id }} .lc-thumbs::-webkit-scrollbar{display:none}
+#lc-hero-{{ section.id }} .lc-main{touch-action:pan-y;cursor:grab}
+#lc-hero-{{ section.id }} .lc-main.is-drag{cursor:grabbing}
 #lc-hero-{{ section.id }} .lc-thumbs button{flex:0 0 auto;width:64px;height:64px;border-radius:12px;overflow:hidden;border:2px solid var(--lc-line);background:#05070f;cursor:pointer;padding:0}
 #lc-hero-{{ section.id }} .lc-thumbs button.on{border-color:var(--lc-blue)}
 #lc-hero-{{ section.id }} .lc-thumbs img{width:100%;height:100%;object-fit:cover}
@@ -314,6 +317,56 @@
   var thumbs=document.getElementById("lc-thumbs-"+S);
   function showImg(i){ if(!main)return; main.querySelectorAll("img").forEach(function(im){im.classList.toggle("on",im.dataset.i==i);}); if(thumbs)thumbs.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.dataset.i==i);}); }
   if(thumbs)thumbs.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){showImg(b.dataset.i);});});
+
+  /* --- esas sekli barmaqla/siçanla surusdurerek deyismek --- */
+  if (main) {
+    var imgs = main.querySelectorAll("img");
+    var count = imgs.length;
+
+    function currentIndex(){
+      var on = main.querySelector("img.on");
+      return on ? parseInt(on.dataset.i, 10) || 0 : 0;
+    }
+    function step(dir){
+      if (count < 2) return;
+      var i = (currentIndex() + dir + count) % count;
+      showImg(String(i));
+      /* secilmis miniatur gorunsun */
+      if (thumbs) {
+        var tb = thumbs.querySelector('button[data-i="' + i + '"]');
+        if (tb && tb.scrollIntoView) tb.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+      }
+    }
+
+    var sx = 0, sy = 0, down = false, moved = false;
+    main.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      down = true; moved = false; sx = e.clientX; sy = e.clientY;
+      main.classList.add("is-drag");
+    });
+    main.addEventListener("pointermove", function (e) {
+      if (!down) return;
+      if (Math.abs(e.clientX - sx) > 8) moved = true;
+    });
+    function finish(e){
+      if (!down) return;
+      down = false;
+      main.classList.remove("is-drag");
+      var dx = e.clientX - sx, dy = e.clientY - sy;
+      /* suruşdurme ufuqi olmalidir, eks halda sehife scroll-u sayilir */
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    }
+    main.addEventListener("pointerup", finish);
+    main.addEventListener("pointercancel", function(){ down = false; main.classList.remove("is-drag"); });
+    main.addEventListener("pointerleave", function(e){ if (down) finish(e); });
+
+    /* klaviatura ile de kecid */
+    main.setAttribute("tabindex", "0");
+    main.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+      if (e.key === "ArrowLeft")  { e.preventDefault(); step(-1); }
+    });
+  }
   // bundle
   var opts=document.getElementById("lc-opts-"+S);
   function recalc(){
