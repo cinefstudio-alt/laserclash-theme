@@ -1,0 +1,33 @@
+{%- comment -%}
+  LaserClash - sebet panelinin basi: ortada loqo, altinda qazanc zolagi.
+  Server terefinde render olunur ki, panel acilanda hazir olsun (JS ile
+  sonradan elave edilende gorunen sicrayis yaranirdi).
+  Metnler: Theme settings -> LaserClash.
+{%- endcomment -%}
+
+{%- assign lc_note = settings.lc_cart_note | default: "You've unlocked free worldwide shipping" -%}
+{%- assign lc_sub = settings.lc_cart_note_sub | default: ' ' -%}
+
+<div class="lc-carthead">
+  {%- if settings.logo != blank -%}
+    <img
+      class="lc-carthead__logo"
+      src="{{ settings.logo | image_url: width: 400 }}"
+      alt="{{ shop.name | escape }}"
+      width="200"
+      height="56"
+      loading="eager">
+  {%- else -%}
+    <span class="lc-carthead__word">{{ shop.name }}</span>
+  {%- endif -%}
+
+  {%- if lc_note != blank -%}
+    <div class="lc-cartnote">
+      <span class="lc-cartnote__tick" aria-hidden="true">&#10003;</span>
+      <span class="lc-cartnote__text">
+        <b>{{ lc_note }}</b>
+        {%- if lc_sub != blank and lc_sub != ' ' -%}<i>{{ lc_sub }}</i>{%- endif -%}
+      </span>
+    </div>
+  {%- endif -%}
+</div>

@@ -63,6 +63,7 @@
           class="cart-drawer__inner{% if cart.empty? %} cart-drawer--empty{% endif %}"
           data-hydration-key="cart-drawer-inner"
         >
+          {% render 'lc-cart-head' %}
           {%- if cart.empty? -%}
             <div class="theme-drawer__header">
               <button

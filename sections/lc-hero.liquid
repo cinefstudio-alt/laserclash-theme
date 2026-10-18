@@ -320,7 +320,7 @@
   /* ---- Sebet: AJAX elave + sag terefden acilan panel (temanin oz drawer-i) ----
      Qlobal olaraq bir defe teyin olunur ki, hero ve yapisqan panel eyni kodu islesin. */
   if (!window.lcCartAdd) {
-    window.lcCartAdd = function (variantId, quantity, button, note) {
+    window.lcCartAdd = function (variantId, quantity, button) {
       if (!variantId) return;
       var label = button ? button.textContent : '';
       if (button) { button.disabled = true; button.textContent = 'Adding...'; }
@@ -345,7 +345,6 @@
             var current = document.getElementById('shopify-section-cart-drawer-section');
             if (fresh && current) current.replaceWith(fresh);
           }
-          window.lcCartNote(note, (window.lcCartNoteSub || ''));
           var drawer = document.getElementById('cart-drawer');
           if (drawer && typeof drawer.open === 'function') drawer.open();
           document.dispatchEvent(new CustomEvent('lc:added', { detail: { id: variantId } }));
@@ -393,9 +392,6 @@
       var td = e.target && e.target.closest ? e.target.closest('theme-drawer') : null;
       if (td && td.id !== 'cart-drawer') return;
       /* Panel hansi yolla acilirsa acilsin - loqo ve zolaq hemise olsun */
-      if (window.lcCartNote) {
-        window.lcCartNote(window.lcCartNoteText || '', window.lcCartNoteSub || '');
-      }
       setTimeout(function () {
         document.addEventListener('click', lcOutside);
         document.addEventListener('keydown', lcEsc);
@@ -408,64 +404,8 @@
     });
   }
 
-    /* Panelin basi: ortada loqo, altinda qazanc zolagi.
-       Loqo basliqdan kopyalanir - Liquid-den asili olmasin deye. */
-    window.lcCartNote = function (text, sub) {
-      var host = document.querySelector('#cart-drawer .cart-drawer__inner')
-        || document.querySelector('#cart-drawer cart-drawer-component')
-        || document.querySelector('#cart-drawer dialog');
-      if (!host) return;
-
-      var prev = host.querySelector('.lc-carthead');
-      if (prev) prev.remove();
-
-      var head = document.createElement('div');
-      head.className = 'lc-carthead';
-
-      /* Yalniz basliqdaki esas loqonu gotururuk. Magazada metn loqo varsa
-         (sekil yoxdursa) adi soz kimi yazilir - sehv sekil dusmesin. */
-      var logo = document.querySelector('.header__logo img, header a[href="/"] img, [class*="header"] [class*="logo"] img');
-      if (logo && logo.getAttribute('src')) {
-        var img = document.createElement('img');
-        img.className = 'lc-carthead__logo';
-        img.src = logo.getAttribute('src');
-        img.alt = '';
-        head.appendChild(img);
-      } else if (window.lcShopName) {
-        var word = document.createElement('span');
-        word.className = 'lc-carthead__word';
-        word.textContent = window.lcShopName;
-        head.appendChild(word);
-      }
-
-      if (text) {
-        var note = document.createElement('div');
-        note.className = 'lc-cartnote';
-        note.innerHTML =
-          '<span class="lc-cartnote__tick" aria-hidden="true">✓</span>' +
-          '<span class="lc-cartnote__text"><b>' + text + '</b>' +
-          (sub ? '<i>' + sub + '</i>' : '') + '</span>';
-        head.appendChild(note);
-      }
-
-      if (head.childNodes.length) host.insertBefore(head, host.firstChild);
-    };
-
-    /* Panel sehife yuklenende artiq aciq ola biler (tema onu bərpa edir) -
-       o halda acilma hadisesi bas vermir, ona gore burada bir defe cagiririq. */
-    var lcInitHead = function () {
-      var td = document.getElementById('cart-drawer');
-      if (td && td.hasAttribute('open')) {
-        window.lcCartNote(window.lcCartNoteText || '', window.lcCartNoteSub || '');
-      }
-    };
-    if (document.readyState === 'complete') setTimeout(lcInitHead, 300);
-    else window.addEventListener('load', function () { setTimeout(lcInitHead, 300); });
   }
 
-  window.lcShopName = {{ shop.name | json }};
-  window.lcCartNoteText = {{ section.settings.drawer_note | default: "You've unlocked free worldwide shipping" | json }};
-  window.lcCartNoteSub = {{ section.settings.drawer_note_sub | default: '' | json }};
 
   var form = document.getElementById("lc-form-" + S);
   var cta = document.getElementById("lc-cta-" + S);
@@ -474,7 +414,7 @@
       e.preventDefault();
       var vid = form.querySelector("[name=id]").value;
       var qty = form.querySelector("[name=quantity]").value;
-      window.lcCartAdd(vid, qty, cta, {{ section.settings.drawer_note | default: 'Free worldwide shipping unlocked' | json }});
+      window.lcCartAdd(vid, qty, cta);
     });
   }
 
@@ -500,8 +440,6 @@
     {"type":"header","content":"Included box"},
     {"type":"text","id":"included_heading","label":"Included heading","default":"✦ INCLUDED WITH YOUR SET ✦"},
     {"type":"header","content":"CTA"},
-    {"type":"text","id":"drawer_note","label":"Cart drawer message","default":"You've unlocked free worldwide shipping"},
-    {"type":"text","id":"drawer_note_sub","label":"Cart drawer sub message","default":"30-day money-back guarantee on every set"},
     {"type":"text","id":"cta_text","label":"Button text","default":"ADD TO CART —"},
     {"type":"header","content":"Trust badges"},
     {"type":"text","id":"trust1","label":"Trust 1","default":"Secure checkout"},

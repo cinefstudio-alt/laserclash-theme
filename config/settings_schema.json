@@ -2116,5 +2116,26 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "LaserClash",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Cart drawer"
+      },
+      {
+        "type": "text",
+        "id": "lc_cart_note",
+        "label": "Cart drawer message",
+        "default": "You've unlocked free worldwide shipping"
+      },
+      {
+        "type": "text",
+        "id": "lc_cart_note_sub",
+        "label": "Cart drawer sub message",
+        "default": "30-day money-back guarantee on every set"
+      }
+    ]
   }
 ]
