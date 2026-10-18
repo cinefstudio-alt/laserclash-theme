@@ -362,7 +362,9 @@
     /* Panelin basinda kicik tesdiq zolagi - alici "duzgun etdim" hissi alsin */
     window.lcCartNote = function (text) {
       if (!text) return;
-      var host = document.querySelector('#cart-drawer .drawer__inner, #cart-drawer dialog, #cart-drawer');
+      var host = document.querySelector('#cart-drawer .cart-drawer__inner')
+        || document.querySelector('#cart-drawer cart-drawer-component')
+        || document.querySelector('#cart-drawer dialog');
       if (!host) return;
       var old = host.querySelector('.lc-cartnote');
       if (old) old.remove();
