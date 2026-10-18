@@ -368,17 +368,25 @@
   if (!window.lcDrawerOutsideBound) {
     window.lcDrawerOutsideBound = true;
 
+    /* Temanin oz baglama axinini isledirik: td.close() cagirmaq dialoq ile
+       komponentin veziyyetini uzlasdirmir ve panel bir daha acilmir. */
+    var lcShut = function () {
+      var td = document.getElementById('cart-drawer');
+      if (!td || !td.hasAttribute('open')) return;
+      var closeBtn = td.querySelector('[data-drawer-close], button[aria-label="Close"], button[aria-label*="Close" i]');
+      if (closeBtn) closeBtn.click();
+      else if (typeof td.close === 'function') td.close();
+    };
+
     var lcOutside = function (e) {
       var td = document.getElementById('cart-drawer');
       if (!td || !td.hasAttribute('open')) return;
       if (e.target && e.target.closest && e.target.closest('#cart-drawer')) return;
-      if (typeof td.close === 'function') td.close();
+      lcShut();
     };
 
     var lcEsc = function (e) {
-      if (e.key !== 'Escape') return;
-      var td = document.getElementById('cart-drawer');
-      if (td && td.hasAttribute('open') && typeof td.close === 'function') td.close();
+      if (e.key === 'Escape') lcShut();
     };
 
     document.addEventListener('theme-drawer:open', function (e) {
