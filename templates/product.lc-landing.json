@@ -292,7 +292,7 @@
         "show_summary": true,
         "summary_rating": 4.8,
         "summary_text": "based on 2,000+ reviews",
-        "columns": 3,
+        "columns": 4,
         "image_ratio": "1 / 1",
         "radius": 16,
         "padding_top": 64,
