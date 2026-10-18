@@ -151,7 +151,6 @@
       "settings": {
         "image_side": "left",
         "image_first_mobile": true,
-        "image": "shopify://shop_images/hf_20261018_141347_298d7ee2-1e2d-441e-84c8-eb121ba6ea75.png",
         "ratio": "3/4",
         "eyebrow": "",
         "heading1": "SAME LIVING ROOM",
@@ -208,8 +207,8 @@
       "settings": {
         "image_side": "right",
         "image_first_mobile": true,
-        "image": "shopify://shop_images/1.00_00_47_18.Still002.png",
-        "ratio": "4/3",
+        "image": "shopify://shop_images/hf_20261018_141347_298d7ee2-1e2d-441e-84c8-eb121ba6ea75.png",
+        "ratio": "3/4",
         "eyebrow": "",
         "heading1": "LESS SCROLLING",
         "heading2": "MORE PLAY",
