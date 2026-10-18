@@ -2203,7 +2203,7 @@ theme-drawer[open] dialog[open] {
   z-index: 1;
   background-size: 2600px 58px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2600 58' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' fill-opacity='0.22' d='M0 36C433 18 866 18 1300 36s867 18 1300 0V0H0Z'/%3E%3C/svg%3E");
-  animation: lcWaveBack 52s linear infinite;
+  animation: lcWaveBack 22s linear infinite;
 }
 
 /* on qat: sehifenin ag fonu */
@@ -2211,7 +2211,7 @@ theme-drawer[open] dialog[open] {
   z-index: 2;
   background-size: 1800px 58px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 58' preserveAspectRatio='none'%3E%3Cpath fill='%23FFFFFF' d='M0 30C300 16 600 16 900 30s600 14 900 0V0H0Z'/%3E%3C/svg%3E");
-  animation: lcWaveFront 38s linear infinite;
+  animation: lcWaveFront 15s linear infinite;
 }
 
 @keyframes lcWaveFront {
