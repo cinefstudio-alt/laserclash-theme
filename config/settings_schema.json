@@ -2122,6 +2122,36 @@
     "settings": [
       {
         "type": "header",
+        "content": "Scroll animation"
+      },
+      {
+        "type": "checkbox",
+        "id": "lc_reveal_enabled",
+        "label": "Reveal sections on scroll",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "lc_reveal_distance",
+        "label": "Rise distance",
+        "min": 0,
+        "max": 40,
+        "step": 4,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "lc_reveal_speed",
+        "label": "Speed",
+        "min": 300,
+        "max": 1200,
+        "step": 50,
+        "unit": "ms",
+        "default": 650
+      },
+      {
+        "type": "header",
         "content": "Cart drawer"
       },
       {
