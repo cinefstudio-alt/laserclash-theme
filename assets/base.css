@@ -1870,3 +1870,31 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   color: #ffffff !important;
   text-shadow: 0 1px 2px rgba(5, 20, 50, 0.35);
 }
+
+/* Mesajlar ozu novbe ile deyisir (autoplay) - oxlara ehtiyac yoxdur */
+[id$="__announcements"] slideshow-arrows,
+[id$="__announcements"] .slideshow-control {
+  display: none !important;
+}
+
+/* Zolag daha ince, herflerin alti kesilmesin deye setir hundurluyu aciq saxlanilir */
+[id$="__announcements"] .announcement-bar__slider {
+  min-height: 0;
+}
+
+[id$="__announcements"] .announcement-bar__slides {
+  width: 100%;
+  max-width: 100%;
+  padding-inline: 16px;
+}
+
+[id$="__announcements"] .announcement-bar__slide {
+  padding-block: 7px;
+}
+
+[id$="__announcements"] .announcement-bar__text {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  overflow: visible;
+}
