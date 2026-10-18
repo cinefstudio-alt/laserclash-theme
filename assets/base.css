@@ -1976,7 +1976,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   display: flex;
   align-items: center;
   gap: 9px;
-  margin: 0 0 12px;
+  margin: 14px 14px 10px;
   padding: 11px 14px;
   border-radius: 12px;
   background: linear-gradient(90deg, rgba(23, 66, 162, 0.10) 0%, rgba(111, 208, 74, 0.16) 100%);
@@ -1986,7 +1986,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   font-weight: 700;
   letter-spacing: 0.01em;
   color: #16351f;
-  animation: lcNotePop 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: lcNotePop 0.3s ease-out both;
 }
 
 .lc-cartnote__tick {
@@ -2004,8 +2004,8 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 }
 
 @keyframes lcNotePop {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: none; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
