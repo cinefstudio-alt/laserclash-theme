@@ -2281,3 +2281,29 @@ theme-drawer[open] dialog[open] {
     background-color: rgba(10, 20, 42, 0.62) !important;
   }
 }
+
+
+/* ==========================================================================
+   LaserClash - scroll reveal. Bolmeler asagidan yumsaq qalxaraq gorunur.
+   Hereket azaldilmasi secilibse tamamile sondurulur.
+   ========================================================================== */
+html.lc-reveal-on .lc-rev {
+  opacity: 0;
+  transform: translate3d(0, var(--lc-rev-dist, 20px), 0);
+  transition:
+    opacity var(--lc-rev-speed, 650ms) cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform var(--lc-rev-speed, 650ms) cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html.lc-reveal-on .lc-rev.lc-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.lc-reveal-on .lc-rev {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

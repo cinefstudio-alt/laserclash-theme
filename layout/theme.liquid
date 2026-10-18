@@ -1,7 +1,8 @@
 <!doctype html>
 <html
-  {% if request.design_mode %}
-    class="shopify-design-mode"
+  class="{% if request.design_mode %}shopify-design-mode {% endif %}{% if settings.lc_reveal_enabled %}lc-reveal-on{% endif %}"
+  {% if settings.lc_reveal_enabled %}
+    style="--lc-rev-dist: {{ settings.lc_reveal_distance | default: 20 }}px; --lc-rev-speed: {{ settings.lc_reveal_speed | default: 650 }}ms;"
   {% endif %}
   lang="{{ request.locale.iso_code }}"
   dir="{{ request.locale.direction | default: 'ltr' }}"
@@ -168,6 +169,10 @@
     {% render 'theme-drawer' %}
 
     {% render 'search-modal' %}
+
+    {% if settings.lc_reveal_enabled %}
+      <script src="{{ 'lc-reveal.js' | asset_url }}" defer></script>
+    {% endif %}
 
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
