@@ -2026,9 +2026,11 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   position: fixed;
   inset: 0;
   background: rgba(6, 14, 32, 0.42);
-  /* panelin oz z-index-i 10-dur: fon ondan asagi qalmalidir ki, paneli boyamasin */
-  z-index: 9;
-  pointer-events: none;
+  /* basliqdan (z-index 18) yuxari, panelden (asagida 100 verilir) asagi.
+     Klikleri uzerine goturur ki, arxadaki sehife ile islenmesin. */
+  z-index: 99;
+  pointer-events: auto;
+  cursor: pointer;
   animation: lcBackdropIn 0.25s ease-out;
 }
 
@@ -2049,4 +2051,9 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     right: 0 !important;
     left: auto !important;
   }
+}
+
+/* Panel basligin da ustunde dursun - eks halda yuxari hissesi altda qalirdi */
+theme-drawer[open] dialog[open] {
+  z-index: 100 !important;
 }

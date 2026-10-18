@@ -359,6 +359,23 @@
         });
     };
 
+
+  /* Panelden kenara klikleyende baglansin */
+  if (!window.lcDrawerOutsideBound) {
+    window.lcDrawerOutsideBound = true;
+    document.addEventListener('click', function (e) {
+      var td = document.getElementById('cart-drawer');
+      if (!td || !td.hasAttribute('open')) return;
+      if (e.target.closest && e.target.closest('#cart-drawer')) return;
+      if (typeof td.close === 'function') td.close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      var td = document.getElementById('cart-drawer');
+      if (td && td.hasAttribute('open') && typeof td.close === 'function') td.close();
+    });
+  }
+
     /* Panelin basinda kicik tesdiq zolagi - alici "duzgun etdim" hissi alsin */
     window.lcCartNote = function (text) {
       if (!text) return;
