@@ -1971,21 +1971,35 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   letter-spacing: 0.04em;
 }
 
-/* Sebet panelinde "pulsuz catdirilma aciqlandi" tesdiq zolagi */
+/* ==========================================================================
+   Sebet paneli - satisa aparan hisse: ortada loqo, altinda qazanc zolagi,
+   checkout duymesi sehifedeki esas CTA ile eyni (neon yasil).
+   ========================================================================== */
+#cart-drawer .lc-carthead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 16px 4px;
+}
+
+#cart-drawer .lc-carthead__logo {
+  height: 28px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+}
+
 .lc-cartnote {
   display: flex;
   align-items: center;
-  gap: 9px;
-  margin: 14px 14px 10px;
-  padding: 11px 14px;
-  border-radius: 12px;
-  background: linear-gradient(90deg, rgba(23, 66, 162, 0.10) 0%, rgba(111, 208, 74, 0.16) 100%);
-  border: 1px solid rgba(111, 208, 74, 0.45);
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(23, 66, 162, 0.08) 0%, rgba(111, 208, 74, 0.18) 100%);
+  border: 1px solid rgba(111, 208, 74, 0.5);
   font-family: 'Montserrat', -apple-system, sans-serif;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  color: #16351f;
   animation: lcNotePop 0.3s ease-out both;
 }
 
@@ -1994,13 +2008,31 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  width: 19px;
-  height: 19px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: #4FBF30;
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
+}
+
+.lc-cartnote__text { display: block; line-height: 1.35; }
+
+.lc-cartnote__text b {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #16351f;
+}
+
+.lc-cartnote__text i {
+  display: block;
+  margin-top: 2px;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(22, 53, 31, 0.68);
 }
 
 @keyframes lcNotePop {
@@ -2008,8 +2040,46 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   to   { opacity: 1; }
 }
 
+/* Checkout duymesi - sehifedeki Add to cart ile eyni dil */
+#cart-drawer .cart__checkout-button {
+  position: relative;
+  overflow: hidden;
+  background: #BFFF0F !important;
+  color: #0B1429 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  font-family: 'Montserrat', -apple-system, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+#cart-drawer .cart__checkout-button:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+#cart-drawer .cart__checkout-button::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -75%;
+  width: 45%;
+  height: 140%;
+  pointer-events: none;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-18deg);
+  opacity: 0;
+}
+
+#cart-drawer .cart__checkout-button:hover::after {
+  animation: lcSweep 0.45s ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .lc-cartnote { animation: none; }
+  #cart-drawer .cart__checkout-button:hover::after { animation: none; }
 }
 
 /* ==========================================================================

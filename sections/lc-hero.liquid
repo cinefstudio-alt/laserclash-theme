@@ -345,7 +345,7 @@
             var current = document.getElementById('shopify-section-cart-drawer-section');
             if (fresh && current) current.replaceWith(fresh);
           }
-          window.lcCartNote(note);
+          window.lcCartNote(note, (window.lcCartNoteSub || ''));
           var drawer = document.getElementById('cart-drawer');
           if (drawer && typeof drawer.open === 'function') drawer.open();
           document.dispatchEvent(new CustomEvent('lc:added', { detail: { id: variantId } }));
@@ -404,21 +404,44 @@
     });
   }
 
-    /* Panelin basinda kicik tesdiq zolagi - alici "duzgun etdim" hissi alsin */
-    window.lcCartNote = function (text) {
-      if (!text) return;
+    /* Panelin basi: ortada loqo, altinda qazanc zolagi.
+       Loqo basliqdan kopyalanir - Liquid-den asili olmasin deye. */
+    window.lcCartNote = function (text, sub) {
       var host = document.querySelector('#cart-drawer .cart-drawer__inner')
         || document.querySelector('#cart-drawer cart-drawer-component')
         || document.querySelector('#cart-drawer dialog');
       if (!host) return;
-      var old = host.querySelector('.lc-cartnote');
-      if (old) old.remove();
-      var el = document.createElement('div');
-      el.className = 'lc-cartnote';
-      el.innerHTML = '<span class="lc-cartnote__tick" aria-hidden="true">✓</span><span>' + text + '</span>';
-      host.insertBefore(el, host.firstChild);
+
+      var prev = host.querySelector('.lc-carthead');
+      if (prev) prev.remove();
+
+      var head = document.createElement('div');
+      head.className = 'lc-carthead';
+
+      var logo = document.querySelector('header img, .header img, [class*="logo"] img');
+      if (logo && logo.getAttribute('src')) {
+        var img = document.createElement('img');
+        img.className = 'lc-carthead__logo';
+        img.src = logo.getAttribute('src');
+        img.alt = '';
+        head.appendChild(img);
+      }
+
+      if (text) {
+        var note = document.createElement('div');
+        note.className = 'lc-cartnote';
+        note.innerHTML =
+          '<span class="lc-cartnote__tick" aria-hidden="true">✓</span>' +
+          '<span class="lc-cartnote__text"><b>' + text + '</b>' +
+          (sub ? '<i>' + sub + '</i>' : '') + '</span>';
+        head.appendChild(note);
+      }
+
+      if (head.childNodes.length) host.insertBefore(head, host.firstChild);
     };
   }
+
+  window.lcCartNoteSub = {{ section.settings.drawer_note_sub | default: '' | json }};
 
   var form = document.getElementById("lc-form-" + S);
   var cta = document.getElementById("lc-cta-" + S);
@@ -453,7 +476,8 @@
     {"type":"header","content":"Included box"},
     {"type":"text","id":"included_heading","label":"Included heading","default":"✦ INCLUDED WITH YOUR SET ✦"},
     {"type":"header","content":"CTA"},
-    {"type":"text","id":"drawer_note","label":"Cart drawer message","default":"Free worldwide shipping unlocked"},
+    {"type":"text","id":"drawer_note","label":"Cart drawer message","default":"You've unlocked free worldwide shipping"},
+    {"type":"text","id":"drawer_note_sub","label":"Cart drawer sub message","default":"30-day money-back guarantee on every set"},
     {"type":"text","id":"cta_text","label":"Button text","default":"ADD TO CART —"},
     {"type":"header","content":"Trust badges"},
     {"type":"text","id":"trust1","label":"Trust 1","default":"Secure checkout"},
