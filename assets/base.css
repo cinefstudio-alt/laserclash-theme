@@ -2127,3 +2127,13 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 theme-drawer[open] dialog[open] {
   z-index: 100 !important;
 }
+
+/* Magazada sekil loqo yoxdursa, adi soz kimi yazilir */
+#cart-drawer .lc-carthead__word {
+  font-family: 'Montserrat', -apple-system, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1742A2;
+}

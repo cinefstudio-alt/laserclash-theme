@@ -145,13 +145,20 @@
       var head = document.createElement('div');
       head.className = 'lc-carthead';
 
-      var logo = document.querySelector('header img, .header img, [class*="logo"] img');
+      /* Yalniz basliqdaki esas loqonu gotururuk. Magazada metn loqo varsa
+         (sekil yoxdursa) adi soz kimi yazilir - sehv sekil dusmesin. */
+      var logo = document.querySelector('.header__logo img, header a[href="/"] img, [class*="header"] [class*="logo"] img');
       if (logo && logo.getAttribute('src')) {
         var img = document.createElement('img');
         img.className = 'lc-carthead__logo';
         img.src = logo.getAttribute('src');
         img.alt = '';
         head.appendChild(img);
+      } else if (window.lcShopName) {
+        var word = document.createElement('span');
+        word.className = 'lc-carthead__word';
+        word.textContent = window.lcShopName;
+        head.appendChild(word);
       }
 
       if (text) {
