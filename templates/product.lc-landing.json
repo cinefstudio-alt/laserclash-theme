@@ -151,6 +151,8 @@
       "settings": {
         "image_side": "left",
         "image_first_mobile": true,
+        "video": "shopify://files/videos/laserclash-4.webm",
+        "video_url": "",
         "ratio": "3/4",
         "eyebrow": "",
         "heading1": "SAME LIVING ROOM",
@@ -208,6 +210,7 @@
         "image_side": "right",
         "image_first_mobile": true,
         "image": "shopify://shop_images/hf_20261018_141347_298d7ee2-1e2d-441e-84c8-eb121ba6ea75.png",
+        "video_url": "",
         "ratio": "3/4",
         "eyebrow": "",
         "heading1": "LESS SCROLLING",
@@ -345,12 +348,17 @@
         "m4"
       ],
       "settings": {
+        "layout": "grid",
+        "video_url": "",
+        "media_side": "left",
+        "media_ratio": "4 / 5",
+        "kicker": "FOUR WAYS TO PLAY",
         "heading": "WHAT'S YOUR GAME PLAN?",
         "subheading": "Switch between 4 modes right on the blaster.",
-        "columns": 4,
         "note": "",
         "cta_text": "",
         "cta_link": "",
+        "columns": 4,
         "pad_top": 52,
         "pad_bottom": 52,
         "bg": "#f3f7ff",
@@ -358,10 +366,10 @@
         "blue": "#1742a2",
         "muted": "#5b6b8c",
         "card": "#f3f7ff",
+        "line": "#dde6f5",
         "accent": "#bfff0f",
         "accent_ink": "#0b1429",
-        "radius": 16,
-        "kicker": "FOUR WAYS TO PLAY"
+        "radius": 16
       }
     },
     "howto": {
@@ -395,12 +403,17 @@
         "s3"
       ],
       "settings": {
+        "layout": "media",
+        "video_url": "",
+        "media_side": "left",
+        "media_ratio": "4 / 5",
+        "kicker": "UP AND RUNNING FAST",
         "heading": "THIS IS WHAT GAME NIGHT LOOKS LIKE",
         "subheading": "Out of the box and into the first round in under two minutes.",
-        "columns": 3,
         "note": "",
         "cta_text": "BUILD YOUR GAME NIGHT",
         "cta_link": "#lc-buy",
+        "columns": 3,
         "pad_top": 64,
         "pad_bottom": 64,
         "bg": "#ffffff",
@@ -408,13 +421,10 @@
         "blue": "#1742a2",
         "muted": "#5b6b8c",
         "card": "#f3f7ff",
+        "line": "#dde6f5",
         "accent": "#bfff0f",
         "accent_ink": "#0b1429",
-        "radius": 16,
-        "layout": "media",
-        "media_side": "left",
-        "media_ratio": "4 / 5",
-        "kicker": "UP AND RUNNING FAST"
+        "radius": 16
       }
     },
     "faq": {
