@@ -228,6 +228,85 @@
         "radius": 16
       }
     },
+    "reviews": {
+      "type": "lc-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/hf_20261018_135134_bacca1c5-b703-499b-8998-3d4cfc8583ab.png",
+            "stars": 5,
+            "quote": "Got this for my son’s birthday and somehow ended up playing till midnight 😂 The vests buzz when you get hit, which makes it even more fun.",
+            "name": "Daniel K.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/hf_20261018_135236_c35b404d-6770-4d7e-8641-a0a5a12d086f.png",
+            "stars": 5,
+            "quote": "Sturdier than I expected for the price. We play 2 vs 2 and nobody argues about the score any more.",
+            "name": "Sarah M.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/hf_20261018_135414_c8eb57b2-3393-4b1a-acfe-eeae8e06963b.png",
+            "stars": 4.5,
+            "quote": "Two minutes to set up, no app, no screens. The kids disappear into the garden and come back exhausted.",
+            "name": "Priya R.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "review_ANE7at": {
+          "type": "review",
+          "settings": {
+            "image": "shopify://shop_images/hf_20261018_135618_14e7cc6d-e07a-42cc-a94c-3ce4490d390b.png",
+            "stars": 4.5,
+            "quote": "My daughter won’t stop asking us to play 😂 Even her dad gets competitive. Such a fun little family game!",
+            "name": "Ashley M.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "review_ANE7at"
+      ],
+      "settings": {
+        "kicker": "FROM REAL CUSTOMERS",
+        "title": "SEEN IN THEIR LIVING ROOMS",
+        "subtext": "Photos and words from people who already play.",
+        "show_summary": true,
+        "summary_rating": 4.8,
+        "summary_text": "based on 2,000+ reviews",
+        "columns": 3,
+        "image_ratio": "1 / 1",
+        "radius": 16,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "card": "#f3f7ff",
+        "line": "#dde6f5",
+        "muted": "#5b6b8c",
+        "star": "#ffc107"
+      }
+    },
     "modes": {
       "type": "lc-steps",
       "blocks": {
@@ -334,85 +413,6 @@
         "radius": 16
       }
     },
-    "reviews": {
-      "type": "lc-reviews",
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/hf_20261018_135134_bacca1c5-b703-499b-8998-3d4cfc8583ab.png",
-            "stars": 5,
-            "quote": "Got this for my son’s birthday and somehow ended up playing till midnight 😂 The vests buzz when you get hit, which makes it even more fun.",
-            "name": "Daniel K.",
-            "meta": "Verified purchase",
-            "verified": true,
-            "verified_text": "Verified buyer"
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/hf_20261018_135236_c35b404d-6770-4d7e-8641-a0a5a12d086f.png",
-            "stars": 5,
-            "quote": "Sturdier than I expected for the price. We play 2 vs 2 and nobody argues about the score any more.",
-            "name": "Sarah M.",
-            "meta": "Verified purchase",
-            "verified": true,
-            "verified_text": "Verified buyer"
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/hf_20261018_135414_c8eb57b2-3393-4b1a-acfe-eeae8e06963b.png",
-            "stars": 4.5,
-            "quote": "Two minutes to set up, no app, no screens. The kids disappear into the garden and come back exhausted.",
-            "name": "Priya R.",
-            "meta": "Verified purchase",
-            "verified": true,
-            "verified_text": "Verified buyer"
-          }
-        },
-        "review_ANE7at": {
-          "type": "review",
-          "settings": {
-            "image": "shopify://shop_images/hf_20261018_135618_14e7cc6d-e07a-42cc-a94c-3ce4490d390b.png",
-            "stars": 4.5,
-            "quote": "My daughter won’t stop asking us to play 😂 Even her dad gets competitive. Such a fun little family game!",
-            "name": "Ashley M.",
-            "meta": "Verified purchase",
-            "verified": true,
-            "verified_text": "Verified buyer"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "review_ANE7at"
-      ],
-      "settings": {
-        "kicker": "FROM REAL CUSTOMERS",
-        "title": "SEEN IN THEIR LIVING ROOMS",
-        "subtext": "Photos and words from people who already play.",
-        "show_summary": true,
-        "summary_rating": 4.8,
-        "summary_text": "based on 2,000+ reviews",
-        "columns": 3,
-        "image_ratio": "1 / 1",
-        "radius": 16,
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "card": "#f3f7ff",
-        "line": "#dde6f5",
-        "muted": "#5b6b8c",
-        "star": "#ffc107"
-      }
-    },
     "faq": {
       "type": "lc-faq",
       "blocks": {
@@ -515,9 +515,9 @@
     "hero",
     "benefits",
     "features",
+    "reviews",
     "modes",
     "howto",
-    "reviews",
     "faq",
     "finalcta",
     "sticky"
