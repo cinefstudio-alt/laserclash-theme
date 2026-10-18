@@ -36,6 +36,40 @@
 /* info */
 #lc-hero-{{ section.id }} .lc-eyebrow{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--lc-blue)}
 #lc-hero-{{ section.id }} h1{font-size:clamp(34px,4.4vw,56px);font-weight:900;color:var(--lc-blue);margin:10px 0 0}
+/* --- reyting setri: ulduzlar + say --- */
+#lc-hero-{{ section.id }} .lc-rating{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 10px;
+}
+
+#lc-hero-{{ section.id }} .lc-rating__stars{
+  position:relative;
+  display:inline-block;
+  font-size:17px;
+  line-height:1;
+  letter-spacing:2px;
+  white-space:nowrap;
+}
+
+#lc-hero-{{ section.id }} .lc-rating__base{ color:#D7DEEA; }
+
+#lc-hero-{{ section.id }} .lc-rating__fill{
+  position:absolute;
+  inset:0;
+  width:var(--lc-stars, 100%);
+  overflow:hidden;
+  color:#FFC107;
+}
+
+#lc-hero-{{ section.id }} .lc-rating__text{
+  font-family:'Montserrat',-apple-system,sans-serif;
+  font-size:14px;
+  font-weight:700;
+  color:var(--lc-ink);
+}
+
 #lc-hero-{{ section.id }} .lc-sub{color:var(--lc-muted);font-size:17px;line-height:1.5;margin:14px 0 0;max-width:46ch}
 #lc-hero-{{ section.id }} .lc-pills{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
 #lc-hero-{{ section.id }} .lc-pill{background:var(--lc-card);color:var(--lc-ink);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-radius:999px}
@@ -150,6 +184,20 @@
     <!-- INFO -->
     <div class="lc-info" id="lc-buy">
       {%- if section.settings.eyebrow != blank -%}<div class="lc-eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      {%- if section.settings.show_rating -%}
+        {%- assign lc_stars = section.settings.rating_value | default: 5.0 -%}
+        {%- assign lc_pct = lc_stars | times: 20.0 -%}
+        <div class="lc-rating" role="img" aria-label="{{ lc_stars }} out of 5 stars{% if section.settings.rating_text != blank %}, {{ section.settings.rating_text | escape }}{% endif %}">
+          <span class="lc-rating__stars" style="--lc-stars: {{ lc_pct }}%;" aria-hidden="true">
+            <span class="lc-rating__base">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="lc-rating__fill">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          </span>
+          {%- if section.settings.rating_text != blank -%}
+            <span class="lc-rating__text">{{ section.settings.rating_text }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
       <h1>{{ section.settings.title | default: p.title }}</h1>
       {%- if section.settings.subtitle != blank -%}<p class="lc-sub">{{ section.settings.subtitle }}</p>{%- endif -%}
 
@@ -427,6 +475,10 @@
   "tag": "section",
   "settings": [
     {"type":"product","id":"product","label":"Product (leave empty on a product page)"},
+    {"type":"header","content":"Rating"},
+    {"type":"checkbox","id":"show_rating","label":"Show star rating","default":true},
+    {"type":"range","id":"rating_value","label":"Stars","min":0,"max":5,"step":0.1,"default":5},
+    {"type":"text","id":"rating_text","label":"Text next to stars","info":"e.g. 10,000+ or 4.8 (2,003 reviews)","default":"10,000+"},
     {"type":"header","content":"Text"},
     {"type":"text","id":"eyebrow","label":"Eyebrow","default":"LASERCLASH"},
     {"type":"text","id":"title","label":"Title (empty = product title)","default":"LASER BATTLE SET"},
