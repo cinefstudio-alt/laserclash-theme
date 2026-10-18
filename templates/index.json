@@ -1,136 +1,56 @@
 {
   "sections": {
-    "hero": {
-      "type": "lc-hero",
-      "blocks": {
-        "b1": {
-          "type": "badge",
-          "settings": {
-            "text": "AGES 8+"
-          }
-        },
-        "b2": {
-          "type": "badge",
-          "settings": {
-            "text": "4 GAME MODES"
-          }
-        },
-        "b3": {
-          "type": "badge",
-          "settings": {
-            "text": "NO PROJECTILES"
-          }
-        },
-        "bun1": {
-          "type": "bundle",
-          "settings": {
-            "label": "2 Guns + 2 Vests",
-            "desc": "One-on-one duels",
-            "variant": "2 Guns And 2 Vests",
-            "units": 1,
-            "discount": 0,
-            "tag": "",
-            "popular": false,
-            "popular_text": "MOST POPULAR",
-            "preselected": false
-          }
-        },
-        "bun2": {
-          "type": "bundle",
-          "settings": {
-            "label": "4 Guns + 4 Vests",
-            "desc": "Team play — 2 vs 2",
-            "variant": "4 Guns And 4 Vests",
-            "units": 1,
-            "discount": 0,
-            "tag": "",
-            "popular": true,
-            "popular_text": "MOST POPULAR",
-            "preselected": true
-          }
-        },
-        "inc1": {
-          "type": "include",
-          "settings": {
-            "text": "Free worldwide shipping on every set"
-          }
-        },
-        "inc2": {
-          "type": "include",
-          "settings": {
-            "text": "30-day money-back guarantee"
-          }
-        },
-        "inc3": {
-          "type": "include",
-          "settings": {
-            "text": "4 game modes + rechargeable play"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "bun1",
-        "bun2",
-        "inc1",
-        "inc2",
-        "inc3"
-      ],
+    "banner": {
+      "type": "lc-banner",
       "settings": {
-        "product": "interactive-laser-gun-4-guns-4-targets-digital",
-        "show_rating": true,
-        "rating_value": 5,
-        "rating_text": "10,000+",
+        "image": "shopify://shop_images/hf_20261018_141347_298d7ee2-1e2d-441e-84c8-eb121ba6ea75.png",
+        "video_url": "",
+        "overlay": "#061020",
+        "overlay_opacity": 50,
+        "bg": "#0b1429",
         "eyebrow": "LASERCLASH",
-        "title": "NEON LASER TAG BATTLE SET",
-        "subtitle": "A team-based infrared laser battle that gets everyone off the couch and into the game.",
-        "color_label": "CHOOSE YOUR COLORS",
-        "bundle_heading": "Choose your set",
-        "bundle_note": "Pick the size of your battle",
-        "per_unit_suffix": "/ set",
-        "included_heading": "✦ INCLUDED WITH YOUR SET ✦",
-        "cta_text": "ADD TO CART —",
-        "trust1": "Secure checkout",
-        "trust2": "Free worldwide shipping",
-        "trust3": "30-day money-back",
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
+        "eyebrow_color": "#bfff0f",
+        "heading": "GAME NIGHT, BUT LOUDER",
+        "subtext": "Infrared blasters and light-up vests. Two minutes to set up, a whole evening to settle who's best.",
+        "trust": "Free worldwide shipping · 30-day money-back guarantee",
+        "ink": "#ffffff",
+        "muted": "#ffffffcc",
+        "button_text": "SHOP THE SET",
+        "button_link": "shopify://products/interactive-laser-gun-4-guns-4-targets-digital",
         "accent": "#bfff0f",
         "accent_ink": "#0b1429",
-        "card": "#f3f7ff",
-        "line": "#dde6f5",
-        "muted": "#5b6b8c",
-        "radius": 16
+        "align": "center",
+        "v_align": "center",
+        "text_width": 680,
+        "height": 78,
+        "height_mobile": 70
       }
     },
-    "benefits": {
+    "promise": {
       "type": "lc-split",
       "blocks": {
         "p1": {
           "type": "point",
           "settings": {
-            "icon": "🎯",
-            "title": "Keep them moving",
-            "text": "An active, screen-free game that gets kids off the couch."
+            "icon": "⚡",
+            "title": "Out of the box in two minutes",
+            "text": "No app, no pairing, no instructions nobody reads. Batteries in, straps on, go."
           }
         },
         "p2": {
           "type": "point",
           "settings": {
-            "icon": "👨‍👩‍👧‍👦",
-            "title": "Family time made easy",
-            "text": "Everyone from 8 to adult jumps in — no setup headaches."
+            "icon": "🏠",
+            "title": "Indoors, outdoors, anywhere",
+            "text": "Hallways, gardens, the back of the garage — the arena is wherever you are."
           }
         },
         "p3": {
           "type": "point",
           "settings": {
-            "icon": "🎉",
-            "title": "Perfect for any night",
-            "text": "Siblings, sleepovers, birthdays — instant fun at home."
+            "icon": "👨‍👩‍👧‍👦",
+            "title": "Everyone can play",
+            "text": "From eight-year-olds to the adults who swore they were just watching."
           }
         }
       },
@@ -145,14 +65,14 @@
         "video": "shopify://files/videos/laserclash-4.webm",
         "video_url": "",
         "ratio": "3/4",
-        "eyebrow": "",
-        "heading1": "SAME LIVING ROOM",
-        "heading2": "MORE TIME TOGETHER",
-        "body": "Turn an ordinary evening into a full-on laser battle the whole family can join.",
-        "cta_text": "",
-        "cta_link": "",
-        "pad_top": 56,
-        "pad_bottom": 56,
+        "eyebrow": "WHAT WE MAKE",
+        "heading1": "ONE SET.",
+        "heading2": "EVERY EVENING SORTED.",
+        "body": "LaserClash makes one thing and makes it properly: a laser tag set that comes out of the cupboard more than once.",
+        "cta_text": "SEE THE SET",
+        "cta_link": "shopify://products/interactive-laser-gun-4-guns-4-targets-digital",
+        "pad_top": 64,
+        "pad_bottom": 64,
         "bg": "#ffffff",
         "ink": "#10204a",
         "blue": "#1742a2",
@@ -165,6 +85,26 @@
     },
     "reviews": {
       "type": "lc-reviews",
+      "settings": {
+        "kicker": "REAL FAMILIES",
+        "title": "WHAT PLAYERS SAY",
+        "subtext": "",
+        "show_summary": true,
+        "summary_rating": 4.8,
+        "summary_text": "based on verified buyers",
+        "columns": 3,
+        "image_ratio": "4/5",
+        "radius": 16,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "bg": "#f3f7ff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "card": "#ffffff",
+        "line": "#dde6f7",
+        "muted": "#5b6b8c",
+        "star": "#ffb400"
+      },
       "blocks": {
         "r1": {
           "type": "review",
@@ -220,41 +160,21 @@
         "r2",
         "r3",
         "review_ANE7at"
-      ],
-      "settings": {
-        "kicker": "FROM REAL CUSTOMERS",
-        "title": "SEEN IN THEIR LIVING ROOMS",
-        "subtext": "Photos and words from people who already play.",
-        "show_summary": true,
-        "summary_rating": 4.8,
-        "summary_text": "based on 2,000+ reviews",
-        "columns": 4,
-        "image_ratio": "1 / 1",
-        "radius": 16,
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "card": "#f3f7ff",
-        "line": "#dde6f5",
-        "muted": "#5b6b8c",
-        "star": "#ffc107"
-      }
+      ]
     },
     "finalcta": {
       "type": "lc-cta",
       "settings": {
         "overlay": 0.5,
-        "eyebrow": "GIVE THEM A REASON TO PLAY TOGETHER",
-        "heading": "MAKE TIME FOR ONE MORE ROUND",
+        "eyebrow": "ONE SET, ENDLESS REMATCHES",
+        "heading": "READY WHEN YOU ARE",
         "body": "",
-        "cta_text": "START THE BATTLE",
-        "cta_link": "#lc-buy",
+        "cta_text": "SHOP LASERCLASH",
+        "cta_link": "shopify://products/interactive-laser-gun-4-guns-4-targets-digital",
         "trust": "Free worldwide shipping · 30-day money-back guarantee",
         "pad_top": 80,
         "pad_bottom": 80,
-        "bg": "#f3f7ff",
+        "bg": "#ffffff",
         "ink": "#10204a",
         "accent": "#bfff0f",
         "accent_ink": "#0b1429"
@@ -262,8 +182,8 @@
     }
   },
   "order": [
-    "hero",
-    "benefits",
+    "banner",
+    "promise",
     "reviews",
     "finalcta"
   ]
