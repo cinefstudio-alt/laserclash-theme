@@ -2011,3 +2011,31 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 @media (prefers-reduced-motion: reduce) {
   .lc-cartnote { animation: none; }
 }
+
+/* ==========================================================================
+   Sebet paneli sehifeni yana itelemesin - ustunden acilsin.
+   Tema genis ekranlarda .page-wrapper-e kenar bosluq verib mezmunu sixisdirir.
+   ========================================================================== */
+.page-wrapper--drawer-open {
+  margin-inline-end: 0 !important;
+}
+
+/* panel acilanda arxa fon bir az qaralsin ki, ustden acildigi hiss olunsun */
+.page-wrapper--drawer-open::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 14, 32, 0.42);
+  z-index: 40;
+  pointer-events: none;
+  animation: lcBackdropIn 0.25s ease-out;
+}
+
+@keyframes lcBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-wrapper--drawer-open::after { animation: none; }
+}
