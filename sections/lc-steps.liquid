@@ -90,7 +90,17 @@
 #lc-steps-{{ section.id }} .list p{margin:0;color:var(--lc-muted);font-size:14.5px;line-height:1.55}
 
 /* ---------- grid quruluşu ---------- */
-#lc-steps-{{ section.id }} .hd{text-align:center;max-width:720px;margin:0 auto 32px}
+#lc-steps-{{ section.id }} .hd{text-align:center;max-width:720px;margin:0 auto 28px}
+#lc-steps-{{ section.id }} .topmedia{
+  max-width:{{ section.settings.media_width }}px;
+  margin:0 auto 30px;
+  border-radius:var(--lc-radius);
+  overflow:hidden;
+  background:#0b1020;
+  aspect-ratio:{{ section.settings.media_ratio }};
+}
+#lc-steps-{{ section.id }} .topmedia img,
+#lc-steps-{{ section.id }} .topmedia video{width:100%;height:100%;object-fit:cover;display:block}
 #lc-steps-{{ section.id }} .grid{display:grid;grid-template-columns:repeat({{ section.settings.columns }},minmax(0,1fr));gap:16px}
 #lc-steps-{{ section.id }} .st{background:var(--lc-card);border:1px solid var(--lc-line);border-radius:var(--lc-radius);padding:22px 20px}
 #lc-steps-{{ section.id }} .st .n{
@@ -156,6 +166,20 @@
         {%- if section.settings.subheading != blank -%}<p class="sub">{{ section.settings.subheading }}</p>{%- endif -%}
       </div>
 
+      {%- if lc_has_media -%}
+        <div class="topmedia">
+          {%- if section.settings.video != blank -%}
+            {{ section.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1400x' }}
+          {%- elsif lc_media_url != blank -%}
+            <video loop muted playsinline preload="none"
+                   {% if section.settings.image != blank %}poster="{{ section.settings.image | image_url: width: 1400 }}"{% endif %}
+                   src="{{ lc_media_url }}"></video>
+          {%- else -%}
+            <img src="{{ section.settings.image | image_url: width: 1400 }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
       <div class="grid">
         {%- for b in section.blocks -%}
           <div class="st" {{ b.shopify_attributes }}>
@@ -215,15 +239,16 @@
     {"type":"select","id":"layout","label":"Layout","default":"grid",
       "options":[
         {"value":"grid","label":"Cards side by side"},
-        {"value":"media","label":"Video / image + numbered list"}
+        {"value":"media","label":"Video / image beside a numbered list"}
       ],
-      "info":"The media layout needs a video or image below."},
+      "info":"With cards, the media sits above them. Beside the list, it sits next to them."},
     {"type":"header","content":"Media"},
     {"type":"video","id":"video","label":"Video"},
     {"type":"text","id":"video_url","label":"Or direct .webm / .mp4 URL"},
     {"type":"image_picker","id":"image","label":"Image","info":"Also used as the video poster."},
     {"type":"select","id":"media_side","label":"Media side","default":"left",
       "options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}]},
+    {"type":"range","id":"media_width","label":"Media width (cards layout)","min":400,"max":1100,"step":20,"unit":"px","default":760},
     {"type":"select","id":"media_ratio","label":"Media shape","default":"4 / 5",
       "options":[
         {"value":"1 / 1","label":"Square"},
