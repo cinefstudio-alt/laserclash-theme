@@ -349,9 +349,11 @@
       ],
       "settings": {
         "layout": "grid",
+        "video": "shopify://files/videos/laserclash-2.webm",
         "video_url": "",
         "media_side": "left",
-        "media_ratio": "4 / 5",
+        "media_width": 760,
+        "media_ratio": "1 / 1",
         "kicker": "FOUR WAYS TO PLAY",
         "heading": "WHAT'S YOUR GAME PLAN?",
         "subheading": "Switch between 4 modes right on the blaster.",
@@ -404,8 +406,10 @@
       ],
       "settings": {
         "layout": "media",
+        "video": "shopify://files/videos/laserclash-18.webm",
         "video_url": "",
         "media_side": "left",
+        "media_width": 760,
         "media_ratio": "4 / 5",
         "kicker": "UP AND RUNNING FAST",
         "heading": "THIS IS WHAT GAME NIGHT LOOKS LIKE",
