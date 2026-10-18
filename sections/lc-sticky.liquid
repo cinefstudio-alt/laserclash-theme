@@ -39,12 +39,79 @@
   // show after scrolling past threshold
   function onScroll(){ if(window.scrollY>{{ section.settings.show_after }}){ wrap.classList.add("show"); } else { wrap.classList.remove("show"); } }
   window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+
+  /* ---- Sebet: AJAX elave + sag terefden acilan panel (temanin oz drawer-i) ----
+     Qlobal olaraq bir defe teyin olunur ki, hero ve yapisqan panel eyni kodu islesin. */
+  if (!window.lcCartAdd) {
+    window.lcCartAdd = function (variantId, quantity, button, note) {
+      if (!variantId) return;
+      var label = button ? button.textContent : '';
+      if (button) { button.disabled = true; button.textContent = 'Adding...'; }
+
+      return fetch('/cart/add.js', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+        body: JSON.stringify({
+          items: [{ id: parseInt(variantId, 10), quantity: parseInt(quantity, 10) || 1 }],
+          sections: ['cart-drawer-section']
+        })
+      })
+        .then(function (r) { return r.json().then(function (d) { return r.ok ? d : Promise.reject(d); }); })
+        .then(function (data) {
+          /* panelin icini tezelemek ucun Shopify-in section rendering cavabi */
+          var html = data.sections && data.sections['cart-drawer-section'];
+          if (html) {
+            var fresh = new DOMParser()
+              .parseFromString(html, 'text/html')
+              .querySelector('#shopify-section-cart-drawer-section');
+            var current = document.getElementById('shopify-section-cart-drawer-section');
+            if (fresh && current) current.replaceWith(fresh);
+          }
+          window.lcCartNote(note);
+          var drawer = document.getElementById('cart-drawer');
+          if (drawer && typeof drawer.open === 'function') drawer.open();
+          document.dispatchEvent(new CustomEvent('lc:added', { detail: { id: variantId } }));
+        })
+        .catch(function (err) {
+          var msg = (err && err.description) || (err && err.message) || 'Could not add to cart';
+          if (button) { button.textContent = msg.slice(0, 40); setTimeout(function () { button.textContent = label; }, 2500); }
+        })
+        .then(function () {
+          if (button) { button.disabled = false; if (button.textContent === 'Adding...') button.textContent = label; }
+        });
+    };
+
+    /* Panelin basinda kicik tesdiq zolagi - alici "duzgun etdim" hissi alsin */
+    window.lcCartNote = function (text) {
+      if (!text) return;
+      var host = document.querySelector('#cart-drawer .drawer__inner, #cart-drawer dialog, #cart-drawer');
+      if (!host) return;
+      var old = host.querySelector('.lc-cartnote');
+      if (old) old.remove();
+      var el = document.createElement('div');
+      el.className = 'lc-cartnote';
+      el.innerHTML = '<span class="lc-cartnote__tick" aria-hidden="true">✓</span><span>' + text + '</span>';
+      host.insertBefore(el, host.firstChild);
+    };
+  }
+
+  var sform = document.getElementById("lc-sform-" + S);
+  if (sform) {
+    var sbtn = sform.querySelector("button[type=submit]");
+    sform.addEventListener("submit", function (e) {
+      e.preventDefault();
+      window.lcCartAdd(vid.value, qty.value, sbtn, {{ section.settings.drawer_note | default: 'Free worldwide shipping unlocked' | json }});
+    });
+  }
+
 })();
 </script>
 {% schema %}
 {
   "name":"LC Sticky cart","tag":"section",
   "settings":[
+    {"type":"text","id":"drawer_note","label":"Cart drawer message","default":"Free worldwide shipping unlocked"},
     {"type":"product","id":"product","label":"Product (leave empty on a product page)"},
     {"type":"text","id":"label","label":"Label (empty = product title)"},
     {"type":"text","id":"button_text","label":"Button text","default":"BUY NOW"},

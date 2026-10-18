@@ -1970,3 +1970,44 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   font-weight: 700;
   letter-spacing: 0.04em;
 }
+
+/* Sebet panelinde "pulsuz catdirilma aciqlandi" tesdiq zolagi */
+.lc-cartnote {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(23, 66, 162, 0.10) 0%, rgba(111, 208, 74, 0.16) 100%);
+  border: 1px solid rgba(111, 208, 74, 0.45);
+  font-family: 'Montserrat', -apple-system, sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #16351f;
+  animation: lcNotePop 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lc-cartnote__tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #4FBF30;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@keyframes lcNotePop {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-cartnote { animation: none; }
+}
