@@ -2,7 +2,8 @@
 <html
   class="{% if request.design_mode %}shopify-design-mode {% endif %}{% if settings.lc_reveal_enabled %}lc-reveal-on{% endif %}"
   {% if settings.lc_reveal_enabled %}
-    style="--lc-rev-dist: {{ settings.lc_reveal_distance | default: 20 }}px; --lc-rev-speed: {{ settings.lc_reveal_speed | default: 650 }}ms;"
+    style="--lc-rev-dist: {{ settings.lc_reveal_distance | default: 44 }}px; --lc-rev-speed: {{ settings.lc_reveal_speed | default: 1000 }}ms;"
+    data-lc-rev-trigger="{{ settings.lc_reveal_trigger | default: 18 }}"
   {% endif %}
   lang="{{ request.locale.iso_code }}"
   dir="{{ request.locale.direction | default: 'ltr' }}"

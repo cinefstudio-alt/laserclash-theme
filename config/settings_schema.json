@@ -2135,20 +2135,30 @@
         "id": "lc_reveal_distance",
         "label": "Rise distance",
         "min": 0,
-        "max": 40,
+        "max": 80,
         "step": 4,
         "unit": "px",
-        "default": 20
+        "default": 44
       },
       {
         "type": "range",
         "id": "lc_reveal_speed",
         "label": "Speed",
         "min": 300,
-        "max": 1200,
+        "max": 2000,
         "step": 50,
         "unit": "ms",
-        "default": 650
+        "default": 1000
+      },
+      {
+        "type": "range",
+        "id": "lc_reveal_trigger",
+        "label": "Trigger point (lower = later)",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "%",
+        "default": 18
       },
       {
         "type": "header",

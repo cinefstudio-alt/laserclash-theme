@@ -12,6 +12,10 @@
   // Icinde sabit (fixed) element olan bolmeler animasiya olunmur
   var SKIP = '[id^="lc-sticky-"], cart-drawer-component, [data-lc-no-reveal]';
 
+  // Bolme ekranin bu qederini dolduranda animasiya baslayir (boyuk = gec)
+  var trigger = parseInt(html.getAttribute('data-lc-rev-trigger'), 10);
+  if (isNaN(trigger) || trigger < 0 || trigger > 45) trigger = 18;
+
   function done(el) {
     el.classList.remove('lc-rev', 'lc-in');
   }
@@ -22,7 +26,7 @@
       var el = en.target;
       io.unobserve(el);
       el.classList.add('lc-in');
-      var t = setTimeout(function () { done(el); }, 1600);
+      var t = setTimeout(function () { done(el); }, 2600);
       el.addEventListener('transitionend', function h(ev) {
         if (ev.propertyName !== 'transform') return;
         clearTimeout(t);
@@ -30,7 +34,7 @@
         done(el);
       });
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
+  }, { rootMargin: '0px 0px -' + trigger + '% 0px', threshold: 0.02 });
 
   function prep(scope, skipFirst) {
     var list = (scope || document).querySelectorAll('main .shopify-section');
