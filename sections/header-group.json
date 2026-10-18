@@ -69,9 +69,37 @@
         "enable_transparent_header_collection": true,
         "text_color_transparent_collection": "#111111cc"
       }
+    },
+    "announcements": {
+      "type": "header-announcements",
+      "blocks": {
+        "a1": {
+          "type": "_announcement",
+          "settings": {
+            "text": "Free worldwide shipping on every battle set"
+          }
+        },
+        "a2": {
+          "type": "_announcement",
+          "settings": {
+            "text": "30-day money-back guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2"
+      ],
+      "settings": {
+        "speed": 5,
+        "section_width": "page-width",
+        "background_color": "#1742A2",
+        "divider_width": 0
+      }
     }
   },
   "order": [
+    "announcements",
     "header_section"
   ]
 }
