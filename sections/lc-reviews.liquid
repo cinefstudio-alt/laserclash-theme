@@ -108,6 +108,11 @@
 
 /* --- mobil: yana surusen lent --- */
 @media (max-width:860px){
+  /* mobilde sekil kesilmesin - oz tebii nisbetinde gorunsun */
+  #lc-rev-{{ section.id }} .lc-rev__media{aspect-ratio:auto}
+  #lc-rev-{{ section.id }} .lc-rev__media img,
+  #lc-rev-{{ section.id }} .lc-rev__media video{height:auto;object-fit:contain}
+
   #lc-rev-{{ section.id }} .lc-rev__grid{
     display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
     gap:14px;padding-bottom:6px;scrollbar-width:none;
