@@ -2137,3 +2137,38 @@ theme-drawer[open] dialog[open] {
   text-transform: uppercase;
   color: #1742A2;
 }
+
+/* ==========================================================================
+   Alt hisse (footer) - brend dili: Barlow basliq, Montserrat duyme,
+   mavi fon uzerinde oxunaqli metn.
+   ========================================================================== */
+.shopify-section-group-footer-group h2 {
+  font-family: 'Barlow', -apple-system, sans-serif !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+  font-size: clamp(26px, 3.4vw, 40px) !important;
+}
+
+.shopify-section-group-footer-group p {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* e-poct duymesi - sehifedeki CTA ile eyni */
+.shopify-section-group-footer-group .button,
+.shopify-section-group-footer-group button[type="submit"] {
+  font-family: 'Montserrat', -apple-system, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em;
+}
+
+.shopify-section-group-footer-group input[type="email"] {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+}
+
+.shopify-section-group-footer-group input[type="email"]::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
