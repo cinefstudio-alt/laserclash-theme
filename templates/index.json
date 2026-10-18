@@ -1,9 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
       "type": "lc-banner",
       "settings": {
-        "image": "shopify://shop_images/hf_20261018_141347_298d7ee2-1e2d-441e-84c8-eb121ba6ea75.png",
+        "image": "shopify://shop_images/hf_20261018_145234_d2f1ca41-32e2-4115-af18-92894c4893b0.png",
         "video_url": "",
         "overlay": "#061020",
         "overlay_opacity": 50,
@@ -85,26 +94,6 @@
     },
     "reviews": {
       "type": "lc-reviews",
-      "settings": {
-        "kicker": "REAL FAMILIES",
-        "title": "WHAT PLAYERS SAY",
-        "subtext": "",
-        "show_summary": true,
-        "summary_rating": 4.8,
-        "summary_text": "based on verified buyers",
-        "columns": 3,
-        "image_ratio": "4/5",
-        "radius": 16,
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "bg": "#f3f7ff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "card": "#ffffff",
-        "line": "#dde6f7",
-        "muted": "#5b6b8c",
-        "star": "#ffb400"
-      },
       "blocks": {
         "r1": {
           "type": "review",
@@ -160,7 +149,27 @@
         "r2",
         "r3",
         "review_ANE7at"
-      ]
+      ],
+      "settings": {
+        "kicker": "REAL FAMILIES",
+        "title": "WHAT PLAYERS SAY",
+        "subtext": "",
+        "show_summary": true,
+        "summary_rating": 4.8,
+        "summary_text": "based on verified buyers",
+        "columns": 4,
+        "image_ratio": "4/5",
+        "radius": 16,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "bg": "#f3f7ff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "card": "#ffffff",
+        "line": "#dde6f7",
+        "muted": "#5b6b8c",
+        "star": "#ffb400"
+      }
     },
     "finalcta": {
       "type": "lc-cta",
