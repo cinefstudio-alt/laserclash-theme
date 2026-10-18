@@ -315,29 +315,29 @@
         "m1": {
           "type": "step",
           "settings": {
-            "title": "Single Shot",
-            "text": "Precision mode — make every tag count."
+            "title": "SINGLE SHOT",
+            "text": "One careful shot"
           }
         },
         "m2": {
           "type": "step",
           "settings": {
-            "title": "Rapid Fire",
-            "text": "Fast bursts for close-range chaos."
+            "title": "RAPID FIRE",
+            "text": "Fast close-range bursts"
           }
         },
         "m3": {
           "type": "step",
           "settings": {
-            "title": "Laser",
-            "text": "Longer range for open-space battles."
+            "title": "LASER",
+            "text": "Longer reach"
           }
         },
         "m4": {
           "type": "step",
           "settings": {
-            "title": "Plasma",
-            "text": "Heavy hits that drain more lives."
+            "title": "PLASMA",
+            "text": "Drains lives faster"
           }
         }
       },
@@ -371,7 +371,8 @@
         "line": "#dde6f5",
         "accent": "#bfff0f",
         "accent_ink": "#0b1429",
-        "radius": 16
+        "radius": 16,
+        "card_style": "compact"
       }
     },
     "howto": {

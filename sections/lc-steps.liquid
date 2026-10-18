@@ -116,6 +116,13 @@
 #lc-steps-{{ section.id }} .grid{align-items:stretch}
 #lc-steps-{{ section.id }} .foot{text-align:center;margin-top:24px}
 
+/* kompakt kart: nomre ve basliq yan-yana, az yer tutur */
+#lc-steps-{{ section.id }}.compact .st{flex-direction:row;align-items:center;gap:11px;padding:14px 16px}
+#lc-steps-{{ section.id }}.compact .st .n{width:28px;height:28px;font-size:13px;margin:0;flex:0 0 auto}
+#lc-steps-{{ section.id }}.compact .st h3{font-size:15px;margin:0;line-height:1.15}
+#lc-steps-{{ section.id }}.compact .st p{font-size:12.5px;line-height:1.4;margin:3px 0 0}
+#lc-steps-{{ section.id }}.compact .grid{gap:12px}
+
 @media(max-width:860px){
   #lc-steps-{{ section.id }} .split{grid-template-columns:minmax(0,1fr);gap:24px}
   #lc-steps-{{ section.id }}.mediaRight .split{direction:ltr}
@@ -124,7 +131,7 @@
 }
 </style>
 
-<section id="lc-steps-{{ section.id }}" class="{% if section.settings.media_side == 'right' %}mediaRight{% endif %}{% if lc_layout == 'grid' and lc_has_media %} hasmedia{% endif %}">
+<section id="lc-steps-{{ section.id }}" class="{% if section.settings.media_side == 'right' %}mediaRight{% endif %}{% if lc_layout == 'grid' and lc_has_media %} hasmedia{% endif %}{% if section.settings.card_style == 'compact' %} compact{% endif %}">
   <div class="w">
 
     {%- if lc_layout == 'media' -%}
@@ -187,8 +194,15 @@
         {%- for b in section.blocks -%}
           <div class="st" {{ b.shopify_attributes }}>
             <div class="n">{{ forloop.index }}</div>
-            <h3>{{ b.settings.title }}</h3>
-            {%- if b.settings.text != blank -%}<p>{{ b.settings.text }}</p>{%- endif -%}
+            {%- if section.settings.card_style == 'compact' -%}
+              <div>
+                <h3>{{ b.settings.title }}</h3>
+                {%- if b.settings.text != blank -%}<p>{{ b.settings.text }}</p>{%- endif -%}
+              </div>
+            {%- else -%}
+              <h3>{{ b.settings.title }}</h3>
+              {%- if b.settings.text != blank -%}<p>{{ b.settings.text }}</p>{%- endif -%}
+            {%- endif -%}
           </div>
         {%- endfor -%}
       </div>
@@ -268,6 +282,11 @@
     {"type":"url","id":"cta_link","label":"Button link"},
     {"type":"header","content":"Cards layout only"},
     {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
+    {"type":"select","id":"card_style","label":"Card style","default":"full",
+      "options":[
+        {"value":"full","label":"Full - number above the title"},
+        {"value":"compact","label":"Compact - number beside the title"}
+      ]},
     {"type":"header","content":"Spacing & colors"},
     {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
     {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
