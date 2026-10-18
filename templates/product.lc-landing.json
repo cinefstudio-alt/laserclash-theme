@@ -378,22 +378,22 @@
         "s1": {
           "type": "step",
           "settings": {
-            "title": "Choose your color",
-            "text": "Grab a blaster and strap on your vest."
+            "title": "CHOOSE YOUR COLOUR",
+            "text": "Grab a blaster, strap the vest on and pick your team."
           }
         },
         "s2": {
           "type": "step",
           "settings": {
-            "title": "Find your cover",
-            "text": "Spread out across the room or backyard."
+            "title": "FIND YOUR COVER",
+            "text": "Sofas, doorways, trees — anything counts as cover."
           }
         },
         "s3": {
           "type": "step",
           "settings": {
-            "title": "Make your move",
-            "text": "Tag rival vests and watch their lives drop."
+            "title": "MAKE YOUR MOVE",
+            "text": "Tag a rival's vest and watch their lives count down."
           }
         }
       },

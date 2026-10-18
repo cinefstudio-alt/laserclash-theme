@@ -36,7 +36,23 @@
   color:var(--lc-ink);
   font-family:'DM Sans',-apple-system,Arial,sans-serif;
   padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px;
+  position:relative;
+  isolation:isolate;
 }
+
+/* arxa fon sekli + ustunde oxunaqliq ucun orto */
+#lc-steps-{{ section.id }} .bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+#lc-steps-{{ section.id }} .bg img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+#lc-steps-{{ section.id }} .bg::after{
+  content:'';position:absolute;inset:0;
+  background:{{ section.settings.overlay_color }};
+  opacity:{{ section.settings.overlay_opacity | divided_by: 100.0 }};
+}
+#lc-steps-{{ section.id }} .w{position:relative;z-index:1}
 #lc-steps-{{ section.id }} *{box-sizing:border-box}
 #lc-steps-{{ section.id }} .w{max-width:1100px;margin:0 auto}
 #lc-steps-{{ section.id }} h2{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;line-height:1;letter-spacing:-.01em;font-size:clamp(28px,3.6vw,44px);margin:0;color:var(--lc-ink)}
@@ -98,7 +114,9 @@
   width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:12px;
 }
 #lc-steps-{{ section.id }} .st h3{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:18px;margin:0 0 5px}
-#lc-steps-{{ section.id }} .st p{margin:0;color:var(--lc-muted);font-size:14px;line-height:1.5}
+#lc-steps-{{ section.id }} .st{display:flex;flex-direction:column}
+#lc-steps-{{ section.id }} .st p{margin:0;color:var(--lc-muted);font-size:14px;line-height:1.5;text-wrap:pretty}
+#lc-steps-{{ section.id }} .grid{align-items:stretch}
 #lc-steps-{{ section.id }} .foot{text-align:center;margin-top:24px}
 
 @media(max-width:860px){
@@ -110,6 +128,12 @@
 </style>
 
 <section id="lc-steps-{{ section.id }}" class="{% if section.settings.media_side == 'right' %}mediaRight{% endif %}">
+  {%- if section.settings.bg_image != blank -%}
+    <div class="bg" aria-hidden="true">
+      <img src="{{ section.settings.bg_image | image_url: width: 2200 }}" alt="" loading="lazy">
+    </div>
+  {%- endif -%}
+
   <div class="w">
 
     {%- if lc_layout == 'media' -%}
@@ -238,6 +262,11 @@
     {"type":"url","id":"cta_link","label":"Button link"},
     {"type":"header","content":"Cards layout only"},
     {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
+    {"type":"header","content":"Background image"},
+    {"type":"image_picker","id":"bg_image","label":"Background image"},
+    {"type":"color","id":"overlay_color","label":"Overlay color","default":"#FFFFFF"},
+    {"type":"range","id":"overlay_opacity","label":"Overlay opacity","min":0,"max":100,"step":5,"unit":"%","default":82,
+      "info":"Keeps the text readable over the photo."},
     {"type":"header","content":"Spacing & colors"},
     {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
     {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
