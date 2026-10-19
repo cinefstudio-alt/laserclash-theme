@@ -95,15 +95,8 @@
         "trust1": "Secure checkout",
         "trust2": "Free shipping",
         "trust3": "30-day money-back",
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429",
-        "card": "#f3f7ff",
-        "line": "#dde6f5",
-        "muted": "#5b6b8c",
-        "radius": 16
+        "radius": 16,
+        "bg_style": "page"
       }
     },
     "benefits": {
@@ -153,14 +146,8 @@
         "cta_link": "",
         "pad_top": 56,
         "pad_bottom": 56,
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "muted": "#5b6b8c",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429",
-        "card": "#f3f7ff",
-        "radius": 16
+        "radius": 16,
+        "bg_style": "tint"
       }
     },
     "features": {
@@ -211,14 +198,8 @@
         "cta_link": "#lc-buy",
         "pad_top": 56,
         "pad_bottom": 56,
-        "bg": "#f3f7ff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "muted": "#5b6b8c",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429",
-        "card": "#f3f7ff",
-        "radius": 16
+        "radius": 16,
+        "bg_style": "page"
       }
     },
     "reviews": {
@@ -291,13 +272,7 @@
         "radius": 16,
         "padding_top": 64,
         "padding_bottom": 64,
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "card": "#f3f7ff",
-        "line": "#dde6f5",
-        "muted": "#5b6b8c",
-        "star": "#ffc107"
+        "bg_style": "tint"
       }
     },
     "modes": {
@@ -354,16 +329,9 @@
         "columns": 4,
         "pad_top": 52,
         "pad_bottom": 52,
-        "bg": "#f3f7ff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "muted": "#5b6b8c",
-        "card": "#f3f7ff",
-        "line": "#dde6f5",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429",
         "radius": 16,
-        "card_style": "strip"
+        "card_style": "strip",
+        "bg_style": "page"
       }
     },
     "howto": {
@@ -412,15 +380,8 @@
         "columns": 3,
         "pad_top": 64,
         "pad_bottom": 64,
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "muted": "#5b6b8c",
-        "card": "#f3f7ff",
-        "line": "#dde6f5",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429",
-        "radius": 16
+        "radius": 16,
+        "bg_style": "tint"
       }
     },
     "faq": {
@@ -482,12 +443,8 @@
         "open_first": true,
         "pad_top": 56,
         "pad_bottom": 56,
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "muted": "#5b6b8c",
-        "line": "#dde6f5",
-        "radius": 14
+        "radius": 14,
+        "bg_style": "page"
       }
     },
     "finalcta": {
@@ -502,10 +459,7 @@
         "trust": "Free shipping · 30-day money-back guarantee",
         "pad_top": 80,
         "pad_bottom": 80,
-        "bg": "#f3f7ff",
-        "ink": "#10204a",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429"
+        "bg_style": "tint"
       }
     },
     "sticky": {
@@ -515,9 +469,7 @@
         "label": "",
         "button_text": "BUY NOW",
         "show_after": 600,
-        "bar_bg": "#0b1429",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429"
+        "bg_style": "page"
       }
     }
   },

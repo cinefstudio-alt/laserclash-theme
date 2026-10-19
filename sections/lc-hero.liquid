@@ -13,16 +13,16 @@
 {%- endif -%}
 
 
+{%- liquid
+  assign lc_secbg = 'var(--lc-bg)'
+  if section.settings.bg_style == 'tint'
+    assign lc_secbg = 'var(--lc-surface)'
+  endif
+-%}
 <style>
+#lc-hero-{{ section.id }}{--lc-sec-bg:{{ lc_secbg }};--lc-bg:{{ lc_secbg }};}
+
 #lc-hero-{{ section.id }}{
-  --lc-bg: {{ section.settings.bg }};
-  --lc-ink: {{ section.settings.ink }};
-  --lc-blue: {{ section.settings.blue }};
-  --lc-accent: {{ section.settings.accent }};
-  --lc-accent-ink: {{ section.settings.accent_ink }};
-  --lc-card: {{ section.settings.card }};
-  --lc-line: {{ section.settings.line }};
-  --lc-muted: {{ section.settings.muted }};
   --lc-radius: {{ section.settings.radius }}px;
 }
 #lc-hero-{{ section.id }} *{box-sizing:border-box}
@@ -291,7 +291,7 @@
         <div class="hd">{{ section.settings.included_heading }}</div>
         <ul>
           {%- for i in incs -%}
-          <li {{ i.shopify_attributes }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="{{ section.settings.blue }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ i.settings.text }}</span></li>
+          <li {{ i.shopify_attributes }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--lc-blue)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ i.settings.text }}</span></li>
           {%- endfor -%}
         </ul>
       </div>
@@ -535,6 +535,26 @@
   "tag": "section",
   "settings": [
     {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Section background",
+      "default": "page",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page background"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        }
+      ]
+    },
+    {
       "type": "product",
       "id": "product",
       "label": "Product (leave empty on a product page)"
@@ -662,55 +682,7 @@
     },
     {
       "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg",
-      "label": "Background",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "ink",
-      "label": "Text",
-      "default": "#10204A"
-    },
-    {
-      "type": "color",
-      "id": "blue",
-      "label": "Accent blue",
-      "default": "#1742A2"
-    },
-    {
-      "type": "color",
-      "id": "accent",
-      "label": "Button / accent",
-      "default": "#BFFF0F"
-    },
-    {
-      "type": "color",
-      "id": "accent_ink",
-      "label": "Button text",
-      "default": "#0B1429"
-    },
-    {
-      "type": "color",
-      "id": "card",
-      "label": "Card background",
-      "default": "#F3F7FF"
-    },
-    {
-      "type": "color",
-      "id": "line",
-      "label": "Borders",
-      "default": "#DDE6F5"
-    },
-    {
-      "type": "color",
-      "id": "muted",
-      "label": "Muted text",
-      "default": "#5B6B8C"
+      "content": "Spacing"
     },
     {
       "type": "range",

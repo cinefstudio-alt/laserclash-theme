@@ -2122,18 +2122,79 @@
     "settings": [
       {
         "type": "header",
-        "content": "Brand colors",
-        "info": "These feed the announcement bar, confetti, cart banner and accents. Set them once per store."
+        "content": "Colors",
+        "info": "One place for the whole storefront. Sections have no color pickers of their own."
       },
-      { "type": "color", "id": "lcb_brand", "label": "Brand primary", "default": "#1742A2" },
-      { "type": "color", "id": "lcb_brand_2", "label": "Brand secondary", "default": "#2E6FD0" },
-      { "type": "color", "id": "lcb_accent", "label": "Accent / CTA", "default": "#BFFF0F" },
-      { "type": "color", "id": "lcb_accent_ink", "label": "Accent text (checkout label)", "default": "#0B1429" },
-      { "type": "color", "id": "lcb_green", "label": "Success green", "default": "#6FD04A" },
-      { "type": "color", "id": "lcb_green_light", "label": "Success green - light", "default": "#9FE870" },
-      { "type": "color", "id": "lcb_green_deep", "label": "Success green - deep", "default": "#2F9E1A" },
-      { "type": "color", "id": "lcb_success", "label": "Confetti extra color", "default": "#4FBF30" },
-      { "type": "color", "id": "lcb_success_ink", "label": "Cart banner text + bar track", "default": "#16351F" },
+      {
+        "type": "color",
+        "id": "lcx_bg",
+        "label": "Page background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "lcx_surface",
+        "label": "Tinted background (cards, alternate sections)",
+        "default": "#F3F7FF"
+      },
+      {
+        "type": "color",
+        "id": "lcx_heading",
+        "label": "Headings",
+        "default": "#10204A"
+      },
+      {
+        "type": "color",
+        "id": "lcx_text",
+        "label": "Body text",
+        "default": "#10204A"
+      },
+      {
+        "type": "color",
+        "id": "lcx_muted",
+        "label": "Small / muted text",
+        "default": "#5B6B8C"
+      },
+      {
+        "type": "color",
+        "id": "lcx_button",
+        "label": "Buttons",
+        "default": "#BFFF0F"
+      },
+      {
+        "type": "color",
+        "id": "lcx_button_text",
+        "label": "Button text",
+        "default": "#0B1429"
+      },
+      {
+        "type": "color",
+        "id": "lcx_line",
+        "label": "Borders",
+        "default": "#DDE6F5"
+      },
+      {
+        "type": "color",
+        "id": "lcx_star",
+        "label": "Review stars",
+        "default": "#FFC107"
+      },
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "color",
+        "id": "lcx_ann_start",
+        "label": "Gradient start",
+        "default": "#1742A2"
+      },
+      {
+        "type": "color",
+        "id": "lcx_ann_end",
+        "label": "Gradient end",
+        "default": "#9FE870"
+      },
       {
         "type": "header",
         "content": "Color mode"
@@ -2144,8 +2205,14 @@
         "label": "Site color mode",
         "default": "light",
         "options": [
-          { "value": "light", "label": "Light" },
-          { "value": "dark", "label": "Dark" }
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
         ],
         "info": "Dark repaints the whole storefront. Switching back to Light restores everything exactly as it was."
       },
@@ -2184,11 +2251,48 @@
         "content": "Footer wave",
         "info": "A soft animated wave on the top edge of the footer. Its color should match the section above the footer."
       },
-      { "type": "checkbox", "id": "lcw_enabled", "label": "Show the footer wave", "default": true },
-      { "type": "color", "id": "lcw_color", "label": "Wave color", "default": "#FFFFFF" },
-      { "type": "range", "id": "lcw_height", "label": "Wave height", "min": 24, "max": 90, "step": 2, "unit": "px", "default": 58 },
-      { "type": "range", "id": "lcw_speed_front", "label": "Front wave speed", "min": 6, "max": 40, "step": 1, "unit": "s", "default": 15 },
-      { "type": "range", "id": "lcw_speed_back", "label": "Back wave speed", "min": 6, "max": 40, "step": 1, "unit": "s", "default": 22 },
+      {
+        "type": "checkbox",
+        "id": "lcw_enabled",
+        "label": "Show the footer wave",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "lcw_color",
+        "label": "Wave color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "range",
+        "id": "lcw_height",
+        "label": "Wave height",
+        "min": 24,
+        "max": 90,
+        "step": 2,
+        "unit": "px",
+        "default": 58
+      },
+      {
+        "type": "range",
+        "id": "lcw_speed_front",
+        "label": "Front wave speed",
+        "min": 6,
+        "max": 40,
+        "step": 1,
+        "unit": "s",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "lcw_speed_back",
+        "label": "Back wave speed",
+        "min": 6,
+        "max": 40,
+        "step": 1,
+        "unit": "s",
+        "default": 22
+      },
       {
         "type": "header",
         "content": "Scroll animation"

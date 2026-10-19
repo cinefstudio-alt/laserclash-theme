@@ -9,15 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 
+{%- liquid
+  assign lc_secbg = 'var(--lc-bg)'
+  if section.settings.bg_style == 'tint'
+    assign lc_secbg = 'var(--lc-surface)'
+  endif
+-%}
 <style>
+#lc-rev-{{ section.id }}{--lc-sec-bg:{{ lc_secbg }};--lc-bg:{{ lc_secbg }};}
+
 #lc-rev-{{ section.id }}{
-  --lc-bg: {{ section.settings.bg }};
-  --lc-ink: {{ section.settings.ink }};
-  --lc-blue: {{ section.settings.blue }};
-  --lc-card: {{ section.settings.card }};
-  --lc-line: {{ section.settings.line }};
-  --lc-muted: {{ section.settings.muted }};
-  --lc-star: {{ section.settings.star }};
   --lc-radius: {{ section.settings.radius }}px;
   --lc-cols: {{ section.settings.columns }};
 }
@@ -206,53 +207,205 @@
   "tag": "section",
   "max_blocks": 12,
   "settings": [
-    {"type":"header","content":"Heading"},
-    {"type":"text","id":"kicker","label":"Kicker","default":"FROM REAL CUSTOMERS"},
-    {"type":"text","id":"title","label":"Title","default":"SEEN IN THEIR LIVING ROOMS"},
-    {"type":"textarea","id":"subtext","label":"Subtext","default":"Photos and words from people who already play."},
-    {"type":"header","content":"Average rating"},
-    {"type":"checkbox","id":"show_summary","label":"Show average rating","default":true},
-    {"type":"range","id":"summary_rating","label":"Average","min":0,"max":5,"step":0.1,"default":4.8},
-    {"type":"text","id":"summary_text","label":"Text next to average","default":"based on 2,000+ reviews"},
-    {"type":"header","content":"Layout"},
-    {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
     {
-      "type":"select","id":"image_ratio","label":"Image shape","default":"1 / 1",
-      "options":[
-        {"value":"1 / 1","label":"Square"},
-        {"value":"4 / 5","label":"Portrait"},
-        {"value":"16 / 9","label":"Landscape"}
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Section background",
+      "default": "page",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page background"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        }
       ]
     },
-    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16},
-    {"type":"range","id":"padding_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":64},
-    {"type":"range","id":"padding_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":64},
-    {"type":"header","content":"Colors"},
-    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
-    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
-    {"type":"color","id":"blue","label":"Accent","default":"#1742A2"},
-    {"type":"color","id":"card","label":"Card background","default":"#F3F7FF"},
-    {"type":"color","id":"line","label":"Borders","default":"#DDE6F5"},
-    {"type":"color","id":"muted","label":"Muted text","default":"#5B6B8C"},
-    {"type":"color","id":"star","label":"Stars","default":"#FFC107"}
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "FROM REAL CUSTOMERS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "SEEN IN THEIR LIVING ROOMS"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Photos and words from people who already play."
+    },
+    {
+      "type": "header",
+      "content": "Average rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary",
+      "label": "Show average rating",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "summary_rating",
+      "label": "Average",
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "default": 4.8
+    },
+    {
+      "type": "text",
+      "id": "summary_text",
+      "label": "Text next to average",
+      "default": "based on 2,000+ reviews"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image shape",
+      "default": "1 / 1",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Landscape"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
   ],
   "blocks": [
     {
-      "type":"review",
-      "name":"Review",
-      "settings":[
-        {"type":"image_picker","id":"image","label":"Photo"},
-        {"type":"range","id":"stars","label":"Stars","min":0,"max":5,"step":0.1,"default":5},
-        {"type":"textarea","id":"quote","label":"Review","default":"The kids played for three hours straight. Worth every penny."},
-        {"type":"text","id":"name","label":"Name","default":"Sarah M."},
-        {"type":"text","id":"meta","label":"Under the name","info":"e.g. a date or a city","default":"Verified purchase"},
-        {"type":"checkbox","id":"verified","label":"Show badge on photo","default":true},
-        {"type":"text","id":"verified_text","label":"Badge text","default":"Verified buyer"}
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Stars",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review",
+          "default": "The kids played for three hours straight. Worth every penny."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Under the name",
+          "info": "e.g. a date or a city",
+          "default": "Verified purchase"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show badge on photo",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "verified_text",
+          "label": "Badge text",
+          "default": "Verified buyer"
+        }
       ]
     }
   ],
-  "presets":[
-    {"name":"LC Photo reviews","blocks":[{"type":"review"},{"type":"review"},{"type":"review"}]}
+  "presets": [
+    {
+      "name": "LC Photo reviews",
+      "blocks": [
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        }
+      ]
+    }
   ]
 }
 {% endschema %}

@@ -22,17 +22,18 @@
   endif
 -%}
 
+{%- liquid
+  assign lc_secbg = 'var(--lc-bg)'
+  if section.settings.bg_style == 'tint'
+    assign lc_secbg = 'var(--lc-surface)'
+  endif
+-%}
 <style>
+#lc-steps-{{ section.id }}{--lc-sec-bg:{{ lc_secbg }};--lc-bg:{{ lc_secbg }};}
+
 #lc-steps-{{ section.id }}{
-  --lc-ink:{{ section.settings.ink }};
-  --lc-blue:{{ section.settings.blue }};
-  --lc-muted:{{ section.settings.muted }};
-  --lc-card:{{ section.settings.card }};
-  --lc-accent:{{ section.settings.accent }};
-  --lc-accent-ink:{{ section.settings.accent_ink }};
-  --lc-line:{{ section.settings.line }};
   --lc-radius:{{ section.settings.radius }}px;
-  background:{{ section.settings.bg }};
+  background:var(--lc-sec-bg);
   color:var(--lc-ink);
   font-family:'DM Sans',-apple-system,Arial,sans-serif;
   padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px;
@@ -289,60 +290,254 @@
 
 {% schema %}
 {
-  "name":"LC Steps","tag":"section",
-  "settings":[
-    {"type":"select","id":"layout","label":"Layout","default":"grid",
-      "options":[
-        {"value":"grid","label":"Cards side by side"},
-        {"value":"media","label":"Video / image beside a numbered list"}
+  "name": "LC Steps",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Section background",
+      "default": "page",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page background"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "grid",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Cards side by side"
+        },
+        {
+          "value": "media",
+          "label": "Video / image beside a numbered list"
+        }
       ],
-      "info":"With cards, the media sits above them. Beside the list, it sits next to them."},
-    {"type":"header","content":"Media"},
-    {"type":"video","id":"video","label":"Video"},
-    {"type":"text","id":"video_url","label":"Or direct .webm / .mp4 URL"},
-    {"type":"image_picker","id":"image","label":"Image","info":"Also used as the video poster."},
-    {"type":"select","id":"media_side","label":"Media side","default":"left",
-      "options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}]},
-    {"type":"range","id":"media_width","label":"Media width (cards layout)","min":400,"max":1100,"step":20,"unit":"px","default":760},
-    {"type":"select","id":"media_ratio","label":"Media shape","default":"4 / 5",
-      "options":[
-        {"value":"1 / 1","label":"Square"},
-        {"value":"4 / 5","label":"Portrait"},
-        {"value":"9 / 16","label":"Tall"},
-        {"value":"16 / 9","label":"Landscape"}
-      ]},
-    {"type":"header","content":"Text"},
-    {"type":"text","id":"kicker","label":"Kicker"},
-    {"type":"text","id":"heading","label":"Heading","default":"READY FOR YOUR FIRST ROUND?"},
-    {"type":"text","id":"subheading","label":"Subheading"},
-    {"type":"text","id":"note","label":"Note under steps"},
-    {"type":"text","id":"cta_text","label":"Button text"},
-    {"type":"url","id":"cta_link","label":"Button link"},
-    {"type":"header","content":"Cards layout only"},
-    {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
-    {"type":"select","id":"card_style","label":"Card style","default":"full",
-      "options":[
-        {"value":"full","label":"Full - number above the title"},
-        {"value":"compact","label":"Compact - number beside the title"},
-        {"value":"strip","label":"Strip - one dark bar, mode-selector look"}
-      ]},
-    {"type":"header","content":"Spacing & colors"},
-    {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
-    {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
-    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
-    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
-    {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
-    {"type":"color","id":"muted","label":"Muted","default":"#5B6B8C"},
-    {"type":"color","id":"card","label":"Card bg","default":"#F3F7FF"},
-    {"type":"color","id":"line","label":"Borders","default":"#DDE6F5"},
-    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
-    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"},
-    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16}
+      "info": "With cards, the media sits above them. Beside the list, it sits next to them."
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Or direct .webm / .mp4 URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Also used as the video poster."
+    },
+    {
+      "type": "select",
+      "id": "media_side",
+      "label": "Media side",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "label": "Media width (cards layout)",
+      "min": 400,
+      "max": 1100,
+      "step": 20,
+      "unit": "px",
+      "default": 760
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "Media shape",
+      "default": "4 / 5",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait"
+        },
+        {
+          "value": "9 / 16",
+          "label": "Tall"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Landscape"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "READY FOR YOUR FIRST ROUND?"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note under steps"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Cards layout only"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "default": "full",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full - number above the title"
+        },
+        {
+          "value": "compact",
+          "label": "Compact - number beside the title"
+        },
+        {
+          "value": "strip",
+          "label": "Strip - one dark bar, mode-selector look"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
   ],
-  "blocks":[{"type":"step","name":"Step","settings":[
-    {"type":"text","id":"title","label":"Title","default":"Power up"},
-    {"type":"textarea","id":"text","label":"Text","default":"One short line describing this step."}
-  ]}],
-  "presets":[{"name":"LC Steps","blocks":[{"type":"step"},{"type":"step"},{"type":"step"}]}]
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Power up"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "One short line describing this step."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LC Steps",
+      "blocks": [
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

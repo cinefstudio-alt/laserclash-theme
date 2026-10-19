@@ -2,8 +2,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+{%- liquid
+  assign lc_secbg = 'var(--lc-bg)'
+  if section.settings.bg_style == 'tint'
+    assign lc_secbg = 'var(--lc-surface)'
+  endif
+-%}
 <style>
-#lc-split-{{ section.id }}{--lc-ink:{{ section.settings.ink }};--lc-blue:{{ section.settings.blue }};--lc-muted:{{ section.settings.muted }};--lc-accent:{{ section.settings.accent }};--lc-accent-ink:{{ section.settings.accent_ink }};--lc-card:{{ section.settings.card }};--lc-radius:{{ section.settings.radius }}px;background:{{ section.settings.bg }};color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
+#lc-split-{{ section.id }}{--lc-sec-bg:{{ lc_secbg }};--lc-bg:{{ lc_secbg }};}
+
+#lc-split-{{ section.id }}{--lc-radius:{{ section.settings.radius }}px;background:var(--lc-sec-bg);color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
 #lc-split-{{ section.id }} *{box-sizing:border-box}
 #lc-split-{{ section.id }} .w{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
 #lc-split-{{ section.id }}.rev .w{direction:rtl}#lc-split-{{ section.id }}.rev .w>*{direction:ltr}
@@ -91,40 +99,194 @@
 
 {% schema %}
 {
-  "name":"LC Split (image+text)","tag":"section",
-  "settings":[
-    {"type":"select","id":"image_side","label":"Image side","options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}],"default":"left"},
-    {"type":"checkbox","id":"image_first_mobile","label":"Image first on mobile","default":true},
-    {"type":"image_picker","id":"image","label":"Image","info":"Used as the poster when a video is set."},
-    {"type":"video","id":"video","label":"Video"},
-    {"type":"text","id":"video_url","label":"Or direct .webm / .mp4 URL"},
-    {"type":"text","id":"ratio","label":"Image ratio (e.g. 4/3)","default":"4/3"},
-    {"type":"text","id":"eyebrow","label":"Eyebrow"},
-    {"type":"text","id":"heading1","label":"Heading line 1","default":"SAME LIVING ROOM"},
-    {"type":"text","id":"heading2","label":"Heading line 2 (accent)","default":"MORE TIME TOGETHER"},
-    {"type":"textarea","id":"body","label":"Body","default":"Two or three sentences about what this is and who it is for."},
-    {"type":"text","id":"cta_text","label":"Button text"},
-    {"type":"url","id":"cta_link","label":"Button link"},
-    {"type":"header","content":"Spacing & colors"},
-    {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
-    {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
-    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
-    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
-    {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
-    {"type":"color","id":"muted","label":"Muted text","default":"#5B6B8C"},
-    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
-    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"},
-    {"type":"color","id":"card","label":"Card / icon bg","default":"#F3F7FF"},
-    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16}
+  "name": "LC Split (image+text)",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Section background",
+      "default": "page",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page background"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Image side",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_first_mobile",
+      "label": "Image first on mobile",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Used as the poster when a video is set."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Or direct .webm / .mp4 URL"
+    },
+    {
+      "type": "text",
+      "id": "ratio",
+      "label": "Image ratio (e.g. 4/3)",
+      "default": "4/3"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading1",
+      "label": "Heading line 1",
+      "default": "SAME LIVING ROOM"
+    },
+    {
+      "type": "text",
+      "id": "heading2",
+      "label": "Heading line 2 (accent)",
+      "default": "MORE TIME TOGETHER"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Two or three sentences about what this is and who it is for."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
   ],
-  "blocks":[
-    {"type":"point","name":"Benefit point","settings":[
-      {"type":"text","id":"icon","label":"Icon (emoji)","default":"🎯"},
-      {"type":"text","id":"title","label":"Title","default":"Keep them moving"},
-      {"type":"textarea","id":"text","label":"Text","default":"An active, screen-free game for restless afternoons."}
-    ]},
-    {"type":"tag","name":"Feature tag","settings":[{"type":"text","id":"text","label":"Text","default":"LIGHT-UP GEAR"}]}
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Benefit point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "🎯"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Keep them moving"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "An active, screen-free game for restless afternoons."
+        }
+      ]
+    },
+    {
+      "type": "tag",
+      "name": "Feature tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "LIGHT-UP GEAR"
+        }
+      ]
+    }
   ],
-  "presets":[{"name":"LC Split (image+text)","blocks":[{"type":"point"},{"type":"point"},{"type":"point"}]}]
+  "presets": [
+    {
+      "name": "LC Split (image+text)",
+      "blocks": [
+        {
+          "type": "point"
+        },
+        {
+          "type": "point"
+        },
+        {
+          "type": "point"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

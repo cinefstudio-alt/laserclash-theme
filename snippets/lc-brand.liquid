@@ -1,22 +1,35 @@
 {%- comment -%}
-  LC Starter - brend rengleri.
-  Butun ozel CSS-de rengler birbasa yazilmir, bu deyisenlerden gelir.
-  Yeni magazada sadece Theme settings -> Brand bolmesinden rengleri secmek
-  kifayetdir: elan zolagi, konfeti, sebet zolagi, duymeler - hamisi uygunlasir.
+  LC Starter - butun saytin reng palitrasi.
+  Rengler bir yerden idare olunur: Theme settings -> Colors.
+  Bolmelerde ayri-ayri reng secicileri yoxdur; her bolmede yalniz
+  "fon: acig / calarli" secimi var. Belelikle eyni rengi iki yerden
+  deyismek ehtiyaci aradan qalxir.
 {%- endcomment -%}
 <style>
   :root {
-    --lcb-brand: {{ settings.lcb_brand | default: '#1742A2' }};
-    --lcb-brand-rgb: {{ settings.lcb_brand.rgb | default: '23 66 162' }};
-    --lcb-brand-2: {{ settings.lcb_brand_2 | default: '#2E6FD0' }};
-    --lcb-accent: {{ settings.lcb_accent | default: '#BFFF0F' }};
-    --lcb-accent-ink: {{ settings.lcb_accent_ink | default: '#0B1429' }};
-    --lcb-green: {{ settings.lcb_green | default: '#6FD04A' }};
-    --lcb-green-rgb: {{ settings.lcb_green.rgb | default: '111 208 74' }};
-    --lcb-green-light: {{ settings.lcb_green_light | default: '#9FE870' }};
-    --lcb-green-deep: {{ settings.lcb_green_deep | default: '#2F9E1A' }};
-    --lcb-success: {{ settings.lcb_success | default: '#4FBF30' }};
-    --lcb-success-ink: {{ settings.lcb_success_ink | default: '#16351F' }};
-    --lcb-success-ink-rgb: {{ settings.lcb_success_ink.rgb | default: '22 53 31' }};
+    --lc-bg: {{ settings.lcx_bg | default: '#FFFFFF' }};
+    --lc-surface: {{ settings.lcx_surface | default: '#F3F7FF' }};
+    --lc-blue: {{ settings.lcx_heading | default: '#10204A' }};
+    --lc-ink: {{ settings.lcx_text | default: '#10204A' }};
+    --lc-muted: {{ settings.lcx_muted | default: '#5B6B8C' }};
+    --lc-accent: {{ settings.lcx_button | default: '#BFFF0F' }};
+    --lc-accent-ink: {{ settings.lcx_button_text | default: '#0B1429' }};
+    --lc-line: {{ settings.lcx_line | default: '#DDE6F5' }};
+    --lc-star: {{ settings.lcx_star | default: '#FFC107' }};
+    --lc-card: var(--lc-surface);
+
+    /* elan zolagi */
+    --lc-ann-a: {{ settings.lcx_ann_start | default: '#1742A2' }};
+    --lc-ann-b: {{ settings.lcx_ann_end | default: '#9FE870' }};
+
+    /* sebet zolagi ve konfeti bu palitradan torenir */
+    --lc-ann-a-rgb: {{ settings.lcx_ann_start.rgb | default: '23 66 162' }};
+    --lc-ann-b-rgb: {{ settings.lcx_ann_end.rgb | default: '159 232 112' }};
+    --lc-ink-rgb: {{ settings.lcx_text.rgb | default: '16 32 74' }};
   }
+
+  /* Basliqlar her yerde eyni rengdedir */
+  [id^="lc-"] h1,
+  [id^="lc-"] h2,
+  [id^="lc-"] h3 { color: var(--lc-blue); }
 </style>

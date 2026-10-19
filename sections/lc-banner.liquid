@@ -11,19 +11,23 @@
   assign lc_url = section.settings.video_url | strip
 -%}
 
+{%- liquid
+  assign lc_secbg = 'var(--lc-bg)'
+  if section.settings.bg_style == 'tint'
+    assign lc_secbg = 'var(--lc-surface)'
+  endif
+-%}
 <style>
+#lc-ban-{{ section.id }}{--lc-sec-bg:{{ lc_secbg }};--lc-bg:{{ lc_secbg }};--lc-ink:#FFFFFF;--lc-muted:#D9E2F2;}
+
 #lc-ban-{{ section.id }}{
-  --lc-ink:{{ section.settings.ink }};
-  --lc-muted:{{ section.settings.muted }};
-  --lc-accent:{{ section.settings.accent }};
-  --lc-accent-ink:{{ section.settings.accent_ink }};
   position:relative;
   display:flex;
   align-items:{% if section.settings.v_align == 'top' %}flex-start{% elsif section.settings.v_align == 'bottom' %}flex-end{% else %}center{% endif %};
   justify-content:{% if section.settings.align == 'left' %}flex-start{% elsif section.settings.align == 'right' %}flex-end{% else %}center{% endif %};
   min-height:{{ section.settings.height }}vh;
   overflow:hidden;
-  background:{{ section.settings.bg }};
+  background:var(--lc-sec-bg);
   color:var(--lc-ink);
   font-family:'DM Sans',-apple-system,Arial,sans-serif;
   isolation:isolate;
@@ -139,37 +143,193 @@
 
 {% schema %}
 {
-  "name":"LC Banner","tag":"section",
-  "settings":[
-    {"type":"header","content":"Background"},
-    {"type":"image_picker","id":"image","label":"Image","info":"Also the video poster."},
-    {"type":"video","id":"video","label":"Video"},
-    {"type":"text","id":"video_url","label":"Or direct .webm / .mp4 URL"},
-    {"type":"color","id":"overlay","label":"Overlay color","default":"#061020"},
-    {"type":"range","id":"overlay_opacity","label":"Overlay opacity","min":0,"max":90,"step":5,"unit":"%","default":45},
-    {"type":"color","id":"bg","label":"Fallback background","default":"#0B1429"},
-    {"type":"header","content":"Text"},
-    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"YOUR BRAND"},
-    {"type":"color","id":"eyebrow_color","label":"Eyebrow color","default":"#BFFF0F"},
-    {"type":"text","id":"heading","label":"Heading","default":"THE ONE THING WE MAKE, MADE PROPERLY"},
-    {"type":"textarea","id":"subtext","label":"Subtext","default":"One sentence that says what you sell and why it is worth the click."},
-    {"type":"text","id":"trust","label":"Line under the button","default":"Free shipping · 30-day money-back guarantee"},
-    {"type":"color","id":"ink","label":"Text","default":"#FFFFFF"},
-    {"type":"color","id":"muted","label":"Muted text","default":"#D9E2F2"},
-    {"type":"header","content":"Button"},
-    {"type":"text","id":"button_text","label":"Button text","default":"SHOP NOW"},
-    {"type":"url","id":"button_link","label":"Button link"},
-    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
-    {"type":"color","id":"accent_ink","label":"Button text color","default":"#0B1429"},
-    {"type":"header","content":"Layout"},
-    {"type":"select","id":"align","label":"Text alignment","default":"center",
-      "options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}]},
-    {"type":"select","id":"v_align","label":"Vertical position","default":"center",
-      "options":[{"value":"top","label":"Top"},{"value":"center","label":"Middle"},{"value":"bottom","label":"Bottom"}]},
-    {"type":"range","id":"text_width","label":"Text width","min":360,"max":900,"step":20,"unit":"px","default":660},
-    {"type":"range","id":"height","label":"Height (desktop)","min":40,"max":100,"step":5,"unit":"vh","default":80},
-    {"type":"range","id":"height_mobile","label":"Height (mobile)","min":40,"max":100,"step":5,"unit":"vh","default":70}
+  "name": "LC Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Section background",
+      "default": "page",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page background"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Also the video poster."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Or direct .webm / .mp4 URL"
+    },
+    {
+      "type": "color",
+      "id": "overlay",
+      "label": "Overlay color",
+      "default": "#061020"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "YOUR BRAND"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#BFFF0F"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "THE ONE THING WE MAKE, MADE PROPERLY"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "One sentence that says what you sell and why it is worth the click."
+    },
+    {
+      "type": "text",
+      "id": "trust",
+      "label": "Line under the button",
+      "default": "Free shipping · 30-day money-back guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "v_align",
+      "label": "Vertical position",
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "label": "Text width",
+      "min": 360,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 660
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Height (desktop)",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Height (mobile)",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 70
+    }
   ],
-  "presets":[{"name":"LC Banner"}]
+  "presets": [
+    {
+      "name": "LC Banner"
+    }
+  ]
 }
 {% endschema %}

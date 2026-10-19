@@ -7,23 +7,19 @@
         "video_url": "",
         "overlay": "#061020",
         "overlay_opacity": 50,
-        "bg": "#0b1429",
         "eyebrow": "YOUR BRAND",
         "eyebrow_color": "#bfff0f",
         "heading": "THE ONE THING WE MAKE, MADE PROPERLY",
         "subtext": "Replace this line with the single clearest reason someone should want your product. One sentence, no jargon.",
         "trust": "Free shipping · 30-day money-back guarantee",
-        "ink": "#ffffff",
-        "muted": "#d9e2f2",
         "button_text": "SHOP NOW",
         "button_link": "",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429",
         "align": "center",
         "v_align": "center",
         "text_width": 680,
         "height": 80,
-        "height_mobile": 70
+        "height_mobile": 70,
+        "bg_style": "page"
       }
     },
     "promise": {
@@ -73,14 +69,8 @@
         "cta_link": "",
         "pad_top": 64,
         "pad_bottom": 64,
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "muted": "#5b6b8c",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429",
-        "card": "#f3f7ff",
-        "radius": 16
+        "radius": 16,
+        "bg_style": "page"
       }
     },
     "reviews": {
@@ -153,13 +143,7 @@
         "radius": 16,
         "padding_top": 64,
         "padding_bottom": 64,
-        "bg": "#f3f7ff",
-        "ink": "#10204a",
-        "blue": "#1742a2",
-        "card": "#ffffff",
-        "line": "#dde6f7",
-        "muted": "#5b6b8c",
-        "star": "#ffb400"
+        "bg_style": "tint"
       }
     },
     "finalcta": {
@@ -174,10 +158,7 @@
         "trust": "Free shipping · 30-day money-back guarantee",
         "pad_top": 80,
         "pad_bottom": 80,
-        "bg": "#ffffff",
-        "ink": "#10204a",
-        "accent": "#bfff0f",
-        "accent_ink": "#0b1429"
+        "bg_style": "page"
       }
     }
   },

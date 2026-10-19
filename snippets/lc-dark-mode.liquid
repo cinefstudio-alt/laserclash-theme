@@ -49,16 +49,20 @@
       background-color: {{ d_bg }} !important;
     }
 
-    /* LC bolmeleri */
-    [id^="lc-"] {
-      --lc-ink: {{ d_ink }} !important;
-      --lc-muted: {{ d_muted }} !important;
+    /* LC palitrasi - hamisi bir yerden */
+    :root {
+      --lc-bg: {{ d_bg }} !important;
+      --lc-surface: {{ d_surface }} !important;
       --lc-card: {{ d_surface }} !important;
+      --lc-ink: {{ d_ink }} !important;
+      --lc-ink-rgb: {{ d_ink.rgb }} !important;
+      --lc-blue: {{ d_ink }} !important;
+      --lc-muted: {{ d_muted }} !important;
       --lc-line: {{ d_line }} !important;
     }
 
     section[id^="lc-"] {
-      background: {{ d_bg }} !important;
+      background: var(--lc-sec-bg, {{ d_bg }}) !important;
     }
 
     /* Zolaq uslubu: fonu --lc-ink-den alirdi, indi o aciqdir - ayrica verilir */

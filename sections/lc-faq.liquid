@@ -1,8 +1,16 @@
 {%- comment -%} LC Starter — FAQ accordion {%- endcomment -%}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+{%- liquid
+  assign lc_secbg = 'var(--lc-bg)'
+  if section.settings.bg_style == 'tint'
+    assign lc_secbg = 'var(--lc-surface)'
+  endif
+-%}
 <style>
-#lc-faq-{{ section.id }}{--lc-ink:{{ section.settings.ink }};--lc-blue:{{ section.settings.blue }};--lc-muted:{{ section.settings.muted }};--lc-line:{{ section.settings.line }};--lc-radius:{{ section.settings.radius }}px;background:{{ section.settings.bg }};color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
+#lc-faq-{{ section.id }}{--lc-sec-bg:{{ lc_secbg }};--lc-bg:{{ lc_secbg }};}
+
+#lc-faq-{{ section.id }}{--lc-radius:{{ section.settings.radius }}px;background:var(--lc-sec-bg);color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
 #lc-faq-{{ section.id }} *{box-sizing:border-box}
 #lc-faq-{{ section.id }} .w{max-width:820px;margin:0 auto}
 #lc-faq-{{ section.id }} h2{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;line-height:1;font-size:clamp(28px,3.6vw,44px);margin:0 0 28px;text-align:center}
@@ -29,24 +37,114 @@
 </section>
 {% schema %}
 {
-  "name":"LC FAQ","tag":"section",
-  "settings":[
-    {"type":"text","id":"heading","label":"Heading","default":"YOUR QUESTIONS ANSWERED"},
-    {"type":"checkbox","id":"open_first","label":"Open first item","default":true},
-    {"type":"header","content":"Spacing & colors"},
-    {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
-    {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
-    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
-    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
-    {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
-    {"type":"color","id":"muted","label":"Muted","default":"#5B6B8C"},
-    {"type":"color","id":"line","label":"Borders","default":"#DDE6F5"},
-    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":14}
+  "name": "LC FAQ",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Section background",
+      "default": "page",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page background"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "YOUR QUESTIONS ANSWERED"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first item",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    }
   ],
-  "blocks":[{"type":"qa","name":"Question","settings":[
-    {"type":"text","id":"q","label":"Question","default":"What's included in each set?"},
-    {"type":"textarea","id":"a","label":"Answer","default":"Answer the question in one or two plain sentences."}
-  ]}],
-  "presets":[{"name":"LC FAQ","blocks":[{"type":"qa"},{"type":"qa"},{"type":"qa"},{"type":"qa"}]}]
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "q",
+          "label": "Question",
+          "default": "What's included in each set?"
+        },
+        {
+          "type": "textarea",
+          "id": "a",
+          "label": "Answer",
+          "default": "Answer the question in one or two plain sentences."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LC FAQ",
+      "blocks": [
+        {
+          "type": "qa"
+        },
+        {
+          "type": "qa"
+        },
+        {
+          "type": "qa"
+        },
+        {
+          "type": "qa"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

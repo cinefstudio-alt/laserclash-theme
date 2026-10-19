@@ -4,15 +4,23 @@
 {%- assign p = product -%}
 {%- if p == blank -%}{%- assign p = all_products[section.settings.product] -%}{%- endif -%}
 {%- unless p == blank -%}
+{%- liquid
+  assign lc_secbg = 'var(--lc-bg)'
+  if section.settings.bg_style == 'tint'
+    assign lc_secbg = 'var(--lc-surface)'
+  endif
+-%}
 <style>
+#lc-sticky-{{ section.id }}{--lc-sec-bg:{{ lc_secbg }};--lc-bg:{{ lc_secbg }};}
+
 #lc-sticky-{{ section.id }}{position:fixed;left:0;right:0;bottom:0;z-index:50;transform:translateY(120%);transition:transform .25s ease;font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:10px 14px;pointer-events:none}
 #lc-sticky-{{ section.id }}.show{transform:translateY(0)}
-#lc-sticky-{{ section.id }} .bar{pointer-events:auto;max-width:1000px;margin:0 auto;background:{{ section.settings.bar_bg }};color:#fff;border-radius:16px;padding:10px 12px 10px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 10px 30px rgba(6,10,25,.3)}
+#lc-sticky-{{ section.id }} .bar{pointer-events:auto;max-width:1000px;margin:0 auto;background:var(--lc-blue);color:#fff;border-radius:16px;padding:10px 12px 10px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 10px 30px rgba(6,10,25,.3)}
 #lc-sticky-{{ section.id }} .th{width:48px;height:48px;border-radius:10px;object-fit:cover;flex:0 0 auto;background:#05070f}
 #lc-sticky-{{ section.id }} .meta{flex:1;min-width:0}
 #lc-sticky-{{ section.id }} .nm{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:14px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #lc-sticky-{{ section.id }} .pr{font-size:13px;opacity:.85}
-#lc-sticky-{{ section.id }} button{flex:0 0 auto;border:none;cursor:pointer;background:{{ section.settings.accent }};color:{{ section.settings.accent_ink }};border-radius:11px;padding:14px 22px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:15px;letter-spacing:.02em}
+#lc-sticky-{{ section.id }} button{flex:0 0 auto;border:none;cursor:pointer;background:var(--lc-accent);color:var(--lc-accent-ink);border-radius:11px;padding:14px 22px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:15px;letter-spacing:.02em}
 @media(max-width:560px){#lc-sticky-{{ section.id }} .nm{font-size:13px}#lc-sticky-{{ section.id }} button{padding:13px 16px;font-size:14px}}
 </style>
 <div id="lc-sticky-{{ section.id }}">
@@ -145,16 +153,59 @@
 
 {% schema %}
 {
-  "name":"LC Sticky cart","tag":"section",
-  "settings":[
-    {"type":"product","id":"product","label":"Product (leave empty on a product page)"},
-    {"type":"text","id":"label","label":"Label (empty = product title)"},
-    {"type":"text","id":"button_text","label":"Button text","default":"BUY NOW"},
-    {"type":"range","id":"show_after","label":"Show after scroll (px)","min":200,"max":1600,"step":50,"default":600},
-    {"type":"color","id":"bar_bg","label":"Bar background","default":"#0B1429"},
-    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
-    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"}
+  "name": "LC Sticky cart",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Section background",
+      "default": "page",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page background"
+        },
+        {
+          "value": "tint",
+          "label": "Tinted"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (leave empty on a product page)"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label (empty = product title)"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "BUY NOW"
+    },
+    {
+      "type": "range",
+      "id": "show_after",
+      "label": "Show after scroll (px)",
+      "min": 200,
+      "max": 1600,
+      "step": 50,
+      "default": 600
+    }
   ],
-  "presets":[{"name":"LC Sticky cart"}]
+  "presets": [
+    {
+      "name": "LC Sticky cart"
+    }
+  ]
 }
 {% endschema %}
