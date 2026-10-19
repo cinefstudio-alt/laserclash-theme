@@ -64,6 +64,26 @@
       border: 1px solid {{ d_line }};
     }
 
+    /* Bolmelerde birbasa ag verilmis yerler */
+    [id^="lc-hero-"] .lc-opt,
+    [id^="lc-hero-"] .lc-colors button.on,
+    [id^="lc-faq-"] details {
+      background: {{ d_surface }} !important;
+    }
+
+    [id^="lc-hero-"] .lc-opt {
+      border-color: {{ d_line }} !important;
+    }
+
+    /* Footerin ustundeki dalga yuxaridaki bolmenin rengini tekrarlayir */
+    {%- assign d_bg_hex = d_bg | remove: '#' -%}
+    [id$="__section_Ldcdxw"]::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 58' preserveAspectRatio='none'%3E%3Cpath fill='%23{{ d_bg_hex }}' d='M0 30C300 16 600 16 900 30s600 14 900 0V0H0Z'/%3E%3C/svg%3E") !important;
+    }
+    [id$="__section_Ldcdxw"]::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2600 58' preserveAspectRatio='none'%3E%3Cpath fill='%23{{ d_bg_hex }}' fill-opacity='0.22' d='M0 36C433 18 866 18 1300 36s867 18 1300 0V0H0Z'/%3E%3C/svg%3E") !important;
+    }
+
     /* Kart ve serhedler */
     [id^="lc-"] .st,
     [id^="lc-"] .lc-rev__card,
