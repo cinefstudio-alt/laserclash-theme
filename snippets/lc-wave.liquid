@@ -1,0 +1,65 @@
+{%- comment -%}
+  LC Starter - footerin ust kenarindaki dalga.
+  Dalga footer qrupunun BIRINCI bolmesine qosulur, bolme ID-sine yox -
+  belelikle hansi magazada olmasindan asili olmayaraq isleyir.
+  Rengi ustundeki bolmenin fonu olmalidir (adeten sehife fonu).
+{%- endcomment -%}
+
+{%- if settings.lcw_enabled -%}
+  {%- liquid
+    assign w_color = settings.lcw_color | default: settings.page_background_color
+    if settings.lc_color_mode == 'dark'
+      assign w_color = settings.lc_dark_bg | default: '#0B1120'
+    endif
+    assign w_hex = w_color | remove: '#'
+    assign w_h = settings.lcw_height | default: 58
+  -%}
+  <style>
+    /* Footer qrupunun ilk bolmesi dalgani alir */
+    .shopify-section-group-footer-group { position: relative; isolation: isolate; }
+
+    .shopify-section-group-footer-group::before,
+    .shopify-section-group-footer-group::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -1px;
+      height: {{ w_h }}px;
+      pointer-events: none;
+      background-repeat: repeat-x;
+    }
+
+    /* Ilk bolmeden sonrakilarda dalga olmasin */
+    .shopify-section-group-footer-group ~ .shopify-section-group-footer-group::before,
+    .shopify-section-group-footer-group ~ .shopify-section-group-footer-group::after {
+      display: none;
+    }
+
+    .shopify-section-group-footer-group::after {
+      z-index: 1;
+      background-size: 2600px {{ w_h }}px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2600 58' preserveAspectRatio='none'%3E%3Cpath fill='%23{{ w_hex }}' fill-opacity='0.22' d='M0 36C433 18 866 18 1300 36s867 18 1300 0V0H0Z'/%3E%3C/svg%3E");
+      animation: lcWaveBack {{ settings.lcw_speed_back | default: 22 }}s linear infinite;
+    }
+
+    .shopify-section-group-footer-group::before {
+      z-index: 2;
+      background-size: 1800px {{ w_h }}px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1800 58' preserveAspectRatio='none'%3E%3Cpath fill='%23{{ w_hex }}' d='M0 30C300 16 600 16 900 30s600 14 900 0V0H0Z'/%3E%3C/svg%3E");
+      animation: lcWaveFront {{ settings.lcw_speed_front | default: 15 }}s linear infinite;
+    }
+
+    @media screen and (max-width: 749px) {
+      .shopify-section-group-footer-group::before,
+      .shopify-section-group-footer-group::after { height: {{ w_h | times: 55 | divided_by: 100 }}px; }
+      .shopify-section-group-footer-group::before { background-size: 1000px {{ w_h | times: 55 | divided_by: 100 }}px; }
+      .shopify-section-group-footer-group::after { background-size: 1450px {{ w_h | times: 55 | divided_by: 100 }}px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .shopify-section-group-footer-group::before,
+      .shopify-section-group-footer-group::after { animation: none; }
+    }
+  </style>
+{%- endif -%}

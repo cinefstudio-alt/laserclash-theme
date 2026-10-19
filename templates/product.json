@@ -1,0 +1,122 @@
+{
+  "sections": {
+    "hero": {
+      "type": "lc-hero",
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "text": "FAST SHIPPING"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "text": "1-YEAR WARRANTY"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "text": "EASY RETURNS"
+          }
+        },
+        "bun1": {
+          "type": "bundle",
+          "settings": {
+            "label": "1 Pack",
+            "desc": "Just the one",
+            "units": 1,
+            "discount": 0,
+            "tag": "",
+            "popular": false,
+            "popular_text": "MOST POPULAR",
+            "preselected": false
+          }
+        },
+        "bun2": {
+          "type": "bundle",
+          "settings": {
+            "label": "2 Packs",
+            "desc": "Most people pick this",
+            "units": 2,
+            "discount": 15,
+            "tag": "-15%",
+            "popular": true,
+            "popular_text": "MOST POPULAR",
+            "preselected": true
+          }
+        },
+        "bun3": {
+          "type": "bundle",
+          "settings": {
+            "label": "3 Packs",
+            "desc": "Best value",
+            "units": 3,
+            "discount": 25,
+            "tag": "-25%",
+            "popular": false,
+            "popular_text": "MOST POPULAR",
+            "preselected": false
+          }
+        },
+        "inc1": {
+          "type": "include",
+          "settings": {
+            "text": "Free shipping on every order"
+          }
+        },
+        "inc2": {
+          "type": "include",
+          "settings": {
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "inc3": {
+          "type": "include",
+          "settings": {
+            "text": "1-year warranty included"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "bun1",
+        "bun2",
+        "bun3",
+        "inc1",
+        "inc2",
+        "inc3"
+      ],
+      "settings": {
+        "product": "",
+        "eyebrow": "YOUR BRAND",
+        "title": "",
+        "subtitle": "One sentence that says what it is and why it beats the alternative.",
+        "color_label": "",
+        "bundle_heading": "Choose your pack",
+        "bundle_note": "The more you buy, the more you save",
+        "per_unit_suffix": "/ pack",
+        "included_heading": "✦ INCLUDED WITH EVERY ORDER ✦",
+        "cta_text": "ADD TO CART —",
+        "trust1": "Secure checkout",
+        "trust2": "Free shipping",
+        "trust3": "30-day money-back",
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429",
+        "card": "#f3f7ff",
+        "line": "#dde6f5",
+        "muted": "#5b6b8c",
+        "radius": 16
+      }
+    }
+  },
+  "order": [
+    "hero"
+  ]
+}

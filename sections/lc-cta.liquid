@@ -1,0 +1,48 @@
+{%- comment -%} LC Starter — Final CTA band {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+#lc-cta-{{ section.id }}{--lc-accent:{{ section.settings.accent }};--lc-accent-ink:{{ section.settings.accent_ink }};font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px;background:{{ section.settings.bg }};color:{{ section.settings.ink }};text-align:center;position:relative}
+#lc-cta-{{ section.id }} *{box-sizing:border-box}
+{%- if section.settings.image != blank -%}
+#lc-cta-{{ section.id }}{background:linear-gradient(rgba(6,10,25,{{ section.settings.overlay }}),rgba(6,10,25,{{ section.settings.overlay }})),url('{{ section.settings.image | image_url: width: 1800 }}') center/cover;color:#fff}
+{%- endif -%}
+#lc-cta-{{ section.id }} .w{max-width:760px;margin:0 auto}
+#lc-cta-{{ section.id }} .eye{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;opacity:.85;margin-bottom:10px}
+#lc-cta-{{ section.id }} h2{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;line-height:.98;font-size:clamp(32px,5vw,58px);margin:0}
+#lc-cta-{{ section.id }} p{font-size:18px;margin:16px auto 0;max-width:46ch;opacity:.9}
+#lc-cta-{{ section.id }} a{display:inline-block;margin:26px 0 0;background:var(--lc-accent);color:var(--lc-accent-ink);text-decoration:none;border-radius:12px;padding:18px 40px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:19px;letter-spacing:.02em}
+#lc-cta-{{ section.id }} .trust{margin:18px 0 0;font-size:13px;opacity:.85}
+</style>
+<section id="lc-cta-{{ section.id }}">
+  <div class="w">
+    {%- if section.settings.eyebrow != blank -%}<div class="eye">{{ section.settings.eyebrow }}</div>{%- endif -%}
+    <h2>{{ section.settings.heading }}</h2>
+    {%- if section.settings.body != blank -%}<p>{{ section.settings.body }}</p>{%- endif -%}
+    <a href="{{ section.settings.cta_link | default: '#lc-buy' }}">{{ section.settings.cta_text }}</a>
+    {%- if section.settings.trust != blank -%}<div class="trust">{{ section.settings.trust }}</div>{%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name":"LC Final CTA","tag":"section",
+  "settings":[
+    {"type":"image_picker","id":"image","label":"Background image (optional)"},
+    {"type":"range","id":"overlay","label":"Image overlay","min":0,"max":0.9,"step":0.1,"default":0.5},
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"GIVE THEM A REASON TO PLAY TOGETHER"},
+    {"type":"text","id":"heading","label":"Heading","default":"MAKE TIME FOR ONE MORE ROUND"},
+    {"type":"textarea","id":"body","label":"Body"},
+    {"type":"text","id":"cta_text","label":"Button text","default":"LET'S PLAY"},
+    {"type":"url","id":"cta_link","label":"Button link"},
+    {"type":"text","id":"trust","label":"Trust line","default":"Free shipping · 30-day money-back guarantee"},
+    {"type":"header","content":"Spacing & colors"},
+    {"type":"range","id":"pad_top","label":"Padding top","min":20,"max":160,"step":4,"unit":"px","default":80},
+    {"type":"range","id":"pad_bottom","label":"Padding bottom","min":20,"max":160,"step":4,"unit":"px","default":80},
+    {"type":"color","id":"bg","label":"Background (no image)","default":"#F3F7FF"},
+    {"type":"color","id":"ink","label":"Text (no image)","default":"#10204A"},
+    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
+    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"}
+  ],
+  "presets":[{"name":"LC Final CTA"}]
+}
+{% endschema %}

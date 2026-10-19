@@ -1,0 +1,130 @@
+{%- comment -%} LC Starter — Image + text split (benefits / feature) {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+#lc-split-{{ section.id }}{--lc-ink:{{ section.settings.ink }};--lc-blue:{{ section.settings.blue }};--lc-muted:{{ section.settings.muted }};--lc-accent:{{ section.settings.accent }};--lc-accent-ink:{{ section.settings.accent_ink }};--lc-card:{{ section.settings.card }};--lc-radius:{{ section.settings.radius }}px;background:{{ section.settings.bg }};color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
+#lc-split-{{ section.id }} *{box-sizing:border-box}
+#lc-split-{{ section.id }} .w{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center}
+#lc-split-{{ section.id }}.rev .w{direction:rtl}#lc-split-{{ section.id }}.rev .w>*{direction:ltr}
+#lc-split-{{ section.id }} .im{border-radius:var(--lc-radius);overflow:hidden;background:var(--lc-card);aspect-ratio:{{ section.settings.ratio }}}
+#lc-split-{{ section.id }} .im img,#lc-split-{{ section.id }} .im video{width:100%;height:100%;object-fit:cover;display:block}
+#lc-split-{{ section.id }} .eye{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--lc-blue);margin-bottom:12px}
+#lc-split-{{ section.id }} h2{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;line-height:.98;letter-spacing:-.01em;font-size:clamp(28px,3.6vw,46px);margin:0;color:var(--lc-ink)}
+#lc-split-{{ section.id }} h2 .l2{display:block;color:var(--lc-blue)}
+#lc-split-{{ section.id }} .body{color:var(--lc-muted);font-size:17px;line-height:1.55;margin:16px 0 0;max-width:48ch}
+#lc-split-{{ section.id }} .pts{margin:22px 0 0;display:flex;flex-direction:column;gap:16px}
+#lc-split-{{ section.id }} .pt{display:flex;gap:14px;align-items:flex-start}
+#lc-split-{{ section.id }} .pt .ic{flex:0 0 auto;width:42px;height:42px;border-radius:12px;background:var(--lc-card);display:flex;align-items:center;justify-content:center;font-size:20px}
+#lc-split-{{ section.id }} .pt h3{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:16px;margin:0 0 2px}
+#lc-split-{{ section.id }} .pt p{margin:0;color:var(--lc-muted);font-size:14px;line-height:1.45}
+#lc-split-{{ section.id }} .tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+#lc-split-{{ section.id }} .tag{background:var(--lc-card);font-weight:700;font-size:12px;letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;border-radius:999px}
+#lc-split-{{ section.id }} .cta{display:inline-block;margin:24px 0 0;background:var(--lc-accent);color:var(--lc-accent-ink);text-decoration:none;border-radius:12px;padding:15px 26px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;font-size:16px;letter-spacing:.02em}
+@media(max-width:860px){#lc-split-{{ section.id }}{overflow-x:clip}#lc-split-{{ section.id }} .w{grid-template-columns:minmax(0,1fr);gap:22px}#lc-split-{{ section.id }}.rev .w{direction:ltr}#lc-split-{{ section.id }} .imgfirst .im{order:-1}#lc-split-{{ section.id }} .body{max-width:100%}}
+</style>
+<section id="lc-split-{{ section.id }}" class="{% if section.settings.image_side == 'right' %}rev{% endif %}">
+  <div class="w {% if section.settings.image_first_mobile %}imgfirst{% endif %}">
+    <div class="im">
+      {%- liquid
+        assign lc_vid_url = section.settings.video_url | strip
+      -%}
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1200x' }}
+      {%- elsif lc_vid_url != blank -%}
+        <video loop muted playsinline preload="none" data-lc-video
+               {% if section.settings.image != blank %}poster="{{ section.settings.image | image_url: width: 1200 }}"{% endif %}
+               src="{{ lc_vid_url }}"></video>
+      {%- elsif section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.heading1 | escape }}" loading="lazy">
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div class="tx">
+      {%- if section.settings.eyebrow != blank -%}<div class="eye">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2>{{ section.settings.heading1 }}{% if section.settings.heading2 != blank %}<span class="l2">{{ section.settings.heading2 }}</span>{% endif %}</h2>
+      {%- if section.settings.body != blank -%}<p class="body">{{ section.settings.body }}</p>{%- endif -%}
+      {%- assign tags = section.blocks | where: "type", "tag" -%}
+      {%- if tags.size > 0 -%}<div class="tags">{%- for t in tags -%}<span class="tag" {{ t.shopify_attributes }}>{{ t.settings.text }}</span>{%- endfor -%}</div>{%- endif -%}
+      {%- assign pts = section.blocks | where: "type", "point" -%}
+      {%- if pts.size > 0 -%}<div class="pts">{%- for p in pts -%}<div class="pt" {{ p.shopify_attributes }}><div class="ic">{{ p.settings.icon }}</div><div><h3>{{ p.settings.title }}</h3><p>{{ p.settings.text }}</p></div></div>{%- endfor -%}</div>{%- endif -%}
+      {%- if section.settings.cta_text != blank -%}<a class="cta" href="{{ section.settings.cta_link | default: '#lc-buy' }}">{{ section.settings.cta_text }}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+<script>
+  (() => {
+    var root = document.getElementById("lc-split-{{ section.id }}");
+    if (!root) return;
+    var vids = root.querySelectorAll("video");
+    if (!vids.length) return;
+
+    vids.forEach(function (v) {
+      v.removeAttribute("autoplay");
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      vids.forEach(function (v) { v.play().catch(function () {}); });
+      return;
+    }
+
+    /* Yalniz ekranda gorunende oynayir - mobil batareyani yemesin */
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) {
+          if (v.preload === "none") { v.preload = "auto"; v.load(); }
+          v.play().catch(function () {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { rootMargin: "150px" });
+
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name":"LC Split (image+text)","tag":"section",
+  "settings":[
+    {"type":"select","id":"image_side","label":"Image side","options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}],"default":"left"},
+    {"type":"checkbox","id":"image_first_mobile","label":"Image first on mobile","default":true},
+    {"type":"image_picker","id":"image","label":"Image","info":"Used as the poster when a video is set."},
+    {"type":"video","id":"video","label":"Video"},
+    {"type":"text","id":"video_url","label":"Or direct .webm / .mp4 URL"},
+    {"type":"text","id":"ratio","label":"Image ratio (e.g. 4/3)","default":"4/3"},
+    {"type":"text","id":"eyebrow","label":"Eyebrow"},
+    {"type":"text","id":"heading1","label":"Heading line 1","default":"SAME LIVING ROOM"},
+    {"type":"text","id":"heading2","label":"Heading line 2 (accent)","default":"MORE TIME TOGETHER"},
+    {"type":"textarea","id":"body","label":"Body","default":"Two or three sentences about what this is and who it is for."},
+    {"type":"text","id":"cta_text","label":"Button text"},
+    {"type":"url","id":"cta_link","label":"Button link"},
+    {"type":"header","content":"Spacing & colors"},
+    {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
+    {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
+    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
+    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
+    {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
+    {"type":"color","id":"muted","label":"Muted text","default":"#5B6B8C"},
+    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
+    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"},
+    {"type":"color","id":"card","label":"Card / icon bg","default":"#F3F7FF"},
+    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16}
+  ],
+  "blocks":[
+    {"type":"point","name":"Benefit point","settings":[
+      {"type":"text","id":"icon","label":"Icon (emoji)","default":"🎯"},
+      {"type":"text","id":"title","label":"Title","default":"Keep them moving"},
+      {"type":"textarea","id":"text","label":"Text","default":"An active, screen-free game for restless afternoons."}
+    ]},
+    {"type":"tag","name":"Feature tag","settings":[{"type":"text","id":"text","label":"Text","default":"LIGHT-UP GEAR"}]}
+  ],
+  "presets":[{"name":"LC Split (image+text)","blocks":[{"type":"point"},{"type":"point"},{"type":"point"}]}]
+}
+{% endschema %}

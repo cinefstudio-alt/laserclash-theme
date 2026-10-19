@@ -1,0 +1,175 @@
+{%- comment -%}
+  LC - Banner (ana sehife ucun gris ekrani).
+  Arxada video ve ya sekil, ustunde basliq ve duyme. Tam ayarlanabilen,
+  oz-ozune yeterli bolme - basqa magazada da oldugu kimi islenir.
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+{%- liquid
+  assign lc_url = section.settings.video_url | strip
+-%}
+
+<style>
+#lc-ban-{{ section.id }}{
+  --lc-ink:{{ section.settings.ink }};
+  --lc-muted:{{ section.settings.muted }};
+  --lc-accent:{{ section.settings.accent }};
+  --lc-accent-ink:{{ section.settings.accent_ink }};
+  position:relative;
+  display:flex;
+  align-items:{% if section.settings.v_align == 'top' %}flex-start{% elsif section.settings.v_align == 'bottom' %}flex-end{% else %}center{% endif %};
+  justify-content:{% if section.settings.align == 'left' %}flex-start{% elsif section.settings.align == 'right' %}flex-end{% else %}center{% endif %};
+  min-height:{{ section.settings.height }}vh;
+  overflow:hidden;
+  background:{{ section.settings.bg }};
+  color:var(--lc-ink);
+  font-family:'DM Sans',-apple-system,Arial,sans-serif;
+  isolation:isolate;
+}
+#lc-ban-{{ section.id }} *{box-sizing:border-box}
+
+#lc-ban-{{ section.id }} .bg{position:absolute;inset:0;z-index:0}
+#lc-ban-{{ section.id }} .bg img,
+#lc-ban-{{ section.id }} .bg video{width:100%;height:100%;object-fit:cover;display:block}
+#lc-ban-{{ section.id }} .bg::after{
+  content:'';position:absolute;inset:0;
+  background:{{ section.settings.overlay }};
+  opacity:{{ section.settings.overlay_opacity | divided_by: 100.0 }};
+}
+
+#lc-ban-{{ section.id }} .in{
+  position:relative;z-index:1;
+  width:100%;max-width:1180px;
+  padding:72px 22px;
+  text-align:{{ section.settings.align }};
+}
+#lc-ban-{{ section.id }} .box{max-width:{{ section.settings.text_width }}px;{% if section.settings.align == 'center' %}margin:0 auto;{% elsif section.settings.align == 'right' %}margin-left:auto;{% endif %}}
+
+#lc-ban-{{ section.id }} .eye{
+  font-family:'Montserrat',sans-serif;font-size:11.5px;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;margin:0 0 14px;color:{{ section.settings.eyebrow_color }};
+}
+#lc-ban-{{ section.id }} h1{
+  font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;
+  font-size:clamp(34px,5.4vw,66px);line-height:1.02;letter-spacing:-.025em;margin:0;
+}
+#lc-ban-{{ section.id }} .sub{
+  margin:18px 0 0;font-size:17px;line-height:1.55;color:var(--lc-muted);
+  {% if section.settings.align == 'center' %}margin-left:auto;margin-right:auto;{% endif %}
+  max-width:52ch;
+}
+#lc-ban-{{ section.id }} .btn{
+  display:inline-block;margin-top:26px;
+  background:var(--lc-accent);color:var(--lc-accent-ink);text-decoration:none;
+  border-radius:999px;padding:17px 34px;
+  font-family:'Montserrat',sans-serif;text-transform:uppercase;font-weight:800;
+  font-size:14px;letter-spacing:.05em;
+  position:relative;overflow:hidden;
+  transition:filter .2s ease,transform .15s ease;
+}
+#lc-ban-{{ section.id }} .btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+#lc-ban-{{ section.id }} .btn::after{
+  content:'';position:absolute;top:-20%;left:-75%;width:45%;height:140%;pointer-events:none;
+  background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 100%);
+  transform:skewX(-18deg);opacity:0;
+}
+#lc-ban-{{ section.id }} .btn:hover::after{animation:lcBanSweep .45s ease-out forwards}
+@keyframes lcBanSweep{0%{left:-75%;opacity:0}10%{opacity:1}100%{left:130%;opacity:0}}
+
+#lc-ban-{{ section.id }} .trust{
+  margin:18px 0 0;font-size:12.5px;color:var(--lc-muted);
+}
+
+@media(max-width:749px){
+  #lc-ban-{{ section.id }}{min-height:{{ section.settings.height_mobile }}vh}
+  #lc-ban-{{ section.id }} .in{padding:56px 18px}
+}
+@media (prefers-reduced-motion: reduce){
+  #lc-ban-{{ section.id }} .btn:hover::after{animation:none}
+}
+</style>
+
+<section id="lc-ban-{{ section.id }}">
+  {%- if section.settings.video != blank or lc_url != blank or section.settings.image != blank -%}
+    <div class="bg" aria-hidden="true">
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', image_size: '1600x' }}
+      {%- elsif lc_url != blank -%}
+        <video loop muted playsinline preload="none"
+               {% if section.settings.image != blank %}poster="{{ section.settings.image | image_url: width: 1600 }}"{% endif %}
+               src="{{ lc_url }}"></video>
+      {%- else -%}
+        <img src="{{ section.settings.image | image_url: width: 2200 }}" alt="" loading="eager">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="in">
+    <div class="box">
+      {%- if section.settings.eyebrow != blank -%}<p class="eye">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h1>{{ section.settings.heading }}</h1>{%- endif -%}
+      {%- if section.settings.subtext != blank -%}<p class="sub">{{ section.settings.subtext }}</p>{%- endif -%}
+      {%- if section.settings.button_text != blank -%}
+        <a class="btn" href="{{ section.settings.button_link | default: '/collections/all' }}">{{ section.settings.button_text }}</a>
+      {%- endif -%}
+      {%- if section.settings.trust != blank -%}<p class="trust">{{ section.settings.trust }}</p>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    var root = document.getElementById("lc-ban-{{ section.id }}");
+    if (!root) return;
+    var v = root.querySelector("video");
+    if (!v) return;
+    v.removeAttribute("autoplay"); v.muted = true; v.loop = true; v.playsInline = true;
+    if (!("IntersectionObserver" in window)) { v.play().catch(function(){}); return; }
+    var io = new IntersectionObserver(function (e) {
+      if (e[0].isIntersecting) {
+        if (v.preload === "none") { v.preload = "auto"; v.load(); }
+        v.play().catch(function(){});
+      } else { v.pause(); }
+    }, { rootMargin: "100px" });
+    io.observe(v);
+  })();
+</script>
+
+{% schema %}
+{
+  "name":"LC Banner","tag":"section",
+  "settings":[
+    {"type":"header","content":"Background"},
+    {"type":"image_picker","id":"image","label":"Image","info":"Also the video poster."},
+    {"type":"video","id":"video","label":"Video"},
+    {"type":"text","id":"video_url","label":"Or direct .webm / .mp4 URL"},
+    {"type":"color","id":"overlay","label":"Overlay color","default":"#061020"},
+    {"type":"range","id":"overlay_opacity","label":"Overlay opacity","min":0,"max":90,"step":5,"unit":"%","default":45},
+    {"type":"color","id":"bg","label":"Fallback background","default":"#0B1429"},
+    {"type":"header","content":"Text"},
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"YOUR BRAND"},
+    {"type":"color","id":"eyebrow_color","label":"Eyebrow color","default":"#BFFF0F"},
+    {"type":"text","id":"heading","label":"Heading","default":"THE ONE THING WE MAKE, MADE PROPERLY"},
+    {"type":"textarea","id":"subtext","label":"Subtext","default":"One sentence that says what you sell and why it is worth the click."},
+    {"type":"text","id":"trust","label":"Line under the button","default":"Free shipping · 30-day money-back guarantee"},
+    {"type":"color","id":"ink","label":"Text","default":"#FFFFFF"},
+    {"type":"color","id":"muted","label":"Muted text","default":"#D9E2F2"},
+    {"type":"header","content":"Button"},
+    {"type":"text","id":"button_text","label":"Button text","default":"SHOP NOW"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"color","id":"accent","label":"Button","default":"#BFFF0F"},
+    {"type":"color","id":"accent_ink","label":"Button text color","default":"#0B1429"},
+    {"type":"header","content":"Layout"},
+    {"type":"select","id":"align","label":"Text alignment","default":"center",
+      "options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}]},
+    {"type":"select","id":"v_align","label":"Vertical position","default":"center",
+      "options":[{"value":"top","label":"Top"},{"value":"center","label":"Middle"},{"value":"bottom","label":"Bottom"}]},
+    {"type":"range","id":"text_width","label":"Text width","min":360,"max":900,"step":20,"unit":"px","default":660},
+    {"type":"range","id":"height","label":"Height (desktop)","min":40,"max":100,"step":5,"unit":"vh","default":80},
+    {"type":"range","id":"height_mobile","label":"Height (mobile)","min":40,"max":100,"step":5,"unit":"vh","default":70}
+  ],
+  "presets":[{"name":"LC Banner"}]
+}
+{% endschema %}

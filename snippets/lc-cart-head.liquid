@@ -1,0 +1,53 @@
+{%- comment -%}
+  LC Starter - sebet panelinin basi: ortada loqo, altinda qazanc zolagi.
+  Server terefinde render olunur ki, panel acilanda hazir olsun (JS ile
+  sonradan elave edilende gorunen sicrayis yaranirdi).
+  Metnler: Theme settings -> Brand & extras.
+{%- endcomment -%}
+
+{%- assign lc_note = settings.lc_cart_note | default: "You've unlocked free shipping" -%}
+{%- assign lc_sub = settings.lc_cart_note_sub | default: ' ' -%}
+
+<div class="lc-carthead">
+  {%- if settings.logo != blank -%}
+    <img
+      class="lc-carthead__logo"
+      src="{{ settings.logo | image_url: width: 400 }}"
+      alt="{{ shop.name | escape }}"
+      width="200"
+      height="56"
+      loading="eager">
+  {%- else -%}
+    <span class="lc-carthead__word">{{ shop.name }}</span>
+  {%- endif -%}
+
+  {%- if lc_note != blank -%}
+    <div class="lc-cartnote">
+      <span class="lc-cartnote__confetti" aria-hidden="true">
+        {%- for i in (1..18) -%}<i></i>{%- endfor -%}
+      </span>
+      <span class="lc-cartnote__text">
+        <b>{{ lc_note }}</b>
+        {%- if lc_sub != blank and lc_sub != ' ' -%}<i>{{ lc_sub }}</i>{%- endif -%}
+        <span class="lc-cartnote__bar" aria-hidden="true"><span class="lc-cartnote__fill"></span></span>
+      </span>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  /* Panel her acilanda konfeti yeniden oynasin - sinfi silib yeniden elave edirik */
+  (function () {
+    if (window.__lcConfettiBound) return;
+    window.__lcConfettiBound = true;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.addEventListener('theme-drawer:open', function () {
+      var el = document.querySelector('#cart-drawer .lc-cartnote');
+      if (!el) return;
+      el.classList.remove('lc-pop');
+      void el.offsetWidth; /* reflow - animasiyani sifirlayir */
+      el.classList.add('lc-pop');
+    });
+  })();
+</script>

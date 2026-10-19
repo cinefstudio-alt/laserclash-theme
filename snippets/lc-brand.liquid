@@ -1,0 +1,22 @@
+{%- comment -%}
+  LC Starter - brend rengleri.
+  Butun ozel CSS-de rengler birbasa yazilmir, bu deyisenlerden gelir.
+  Yeni magazada sadece Theme settings -> Brand bolmesinden rengleri secmek
+  kifayetdir: elan zolagi, konfeti, sebet zolagi, duymeler - hamisi uygunlasir.
+{%- endcomment -%}
+<style>
+  :root {
+    --lcb-brand: {{ settings.lcb_brand | default: '#1742A2' }};
+    --lcb-brand-rgb: {{ settings.lcb_brand.rgb | default: '23 66 162' }};
+    --lcb-brand-2: {{ settings.lcb_brand_2 | default: '#2E6FD0' }};
+    --lcb-accent: {{ settings.lcb_accent | default: '#BFFF0F' }};
+    --lcb-accent-ink: {{ settings.lcb_accent_ink | default: '#0B1429' }};
+    --lcb-green: {{ settings.lcb_green | default: '#6FD04A' }};
+    --lcb-green-rgb: {{ settings.lcb_green.rgb | default: '111 208 74' }};
+    --lcb-green-light: {{ settings.lcb_green_light | default: '#9FE870' }};
+    --lcb-green-deep: {{ settings.lcb_green_deep | default: '#2F9E1A' }};
+    --lcb-success: {{ settings.lcb_success | default: '#4FBF30' }};
+    --lcb-success-ink: {{ settings.lcb_success_ink | default: '#16351F' }};
+    --lcb-success-ink-rgb: {{ settings.lcb_success_ink.rgb | default: '22 53 31' }};
+  }
+</style>

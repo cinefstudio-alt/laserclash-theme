@@ -1,0 +1,52 @@
+{%- comment -%} LC Starter — FAQ accordion {%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+#lc-faq-{{ section.id }}{--lc-ink:{{ section.settings.ink }};--lc-blue:{{ section.settings.blue }};--lc-muted:{{ section.settings.muted }};--lc-line:{{ section.settings.line }};--lc-radius:{{ section.settings.radius }}px;background:{{ section.settings.bg }};color:var(--lc-ink);font-family:'DM Sans',-apple-system,Arial,sans-serif;padding:{{ section.settings.pad_top }}px 16px {{ section.settings.pad_bottom }}px}
+#lc-faq-{{ section.id }} *{box-sizing:border-box}
+#lc-faq-{{ section.id }} .w{max-width:820px;margin:0 auto}
+#lc-faq-{{ section.id }} h2{font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;line-height:1;font-size:clamp(28px,3.6vw,44px);margin:0 0 28px;text-align:center}
+#lc-faq-{{ section.id }} details{border:1px solid var(--lc-line);border-radius:var(--lc-radius);margin-bottom:12px;overflow:hidden;background:#fff}
+#lc-faq-{{ section.id }} summary{list-style:none;cursor:pointer;padding:18px 20px;font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+#lc-faq-{{ section.id }} summary::-webkit-details-marker{display:none}
+#lc-faq-{{ section.id }} summary .pl{flex:0 0 auto;width:22px;height:22px;position:relative;transition:transform .2s}
+#lc-faq-{{ section.id }} summary .pl:before,#lc-faq-{{ section.id }} summary .pl:after{content:"";position:absolute;background:var(--lc-blue);border-radius:2px}
+#lc-faq-{{ section.id }} summary .pl:before{top:10px;left:2px;right:2px;height:2px}
+#lc-faq-{{ section.id }} summary .pl:after{left:10px;top:2px;bottom:2px;width:2px}
+#lc-faq-{{ section.id }} details[open] summary .pl:after{opacity:0}
+#lc-faq-{{ section.id }} .a{padding:0 20px 18px;color:var(--lc-muted);font-size:15px;line-height:1.55}
+</style>
+<section id="lc-faq-{{ section.id }}">
+  <div class="w">
+    <h2>{{ section.settings.heading }}</h2>
+    {%- for b in section.blocks -%}
+      <details {% if forloop.first and section.settings.open_first %}open{% endif %} {{ b.shopify_attributes }}>
+        <summary>{{ b.settings.q }}<span class="pl"></span></summary>
+        <div class="a">{{ b.settings.a }}</div>
+      </details>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name":"LC FAQ","tag":"section",
+  "settings":[
+    {"type":"text","id":"heading","label":"Heading","default":"YOUR QUESTIONS ANSWERED"},
+    {"type":"checkbox","id":"open_first","label":"Open first item","default":true},
+    {"type":"header","content":"Spacing & colors"},
+    {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
+    {"type":"range","id":"pad_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":56},
+    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
+    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
+    {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
+    {"type":"color","id":"muted","label":"Muted","default":"#5B6B8C"},
+    {"type":"color","id":"line","label":"Borders","default":"#DDE6F5"},
+    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":14}
+  ],
+  "blocks":[{"type":"qa","name":"Question","settings":[
+    {"type":"text","id":"q","label":"Question","default":"What's included in each set?"},
+    {"type":"textarea","id":"a","label":"Answer","default":"Answer the question in one or two plain sentences."}
+  ]}],
+  "presets":[{"name":"LC FAQ","blocks":[{"type":"qa"},{"type":"qa"},{"type":"qa"},{"type":"qa"}]}]
+}
+{% endschema %}

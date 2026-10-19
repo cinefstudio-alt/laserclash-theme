@@ -1,0 +1,190 @@
+{
+  "sections": {
+    "banner": {
+      "type": "lc-banner",
+      "settings": {
+        "image": "",
+        "video_url": "",
+        "overlay": "#061020",
+        "overlay_opacity": 50,
+        "bg": "#0b1429",
+        "eyebrow": "YOUR BRAND",
+        "eyebrow_color": "#bfff0f",
+        "heading": "THE ONE THING WE MAKE, MADE PROPERLY",
+        "subtext": "Replace this line with the single clearest reason someone should want your product. One sentence, no jargon.",
+        "trust": "Free shipping · 30-day money-back guarantee",
+        "ink": "#ffffff",
+        "muted": "#d9e2f2",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429",
+        "align": "center",
+        "v_align": "center",
+        "text_width": 680,
+        "height": 80,
+        "height_mobile": 70
+      }
+    },
+    "promise": {
+      "type": "lc-split",
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "icon": "⚡",
+            "title": "Ready in two minutes",
+            "text": "No setup headaches, no app, no instructions nobody reads."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "icon": "🛡️",
+            "title": "Made to last",
+            "text": "Describe the material, the build, the thing that survives daily use."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "icon": "↩️",
+            "title": "Risk-free to try",
+            "text": "30 days to change your mind. We cover the return."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "image_side": "left",
+        "image_first_mobile": true,
+        "video": "",
+        "video_url": "",
+        "ratio": "3/4",
+        "eyebrow": "WHY IT EXISTS",
+        "heading1": "BUILT FOR ONE JOB.",
+        "heading2": "AND IT DOES IT WELL.",
+        "body": "Two or three sentences about what you make and who it is for. Keep it plain — the picture beside it does the selling.",
+        "cta_text": "SEE THE PRODUCT",
+        "cta_link": "",
+        "pad_top": 64,
+        "pad_bottom": 64,
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "muted": "#5b6b8c",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429",
+        "card": "#f3f7ff",
+        "radius": 16
+      }
+    },
+    "reviews": {
+      "type": "lc-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "stars": 5,
+            "quote": "I was not expecting much at this price and it genuinely surprised me. Three weeks in and it still looks new.",
+            "name": "Daniel K.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "stars": 5,
+            "quote": "Arrived faster than the estimate and it does exactly what the page said it would. No complaints.",
+            "name": "Sarah M.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "stars": 4.5,
+            "quote": "Bought one, then bought a second for my sister. That is the whole review.",
+            "name": "Priya R.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "review_ANE7at": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "stars": 4.5,
+            "quote": "Simple, well made, and I use it every single day. Worth it.",
+            "name": "Alex M.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "review_ANE7at"
+      ],
+      "settings": {
+        "kicker": "REAL CUSTOMERS",
+        "title": "WHAT PEOPLE SAY",
+        "subtext": "",
+        "show_summary": true,
+        "summary_rating": 4.8,
+        "summary_text": "based on verified buyers",
+        "columns": 4,
+        "image_ratio": "4/5",
+        "radius": 16,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "bg": "#f3f7ff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "card": "#ffffff",
+        "line": "#dde6f7",
+        "muted": "#5b6b8c",
+        "star": "#ffb400"
+      }
+    },
+    "finalcta": {
+      "type": "lc-cta",
+      "settings": {
+        "overlay": 0.5,
+        "eyebrow": "NO REASON TO WAIT",
+        "heading": "READY WHEN YOU ARE",
+        "body": "",
+        "cta_text": "SHOP NOW",
+        "cta_link": "",
+        "trust": "Free shipping · 30-day money-back guarantee",
+        "pad_top": 80,
+        "pad_bottom": 80,
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "promise",
+    "reviews",
+    "finalcta"
+  ]
+}

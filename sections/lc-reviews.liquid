@@ -1,0 +1,258 @@
+{%- comment -%}
+  LC - Photo reviews.
+  Musteri sekilleri + reyleri. Tamamile ayarlanabilen, oz-ozune yeterli bolme:
+  CSS ve JS faylin icindedir, her sey section.id ile ehate olunub, rengler
+  ayarlardan gelir - basqa magazada da oldugu kimi islenir.
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700;800;900&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+#lc-rev-{{ section.id }}{
+  --lc-bg: {{ section.settings.bg }};
+  --lc-ink: {{ section.settings.ink }};
+  --lc-blue: {{ section.settings.blue }};
+  --lc-card: {{ section.settings.card }};
+  --lc-line: {{ section.settings.line }};
+  --lc-muted: {{ section.settings.muted }};
+  --lc-star: {{ section.settings.star }};
+  --lc-radius: {{ section.settings.radius }}px;
+  --lc-cols: {{ section.settings.columns }};
+}
+#lc-rev-{{ section.id }} *{box-sizing:border-box}
+#lc-rev-{{ section.id }}{
+  background:var(--lc-bg);
+  color:var(--lc-ink);
+  font-family:'DM Sans',-apple-system,Arial,sans-serif;
+  padding:{{ section.settings.padding_top }}px 16px {{ section.settings.padding_bottom }}px;
+}
+#lc-rev-{{ section.id }} .lc-rev__wrap{max-width:1180px;margin:0 auto}
+
+/* --- bas --- */
+#lc-rev-{{ section.id }} .lc-rev__head{text-align:center;margin:0 0 28px}
+#lc-rev-{{ section.id }} .lc-rev__kicker{
+  font-family:'Montserrat',sans-serif;font-size:11.5px;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--lc-blue);margin:0 0 10px;
+}
+#lc-rev-{{ section.id }} .lc-rev__title{
+  font-family:'Barlow',sans-serif;text-transform:uppercase;font-weight:900;
+  font-size:clamp(28px,4vw,46px);line-height:1;letter-spacing:-.01em;margin:0;color:var(--lc-blue);
+}
+#lc-rev-{{ section.id }} .lc-rev__sub{
+  margin:12px auto 0;max-width:46ch;font-size:15.5px;line-height:1.55;color:var(--lc-muted);
+}
+
+/* --- ortalama reyting --- */
+#lc-rev-{{ section.id }} .lc-rev__summary{
+  display:inline-flex;align-items:center;gap:10px;margin:16px auto 0;
+  padding:9px 16px;border-radius:999px;background:var(--lc-card);border:1px solid var(--lc-line);
+}
+#lc-rev-{{ section.id }} .lc-rev__score{
+  font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--lc-ink);
+}
+#lc-rev-{{ section.id }} .lc-rev__count{font-size:13px;color:var(--lc-muted)}
+
+/* --- ulduzlar --- */
+#lc-rev-{{ section.id }} .lc-stars{position:relative;display:inline-block;font-size:15px;line-height:1;letter-spacing:2px;white-space:nowrap}
+#lc-rev-{{ section.id }} .lc-stars__base{color:var(--lc-line)}
+#lc-rev-{{ section.id }} .lc-stars__fill{position:absolute;inset:0;width:var(--s,100%);overflow:hidden;color:var(--lc-star)}
+
+/* --- setr --- */
+#lc-rev-{{ section.id }} .lc-rev__grid{
+  display:grid;gap:18px;
+  grid-template-columns:repeat(var(--lc-cols),minmax(0,1fr));
+}
+
+#lc-rev-{{ section.id }} .lc-rev__card{
+  display:flex;flex-direction:column;
+  background:var(--lc-card);
+  border:1px solid var(--lc-line);
+  border-radius:var(--lc-radius);
+  overflow:hidden;
+  transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s ease,border-color .25s ease;
+}
+#lc-rev-{{ section.id }} .lc-rev__card:hover{
+  transform:translateY(-3px);
+  border-color:var(--lc-blue);
+  box-shadow:0 14px 30px rgba(16,32,74,.12);
+}
+
+#lc-rev-{{ section.id }} .lc-rev__media{position:relative;background:#0b1020;aspect-ratio:{{ section.settings.image_ratio }}}
+#lc-rev-{{ section.id }} .lc-rev__media img,
+#lc-rev-{{ section.id }} .lc-rev__media video{width:100%;height:100%;object-fit:cover;display:block}
+
+#lc-rev-{{ section.id }} .lc-rev__badge{
+  position:absolute;left:10px;top:10px;
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 10px;border-radius:999px;
+  background:rgba(255,255,255,.94);
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;color:#17642b;
+}
+#lc-rev-{{ section.id }} .lc-rev__badge::before{content:"\2713";font-size:10px}
+
+#lc-rev-{{ section.id }} .lc-rev__body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:9px;flex:1}
+#lc-rev-{{ section.id }} .lc-rev__quote{margin:0;font-size:14.5px;line-height:1.55;color:var(--lc-ink)}
+#lc-rev-{{ section.id }} .lc-rev__foot{margin-top:auto;display:flex;align-items:center;gap:9px;padding-top:4px}
+#lc-rev-{{ section.id }} .lc-rev__avatar{
+  flex:0 0 auto;width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--lc-blue);color:#fff;
+  font-family:'Montserrat',sans-serif;font-size:11.5px;font-weight:800;
+}
+#lc-rev-{{ section.id }} .lc-rev__who{display:flex;flex-direction:column;line-height:1.25}
+#lc-rev-{{ section.id }} .lc-rev__name{font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:var(--lc-ink)}
+#lc-rev-{{ section.id }} .lc-rev__meta{font-size:11.5px;color:var(--lc-muted)}
+
+/* --- mobil: yana surusen lent --- */
+@media (max-width:860px){
+  /* mobilde qutu sekilin oz nisbetini goturur: ne kesilir, ne de cokur */
+  #lc-rev-{{ section.id }} .lc-rev__media{aspect-ratio:var(--lc-nat, 1)}
+  #lc-rev-{{ section.id }} .lc-rev__media img{height:100%;object-fit:cover}
+
+  #lc-rev-{{ section.id }} .lc-rev__grid{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    gap:14px;padding-bottom:6px;scrollbar-width:none;
+  }
+  #lc-rev-{{ section.id }} .lc-rev__grid::-webkit-scrollbar{display:none}
+  #lc-rev-{{ section.id }} .lc-rev__card{flex:0 0 78%;scroll-snap-align:start}
+}
+
+@media (prefers-reduced-motion: reduce){
+  #lc-rev-{{ section.id }} .lc-rev__card{transition:none}
+}
+</style>
+
+{%- if section.blocks.size > 0 -%}
+<section id="lc-rev-{{ section.id }}">
+  <div class="lc-rev__wrap">
+    {%- if section.settings.kicker != blank or section.settings.title != blank or section.settings.show_summary -%}
+      <div class="lc-rev__head">
+        {%- if section.settings.kicker != blank -%}
+          <p class="lc-rev__kicker">{{ section.settings.kicker }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="lc-rev__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtext != blank -%}
+          <p class="lc-rev__sub">{{ section.settings.subtext }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.show_summary -%}
+          {%- assign sum_pct = section.settings.summary_rating | times: 20.0 -%}
+          <div class="lc-rev__summary">
+            <span class="lc-stars" style="--s: {{ sum_pct }}%;" aria-hidden="true">
+              <span class="lc-stars__base">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="lc-stars__fill">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </span>
+            <span class="lc-rev__score">{{ section.settings.summary_rating }}</span>
+            {%- if section.settings.summary_text != blank -%}
+              <span class="lc-rev__count">{{ section.settings.summary_text }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="lc-rev__grid">
+      {%- for block in section.blocks -%}
+        {%- assign pct = block.settings.stars | times: 20.0 -%}
+        <article class="lc-rev__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="lc-rev__media" style="--lc-nat: {{ block.settings.image.aspect_ratio | default: 1 }};">
+              <img src="{{ block.settings.image | image_url: width: 900 }}"
+                   alt="{{ block.settings.name | escape }}"
+                   width="{{ block.settings.image.width }}"
+                   height="{{ block.settings.image.height }}"
+                   loading="lazy">
+              {%- if block.settings.verified -%}
+                <span class="lc-rev__badge">{{ block.settings.verified_text | default: 'Verified buyer' }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <div class="lc-rev__body">
+            <span class="lc-stars" style="--s: {{ pct }}%;" aria-label="{{ block.settings.stars }} out of 5">
+              <span class="lc-stars__base" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="lc-stars__fill" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </span>
+
+            {%- if block.settings.quote != blank -%}
+              <p class="lc-rev__quote">{{ block.settings.quote }}</p>
+            {%- endif -%}
+
+            <div class="lc-rev__foot">
+              {%- if block.settings.name != blank -%}
+                <span class="lc-rev__avatar" aria-hidden="true">{{ block.settings.name | strip | slice: 0 | upcase }}</span>
+              {%- endif -%}
+              <span class="lc-rev__who">
+                {%- if block.settings.name != blank -%}<span class="lc-rev__name">{{ block.settings.name }}</span>{%- endif -%}
+                {%- if block.settings.meta != blank -%}<span class="lc-rev__meta">{{ block.settings.meta }}</span>{%- endif -%}
+              </span>
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "LC Photo reviews",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    {"type":"header","content":"Heading"},
+    {"type":"text","id":"kicker","label":"Kicker","default":"FROM REAL CUSTOMERS"},
+    {"type":"text","id":"title","label":"Title","default":"SEEN IN THEIR LIVING ROOMS"},
+    {"type":"textarea","id":"subtext","label":"Subtext","default":"Photos and words from people who already play."},
+    {"type":"header","content":"Average rating"},
+    {"type":"checkbox","id":"show_summary","label":"Show average rating","default":true},
+    {"type":"range","id":"summary_rating","label":"Average","min":0,"max":5,"step":0.1,"default":4.8},
+    {"type":"text","id":"summary_text","label":"Text next to average","default":"based on 2,000+ reviews"},
+    {"type":"header","content":"Layout"},
+    {"type":"range","id":"columns","label":"Columns","min":2,"max":4,"step":1,"default":3},
+    {
+      "type":"select","id":"image_ratio","label":"Image shape","default":"1 / 1",
+      "options":[
+        {"value":"1 / 1","label":"Square"},
+        {"value":"4 / 5","label":"Portrait"},
+        {"value":"16 / 9","label":"Landscape"}
+      ]
+    },
+    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16},
+    {"type":"range","id":"padding_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":64},
+    {"type":"range","id":"padding_bottom","label":"Padding bottom","min":0,"max":120,"step":4,"unit":"px","default":64},
+    {"type":"header","content":"Colors"},
+    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
+    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
+    {"type":"color","id":"blue","label":"Accent","default":"#1742A2"},
+    {"type":"color","id":"card","label":"Card background","default":"#F3F7FF"},
+    {"type":"color","id":"line","label":"Borders","default":"#DDE6F5"},
+    {"type":"color","id":"muted","label":"Muted text","default":"#5B6B8C"},
+    {"type":"color","id":"star","label":"Stars","default":"#FFC107"}
+  ],
+  "blocks": [
+    {
+      "type":"review",
+      "name":"Review",
+      "settings":[
+        {"type":"image_picker","id":"image","label":"Photo"},
+        {"type":"range","id":"stars","label":"Stars","min":0,"max":5,"step":0.1,"default":5},
+        {"type":"textarea","id":"quote","label":"Review","default":"The kids played for three hours straight. Worth every penny."},
+        {"type":"text","id":"name","label":"Name","default":"Sarah M."},
+        {"type":"text","id":"meta","label":"Under the name","info":"e.g. a date or a city","default":"Verified purchase"},
+        {"type":"checkbox","id":"verified","label":"Show badge on photo","default":true},
+        {"type":"text","id":"verified_text","label":"Badge text","default":"Verified buyer"}
+      ]
+    }
+  ],
+  "presets":[
+    {"name":"LC Photo reviews","blocks":[{"type":"review"},{"type":"review"},{"type":"review"}]}
+  ]
+}
+{% endschema %}
