@@ -123,15 +123,53 @@
 #lc-steps-{{ section.id }}.compact .st p{font-size:12.5px;line-height:1.4;margin:3px 0 0}
 #lc-steps-{{ section.id }}.compact .grid{gap:12px}
 
+/* zolaq uslubu: tek tund lent, icinde bolmeler - blasterin rejim seccisi kimi */
+#lc-steps-{{ section.id }}.strip .grid{
+  gap:0;
+  background:var(--lc-ink);
+  border-radius:calc(var(--lc-radius) + 4px);
+  overflow:hidden;
+  box-shadow:0 12px 34px rgb(16 32 74 / 0.18);
+}
+#lc-steps-{{ section.id }}.strip .st{
+  background:transparent;border:0;border-radius:0;
+  flex-direction:row;align-items:center;gap:12px;
+  padding:16px 18px;
+  border-left:1px solid rgb(255 255 255 / 0.10);
+  transition:background .25s ease;
+}
+#lc-steps-{{ section.id }}.strip .st:first-child{border-left:0}
+#lc-steps-{{ section.id }}.strip .st:hover{background:rgb(191 255 15 / 0.07)}
+#lc-steps-{{ section.id }}.strip .st .n{
+  width:26px;height:26px;flex:0 0 auto;margin:0;font-size:12px;
+  background:transparent;color:var(--lc-accent);
+  border:1.5px solid var(--lc-accent);
+  transition:background .25s ease,color .25s ease,box-shadow .25s ease;
+}
+#lc-steps-{{ section.id }}.strip .st:hover .n{
+  background:var(--lc-accent);color:var(--lc-accent-ink);
+  box-shadow:0 0 14px rgb(191 255 15 / 0.55);
+}
+#lc-steps-{{ section.id }}.strip .st h3{
+  font-size:14.5px;line-height:1.15;margin:0;color:#fff;letter-spacing:.03em;
+}
+#lc-steps-{{ section.id }}.strip .st p{
+  font-size:12px;line-height:1.35;margin:2px 0 0;color:rgb(255 255 255 / 0.60);
+}
+
 @media(max-width:860px){
   #lc-steps-{{ section.id }} .split{grid-template-columns:minmax(0,1fr);gap:24px}
   #lc-steps-{{ section.id }}.mediaRight .split{direction:ltr}
   #lc-steps-{{ section.id }} .media{order:-1}
   #lc-steps-{{ section.id }} .grid{grid-template-columns:minmax(0,1fr)}
+  #lc-steps-{{ section.id }}.strip .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #lc-steps-{{ section.id }}.strip .st:nth-child(odd){border-left:0}
+  #lc-steps-{{ section.id }}.strip .st:nth-child(n+3){border-top:1px solid rgb(255 255 255 / 0.10)}
+  #lc-steps-{{ section.id }}.strip .st{padding:14px 14px}
 }
 </style>
 
-<section id="lc-steps-{{ section.id }}" class="{% if section.settings.media_side == 'right' %}mediaRight{% endif %}{% if lc_layout == 'grid' and lc_has_media %} hasmedia{% endif %}{% if section.settings.card_style == 'compact' %} compact{% endif %}">
+<section id="lc-steps-{{ section.id }}" class="{% if section.settings.media_side == 'right' %}mediaRight{% endif %}{% if lc_layout == 'grid' and lc_has_media %} hasmedia{% endif %}{% if section.settings.card_style == 'compact' %} compact{% elsif section.settings.card_style == 'strip' %} strip{% endif %}">
   <div class="w">
 
     {%- if lc_layout == 'media' -%}
@@ -194,7 +232,7 @@
         {%- for b in section.blocks -%}
           <div class="st" {{ b.shopify_attributes }}>
             <div class="n">{{ forloop.index }}</div>
-            {%- if section.settings.card_style == 'compact' -%}
+            {%- if section.settings.card_style != 'full' -%}
               <div>
                 <h3>{{ b.settings.title }}</h3>
                 {%- if b.settings.text != blank -%}<p>{{ b.settings.text }}</p>{%- endif -%}
@@ -285,7 +323,8 @@
     {"type":"select","id":"card_style","label":"Card style","default":"full",
       "options":[
         {"value":"full","label":"Full - number above the title"},
-        {"value":"compact","label":"Compact - number beside the title"}
+        {"value":"compact","label":"Compact - number beside the title"},
+        {"value":"strip","label":"Strip - one dark bar, mode-selector look"}
       ]},
     {"type":"header","content":"Spacing & colors"},
     {"type":"range","id":"pad_top","label":"Padding top","min":0,"max":120,"step":4,"unit":"px","default":56},
