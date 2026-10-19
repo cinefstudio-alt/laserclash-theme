@@ -2364,7 +2364,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   position: relative;
   overflow: hidden;
   background: var(--lcb-accent) !important;
-  color: #0B1429 !important;
+  color: var(--lcb-accent-ink) !important;
   border: 0 !important;
   border-radius: 999px !important;
   font-family: 'Montserrat', -apple-system, sans-serif !important;

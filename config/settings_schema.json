@@ -2128,12 +2128,12 @@
       { "type": "color", "id": "lcb_brand", "label": "Brand primary", "default": "#1742A2" },
       { "type": "color", "id": "lcb_brand_2", "label": "Brand secondary", "default": "#2E6FD0" },
       { "type": "color", "id": "lcb_accent", "label": "Accent / CTA", "default": "#BFFF0F" },
-      { "type": "color", "id": "lcb_accent_ink", "label": "Accent text", "default": "#0B1429" },
+      { "type": "color", "id": "lcb_accent_ink", "label": "Accent text (checkout label)", "default": "#0B1429" },
       { "type": "color", "id": "lcb_green", "label": "Success green", "default": "#6FD04A" },
       { "type": "color", "id": "lcb_green_light", "label": "Success green - light", "default": "#9FE870" },
       { "type": "color", "id": "lcb_green_deep", "label": "Success green - deep", "default": "#2F9E1A" },
-      { "type": "color", "id": "lcb_success", "label": "Cart badge", "default": "#4FBF30" },
-      { "type": "color", "id": "lcb_success_ink", "label": "Cart banner text", "default": "#16351F" },
+      { "type": "color", "id": "lcb_success", "label": "Confetti extra color", "default": "#4FBF30" },
+      { "type": "color", "id": "lcb_success_ink", "label": "Cart banner text + bar track", "default": "#16351F" },
       {
         "type": "header",
         "content": "Color mode"
