@@ -2122,6 +2122,51 @@
     "settings": [
       {
         "type": "header",
+        "content": "Color mode"
+      },
+      {
+        "type": "select",
+        "id": "lc_color_mode",
+        "label": "Site color mode",
+        "default": "light",
+        "options": [
+          { "value": "light", "label": "Light" },
+          { "value": "dark", "label": "Dark" }
+        ],
+        "info": "Dark repaints the whole storefront. Switching back to Light restores everything exactly as it was."
+      },
+      {
+        "type": "color",
+        "id": "lc_dark_bg",
+        "label": "Dark - page background",
+        "default": "#0B1120"
+      },
+      {
+        "type": "color",
+        "id": "lc_dark_surface",
+        "label": "Dark - cards and inputs",
+        "default": "#121A2E"
+      },
+      {
+        "type": "color",
+        "id": "lc_dark_ink",
+        "label": "Dark - text",
+        "default": "#E8EEFB"
+      },
+      {
+        "type": "color",
+        "id": "lc_dark_muted",
+        "label": "Dark - muted text",
+        "default": "#9DAFCE"
+      },
+      {
+        "type": "color",
+        "id": "lc_dark_line",
+        "label": "Dark - borders",
+        "default": "#27324C"
+      },
+      {
+        "type": "header",
         "content": "Scroll animation"
       },
       {

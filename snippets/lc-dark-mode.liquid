@@ -1,0 +1,74 @@
+{%- comment -%}
+  LC - Dark mode.
+  Temanin butun rengleri :root deyisenlerinden gelir (color-palette.liquid),
+  ona gore qaranliq rejim ucun hemin deyisenlerin ustunden yazmaq kifayetdir -
+  Horizonun oz komponentleri avtomatik uygunlasir.
+  lc-* bolmelerinin rengleri ise bolme ayarlarindan geldiyi ucun ayrica elave olunur.
+  Ayar "Light" olanda bu fayl hec ne cixarmir - sayt tam oz halinda qalir.
+{%- endcomment -%}
+
+{%- if settings.lc_color_mode == 'dark' -%}
+  {%- liquid
+    assign d_bg = settings.lc_dark_bg | default: '#0B1120'
+    assign d_surface = settings.lc_dark_surface | default: '#121A2E'
+    assign d_ink = settings.lc_dark_ink | default: '#E8EEFB'
+    assign d_muted = settings.lc_dark_muted | default: '#9DAFCE'
+    assign d_line = settings.lc_dark_line | default: '#27324C'
+  -%}
+  <style data-lc-dark>
+    :root {
+      --color-background: {{ d_bg }};
+      --color-background-rgb: {{ d_bg.rgb }};
+      --color-foreground: {{ d_ink }};
+      --color-foreground-rgb: {{ d_ink.rgb }};
+      --color-border: {{ d_line }};
+      --color-border-rgb: {{ d_line.rgb }};
+
+      --color-input-background: {{ d_surface }};
+      --color-input-text: {{ d_ink }};
+      --color-input-text-rgb: {{ d_ink.rgb }};
+      --color-input-border: {{ d_line }};
+
+      --color-variant-background: {{ d_surface }};
+      --color-variant-text: {{ d_ink }};
+      --color-variant-text-rgb: {{ d_ink.rgb }};
+      --color-variant-border: {{ d_line }};
+    }
+
+    html,
+    body {
+      background-color: {{ d_bg }};
+      color: {{ d_ink }};
+    }
+
+    /* Horizonun bolme arxa fonu ayrica qatda cekilir */
+    .shopify-section:not(.header-section) .section-background {
+      background-color: {{ d_bg }} !important;
+    }
+
+    /* LaserClash bolmeleri */
+    [id^="lc-"] {
+      --lc-ink: {{ d_ink }} !important;
+      --lc-muted: {{ d_muted }} !important;
+      --lc-card: {{ d_surface }} !important;
+      --lc-line: {{ d_line }} !important;
+    }
+
+    section[id^="lc-"] {
+      background: {{ d_bg }} !important;
+    }
+
+    /* Zolaq uslubu: fonu --lc-ink-den alirdi, indi o aciqdir - ayrica verilir */
+    [id^="lc-steps-"].strip .grid {
+      background: {{ d_surface }} !important;
+      border: 1px solid {{ d_line }};
+    }
+
+    /* Kart ve serhedler */
+    [id^="lc-"] .st,
+    [id^="lc-"] .lc-rev__card,
+    [id^="lc-"] .card {
+      border-color: {{ d_line }} !important;
+    }
+  </style>
+{%- endif -%}
