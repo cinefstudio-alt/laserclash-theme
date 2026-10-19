@@ -11,6 +11,7 @@
   "current": {
     "logo_height": 36,
     "logo_height_mobile": 28,
+    "favicon": "shopify://shop_images/Profile_pic_7b9ce289-867e-46e3-a229-1b3413c27b54.png",
     "page_text_color": "{{ settings.color_palette.foreground }}",
     "type_body_font": "inter_n4",
     "type_subheading_font": "inter_n4",
