@@ -534,59 +534,314 @@
   "name": "LC Hero + Bundle",
   "tag": "section",
   "settings": [
-    {"type":"product","id":"product","label":"Product (leave empty on a product page)"},
-    {"type":"header","content":"Rating"},
-    {"type":"checkbox","id":"show_rating","label":"Show star rating","default":true},
-    {"type":"range","id":"rating_value","label":"Stars","min":0,"max":5,"step":0.1,"default":5},
-    {"type":"text","id":"rating_text","label":"Text next to stars","info":"e.g. 10,000+ or 4.8 (2,003 reviews)","default":"10,000+"},
-    {"type":"header","content":"Text"},
-    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"YOUR BRAND"},
-    {"type":"text","id":"title","label":"Title (empty = product title)","default":""},
-    {"type":"textarea","id":"subtitle","label":"Subtitle","default":"One sentence that says what it is and why it beats the alternative."},
-    {"type":"header","content":"Color selector"},
-    {"type":"text","id":"color_label","label":"Color label","default":"CHOOSE YOUR COLORS"},
-    {"type":"header","content":"Bundle"},
-    {"type":"text","id":"bundle_heading","label":"Bundle heading","default":"Choose your set"},
-    {"type":"text","id":"bundle_note","label":"Bundle note","default":"The more you gear up, the more you save"},
-    {"type":"text","id":"per_unit_suffix","label":"Per-unit suffix","default":"/ set"},
-    {"type":"header","content":"Included box"},
-    {"type":"text","id":"included_heading","label":"Included heading","default":"✦ INCLUDED WITH YOUR SET ✦"},
-    {"type":"header","content":"CTA"},
-    {"type":"text","id":"cta_text","label":"Button text","default":"ADD TO CART —"},
-    {"type":"header","content":"Trust badges"},
-    {"type":"text","id":"trust1","label":"Trust 1","default":"Secure checkout"},
-    {"type":"text","id":"trust2","label":"Trust 2","default":"Free shipping"},
-    {"type":"text","id":"trust3","label":"Trust 3","default":"30-day money-back"},
-    {"type":"header","content":"Colors"},
-    {"type":"color","id":"bg","label":"Background","default":"#FFFFFF"},
-    {"type":"color","id":"ink","label":"Text","default":"#10204A"},
-    {"type":"color","id":"blue","label":"Accent blue","default":"#1742A2"},
-    {"type":"color","id":"accent","label":"Button / accent","default":"#BFFF0F"},
-    {"type":"color","id":"accent_ink","label":"Button text","default":"#0B1429"},
-    {"type":"color","id":"card","label":"Card background","default":"#F3F7FF"},
-    {"type":"color","id":"line","label":"Borders","default":"#DDE6F5"},
-    {"type":"color","id":"muted","label":"Muted text","default":"#5B6B8C"},
-    {"type":"range","id":"radius","label":"Corner radius","min":0,"max":28,"step":2,"unit":"px","default":16}
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (leave empty on a product page)"
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show star rating",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "rating_value",
+      "label": "Stars",
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Text next to stars",
+      "info": "e.g. 10,000+ or 4.8 (2,003 reviews)",
+      "default": "10,000+"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "YOUR BRAND"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title (empty = product title)"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "One sentence that says what it is and why it beats the alternative."
+    },
+    {
+      "type": "header",
+      "content": "Color selector"
+    },
+    {
+      "type": "text",
+      "id": "color_label",
+      "label": "Color label",
+      "default": "CHOOSE YOUR COLORS"
+    },
+    {
+      "type": "header",
+      "content": "Bundle"
+    },
+    {
+      "type": "text",
+      "id": "bundle_heading",
+      "label": "Bundle heading",
+      "default": "Choose your set"
+    },
+    {
+      "type": "text",
+      "id": "bundle_note",
+      "label": "Bundle note",
+      "default": "The more you gear up, the more you save"
+    },
+    {
+      "type": "text",
+      "id": "per_unit_suffix",
+      "label": "Per-unit suffix",
+      "default": "/ set"
+    },
+    {
+      "type": "header",
+      "content": "Included box"
+    },
+    {
+      "type": "text",
+      "id": "included_heading",
+      "label": "Included heading",
+      "default": "✦ INCLUDED WITH YOUR SET ✦"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "ADD TO CART —"
+    },
+    {
+      "type": "header",
+      "content": "Trust badges"
+    },
+    {
+      "type": "text",
+      "id": "trust1",
+      "label": "Trust 1",
+      "default": "Secure checkout"
+    },
+    {
+      "type": "text",
+      "id": "trust2",
+      "label": "Trust 2",
+      "default": "Free shipping"
+    },
+    {
+      "type": "text",
+      "id": "trust3",
+      "label": "Trust 3",
+      "default": "30-day money-back"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "ink",
+      "label": "Text",
+      "default": "#10204A"
+    },
+    {
+      "type": "color",
+      "id": "blue",
+      "label": "Accent blue",
+      "default": "#1742A2"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Button / accent",
+      "default": "#BFFF0F"
+    },
+    {
+      "type": "color",
+      "id": "accent_ink",
+      "label": "Button text",
+      "default": "#0B1429"
+    },
+    {
+      "type": "color",
+      "id": "card",
+      "label": "Card background",
+      "default": "#F3F7FF"
+    },
+    {
+      "type": "color",
+      "id": "line",
+      "label": "Borders",
+      "default": "#DDE6F5"
+    },
+    {
+      "type": "color",
+      "id": "muted",
+      "label": "Muted text",
+      "default": "#5B6B8C"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
   ],
   "blocks": [
-    {"type":"badge","name":"Badge pill","settings":[{"type":"text","id":"text","label":"Text","default":"AGES 8+"}]},
-    {"type":"bundle","name":"Bundle option","settings":[
-      {"type":"text","id":"label","label":"Label","default":"1 Set"},
-      {"type":"text","id":"desc","label":"Description","default":"What is in this pack"},
-      {"type":"text","id":"variant","label":"Product variant","info":"Exact variant title, e.g. Blue / Large. Leave empty to use quantity x discount instead."},
-      {"type":"number","id":"units","label":"Quantity (sets)","default":1},
-      {"type":"range","id":"discount","label":"Discount %","min":0,"max":60,"step":5,"unit":"%","default":0},
-      {"type":"text","id":"tag","label":"Tag (e.g. -20%)"},
-      {"type":"checkbox","id":"popular","label":"Show 'popular' ribbon","default":false},
-      {"type":"text","id":"popular_text","label":"Ribbon text","default":"MOST POPULAR"},
-      {"type":"checkbox","id":"preselected","label":"Preselected","default":false}
-    ]},
-    {"type":"include","name":"Included item","settings":[{"type":"text","id":"text","label":"Text","default":"Free shipping"}]}
+    {
+      "type": "badge",
+      "name": "Badge pill",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "AGES 8+"
+        }
+      ]
+    },
+    {
+      "type": "bundle",
+      "name": "Bundle option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "1 Set"
+        },
+        {
+          "type": "text",
+          "id": "desc",
+          "label": "Description",
+          "default": "What is in this pack"
+        },
+        {
+          "type": "text",
+          "id": "variant",
+          "label": "Product variant",
+          "info": "Exact variant title, e.g. Blue / Large. Leave empty to use quantity x discount instead."
+        },
+        {
+          "type": "number",
+          "id": "units",
+          "label": "Quantity (sets)",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "discount",
+          "label": "Discount %",
+          "min": 0,
+          "max": 60,
+          "step": 5,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag (e.g. -20%)"
+        },
+        {
+          "type": "checkbox",
+          "id": "popular",
+          "label": "Show 'popular' ribbon",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "popular_text",
+          "label": "Ribbon text",
+          "default": "MOST POPULAR"
+        },
+        {
+          "type": "checkbox",
+          "id": "preselected",
+          "label": "Preselected",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "include",
+      "name": "Included item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free shipping"
+        }
+      ]
+    }
   ],
-  "presets": [{"name":"LC Hero + Bundle","blocks":[
-    {"type":"badge"},{"type":"badge"},{"type":"badge"},
-    {"type":"bundle"},{"type":"bundle"},{"type":"bundle"},
-    {"type":"include"},{"type":"include"}
-  ]}]
+  "presets": [
+    {
+      "name": "LC Hero + Bundle",
+      "blocks": [
+        {
+          "type": "badge"
+        },
+        {
+          "type": "badge"
+        },
+        {
+          "type": "badge"
+        },
+        {
+          "type": "bundle"
+        },
+        {
+          "type": "bundle"
+        },
+        {
+          "type": "bundle"
+        },
+        {
+          "type": "include"
+        },
+        {
+          "type": "include"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
