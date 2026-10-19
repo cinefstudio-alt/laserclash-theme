@@ -23,7 +23,9 @@
 
   {%- if lc_note != blank -%}
     <div class="lc-cartnote">
-      <span class="lc-cartnote__tick" aria-hidden="true">&#10003;</span>
+      <span class="lc-cartnote__confetti" aria-hidden="true">
+        {%- for i in (1..16) -%}<i></i>{%- endfor -%}
+      </span>
       <span class="lc-cartnote__text">
         <b>{{ lc_note }}</b>
         {%- if lc_sub != blank and lc_sub != ' ' -%}<i>{{ lc_sub }}</i>{%- endif -%}
@@ -32,3 +34,20 @@
     </div>
   {%- endif -%}
 </div>
+
+<script>
+  /* Panel her acilanda konfeti yeniden oynasin - sinfi silib yeniden elave edirik */
+  (function () {
+    if (window.__lcConfettiBound) return;
+    window.__lcConfettiBound = true;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.addEventListener('theme-drawer:open', function () {
+      var el = document.querySelector('#cart-drawer .lc-cartnote');
+      if (!el) return;
+      el.classList.remove('lc-pop');
+      void el.offsetWidth; /* reflow - animasiyani sifirlayir */
+      el.classList.add('lc-pop');
+    });
+  })();
+</script>

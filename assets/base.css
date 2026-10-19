@@ -1995,10 +1995,12 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 
 .lc-cartnote {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  text-align: center;
+  gap: 0;
   width: 100%;
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-radius: 14px;
   background: linear-gradient(90deg, rgba(23, 66, 162, 0.08) 0%, rgba(111, 208, 74, 0.18) 100%);
   border: 1px solid rgba(111, 208, 74, 0.5);
@@ -2020,7 +2022,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   font-weight: 800;
 }
 
-.lc-cartnote__text { display: block; line-height: 1.35; }
+.lc-cartnote__text { display: block; width: 100%; line-height: 1.35; }
 
 .lc-cartnote__text b {
   display: block;
@@ -2069,20 +2071,10 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   100% { left: 125%; }
 }
 
-.lc-cartnote__tick {
-  position: relative;
-  animation: lcTickRing 2.6s ease-out 0.5s infinite;
-}
-
-@keyframes lcTickRing {
-  0%   { box-shadow: 0 0 0 0 rgb(79 191 48 / 0.5); }
-  65%  { box-shadow: 0 0 0 11px rgb(79 191 48 / 0); }
-  100% { box-shadow: 0 0 0 0 rgb(79 191 48 / 0); }
-}
-
 .lc-cartnote__bar {
   display: block;
-  margin-top: 8px;
+  width: 100%;
+  margin-top: 9px;
   height: 5px;
   border-radius: 999px;
   background: rgb(22 53 31 / 0.14);
@@ -2119,6 +2111,119 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
   .lc-cartnote__fill { animation: none; }
   .lc-cartnote__fill { width: 100%; }
 }
+
+/* Konfeti - panel acilanda bir defe partlayir, yungul ve qisa */
+.lc-cartnote__confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.lc-cartnote__confetti i {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  border-radius: 1px;
+  opacity: 0;
+}
+
+.lc-cartnote.lc-pop .lc-cartnote__confetti i {
+  animation: lcConfetti 0.95s cubic-bezier(0.14, 0.7, 0.3, 1) both;
+}
+
+@keyframes lcConfetti {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(0deg); }
+  14%  { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1) rotate(var(--rot)); }
+}
+
+.lc-cartnote__confetti i:nth-child(1) {
+  --dx: 68px; --dy: 5px; --rot: -246deg;
+  width: 5px; height: 9px; background: #6FD04A; animation-delay: 0.074s;
+}
+
+.lc-cartnote__confetti i:nth-child(2) {
+  --dx: 103px; --dy: 20px; --rot: -232deg;
+  width: 5px; height: 7px; background: #BFFF0F; animation-delay: 0.039s;
+}
+
+.lc-cartnote__confetti i:nth-child(3) {
+  --dx: 59px; --dy: 26px; --rot: -194deg;
+  width: 7px; height: 10px; background: #1742A2; animation-delay: 0.085s;
+}
+
+.lc-cartnote__confetti i:nth-child(4) {
+  --dx: 11px; --dy: 21px; --rot: -270deg;
+  width: 5px; height: 10px; background: #2E6FD0; animation-delay: 0.088s;
+}
+
+.lc-cartnote__confetti i:nth-child(5) {
+  --dx: -24px; --dy: 20px; --rot: -200deg;
+  width: 7px; height: 10px; background: #FFFFFF; animation-delay: 0.051s;
+}
+
+.lc-cartnote__confetti i:nth-child(6) {
+  --dx: -48px; --dy: 31px; --rot: 61deg;
+  width: 7px; height: 7px; background: #4FBF30; animation-delay: 0.009s;
+}
+
+.lc-cartnote__confetti i:nth-child(7) {
+  --dx: -88px; --dy: 18px; --rot: 224deg;
+  width: 6px; height: 9px; background: #6FD04A; animation-delay: 0.038s;
+}
+
+.lc-cartnote__confetti i:nth-child(8) {
+  --dx: -90px; --dy: 3px; --rot: -136deg;
+  width: 5px; height: 7px; background: #BFFF0F; animation-delay: 0.063s;
+}
+
+.lc-cartnote__confetti i:nth-child(9) {
+  --dx: -95px; --dy: -2px; --rot: 139deg;
+  width: 5px; height: 7px; background: #1742A2; animation-delay: 0.026s;
+}
+
+.lc-cartnote__confetti i:nth-child(10) {
+  --dx: -58px; --dy: -15px; --rot: 180deg;
+  width: 7px; height: 7px; background: #2E6FD0; animation-delay: 0.038s;
+}
+
+.lc-cartnote__confetti i:nth-child(11) {
+  --dx: -49px; --dy: -24px; --rot: 1deg;
+  width: 6px; height: 10px; background: #FFFFFF; animation-delay: 0.031s;
+}
+
+.lc-cartnote__confetti i:nth-child(12) {
+  --dx: -23px; --dy: -42px; --rot: -225deg;
+  width: 6px; height: 10px; background: #4FBF30; animation-delay: 0.085s;
+}
+
+.lc-cartnote__confetti i:nth-child(13) {
+  --dx: 15px; --dy: -17px; --rot: 271deg;
+  width: 6px; height: 9px; background: #6FD04A; animation-delay: 0.089s;
+}
+
+.lc-cartnote__confetti i:nth-child(14) {
+  --dx: 76px; --dy: -34px; --rot: 152deg;
+  width: 7px; height: 7px; background: #BFFF0F; animation-delay: 0.032s;
+}
+
+.lc-cartnote__confetti i:nth-child(15) {
+  --dx: 62px; --dy: -16px; --rot: -67deg;
+  width: 6px; height: 7px; background: #1742A2; animation-delay: 0.036s;
+}
+
+.lc-cartnote__confetti i:nth-child(16) {
+  --dx: 84px; --dy: -11px; --rot: -180deg;
+  width: 7px; height: 9px; background: #2E6FD0; animation-delay: 0.074s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-cartnote__confetti { display: none; }
+}
+
 
 /* Checkout duymesi - sehifedeki Add to cart ile eyni dil */
 #cart-drawer .cart__checkout-button {
