@@ -33,6 +33,9 @@
       --color-variant-text: {{ d_ink }};
       --color-variant-text-rgb: {{ d_ink.rgb }};
       --color-variant-border: {{ d_line }};
+
+      --color-foreground-muted: rgb({{ d_ink.rgb }} / 0.74);
+      --color-foreground-subdued: rgb({{ d_ink.rgb }} / 0.56);
     }
 
     html,
@@ -80,6 +83,8 @@
       --color-foreground-rgb: {{ d_ink.rgb }} !important;
       --color-border: {{ d_line }} !important;
       --color-border-rgb: {{ d_line.rgb }} !important;
+      --color-foreground-muted: rgb({{ d_ink.rgb }} / 0.74) !important;
+      --color-foreground-subdued: rgb({{ d_ink.rgb }} / 0.56) !important;
     }
 
     dialog {
@@ -92,6 +97,19 @@
     dialog .card {
       background-color: {{ d_surface }} !important;
       border-color: {{ d_line }} !important;
+    }
+
+    /* Sebetdeki "pulsuz catdirilma" zolagi - yazilari tund yasil idi */
+    .lc-cartnote__text b {
+      color: #D7F7C4 !important;
+    }
+
+    .lc-cartnote__text i {
+      color: rgb(215 247 196 / 0.72) !important;
+    }
+
+    .lc-cartnote {
+      background: linear-gradient(90deg, rgb(23 66 162 / 0.22) 0%, rgb(111 208 74 / 0.26) 100%) !important;
     }
 
     /* Bolmelerde birbasa ag verilmis yerler */
