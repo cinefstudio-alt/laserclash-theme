@@ -64,6 +64,36 @@
       border: 1px solid {{ d_line }};
     }
 
+    /* Sebet paneli ve diger acilan panellər.
+       Onlarin rengi bolme seviyyesinde (.color-custom-...) teyin olunur ve
+       :root-dan sonra yuklenir, ona gore burada acig-askar ustunden yazilir. */
+    dialog,
+    theme-drawer,
+    theme-drawer dialog,
+    cart-drawer-component,
+    #cart-drawer,
+    #cart-drawer [class*="color-custom-"],
+    dialog [class*="color-custom-"] {
+      --color-background: {{ d_bg }} !important;
+      --color-background-rgb: {{ d_bg.rgb }} !important;
+      --color-foreground: {{ d_ink }} !important;
+      --color-foreground-rgb: {{ d_ink.rgb }} !important;
+      --color-border: {{ d_line }} !important;
+      --color-border-rgb: {{ d_line.rgb }} !important;
+    }
+
+    dialog {
+      background-color: {{ d_bg }} !important;
+      color: {{ d_ink }} !important;
+    }
+
+    #cart-drawer .cart-item,
+    #cart-drawer .cart-items__inner,
+    dialog .card {
+      background-color: {{ d_surface }} !important;
+      border-color: {{ d_line }} !important;
+    }
+
     /* Bolmelerde birbasa ag verilmis yerler */
     [id^="lc-hero-"] .lc-opt,
     [id^="lc-hero-"] .lc-colors button.on,
