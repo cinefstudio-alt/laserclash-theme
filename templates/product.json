@@ -24,8 +24,9 @@
         "bun1": {
           "type": "bundle",
           "settings": {
-            "label": "1 Pack",
+            "label": "Single",
             "desc": "Just the one",
+            "variant": "",
             "units": 1,
             "discount": 0,
             "tag": "",
@@ -37,27 +38,15 @@
         "bun2": {
           "type": "bundle",
           "settings": {
-            "label": "2 Packs",
-            "desc": "Most people pick this",
-            "units": 2,
-            "discount": 15,
-            "tag": "-15%",
+            "label": "Double pack",
+            "desc": "Best value — save more",
+            "variant": "",
+            "units": 1,
+            "discount": 0,
+            "tag": "",
             "popular": true,
             "popular_text": "MOST POPULAR",
             "preselected": true
-          }
-        },
-        "bun3": {
-          "type": "bundle",
-          "settings": {
-            "label": "3 Packs",
-            "desc": "Best value",
-            "units": 3,
-            "discount": 25,
-            "tag": "-25%",
-            "popular": false,
-            "popular_text": "MOST POPULAR",
-            "preselected": false
           }
         },
         "inc1": {
@@ -85,19 +74,21 @@
         "b3",
         "bun1",
         "bun2",
-        "bun3",
         "inc1",
         "inc2",
         "inc3"
       ],
       "settings": {
         "product": "",
+        "show_rating": true,
+        "rating_value": 5,
+        "rating_text": "1,000+",
         "eyebrow": "YOUR BRAND",
-        "title": "",
-        "subtitle": "One sentence that says what it is and why it beats the alternative.",
-        "color_label": "",
+        "title": "YOUR PRODUCT NAME",
+        "subtitle": "One sentence that says what it is and why it beats the alternative. Write it like you would say it out loud.",
+        "color_label": "CHOOSE YOUR COLOR",
         "bundle_heading": "Choose your pack",
-        "bundle_note": "The more you buy, the more you save",
+        "bundle_note": "Pick the size that suits you",
         "per_unit_suffix": "/ pack",
         "included_heading": "✦ INCLUDED WITH EVERY ORDER ✦",
         "cta_text": "ADD TO CART —",
@@ -114,9 +105,431 @@
         "muted": "#5b6b8c",
         "radius": 16
       }
+    },
+    "benefits": {
+      "type": "lc-split",
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "icon": "🎯",
+            "title": "Solves the real problem",
+            "text": "Say what actually changes for them on day one."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "icon": "🧰",
+            "title": "No learning curve",
+            "text": "Out of the box and working in minutes."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "icon": "💬",
+            "title": "People keep it",
+            "text": "The reason they do not return it."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "image_side": "left",
+        "image_first_mobile": true,
+        "video": "",
+        "video_url": "",
+        "ratio": "3/4",
+        "eyebrow": "",
+        "heading1": "THE PROBLEM",
+        "heading2": "AND HOW THIS FIXES IT",
+        "body": "Name the frustration your customer already has, then show the product solving it. Put a short vertical video beside this.",
+        "cta_text": "",
+        "cta_link": "",
+        "pad_top": 56,
+        "pad_bottom": 56,
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "muted": "#5b6b8c",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429",
+        "card": "#f3f7ff",
+        "radius": 16
+      }
+    },
+    "features": {
+      "type": "lc-split",
+      "blocks": {
+        "t1": {
+          "type": "tag",
+          "settings": {
+            "text": "PREMIUM MATERIALS"
+          }
+        },
+        "t2": {
+          "type": "tag",
+          "settings": {
+            "text": "TESTED BUILD"
+          }
+        },
+        "t3": {
+          "type": "tag",
+          "settings": {
+            "text": "EASY TO USE"
+          }
+        },
+        "t4": {
+          "type": "tag",
+          "settings": {
+            "text": "READY TO GIFT"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {
+        "image_side": "right",
+        "image_first_mobile": true,
+        "image": "",
+        "video_url": "",
+        "ratio": "3/4",
+        "eyebrow": "",
+        "heading1": "WHAT MAKES IT",
+        "heading2": "DIFFERENT",
+        "body": "Three or four concrete details — material, size, battery, warranty. Specifics sell; adjectives do not.",
+        "cta_text": "GET YOURS",
+        "cta_link": "#lc-buy",
+        "pad_top": 56,
+        "pad_bottom": 56,
+        "bg": "#f3f7ff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "muted": "#5b6b8c",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429",
+        "card": "#f3f7ff",
+        "radius": 16
+      }
+    },
+    "reviews": {
+      "type": "lc-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "stars": 5,
+            "quote": "I was not expecting much at this price and it genuinely surprised me. Three weeks in and it still looks new.",
+            "name": "Daniel K.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "stars": 5,
+            "quote": "Arrived faster than the estimate and it does exactly what the page said it would. No complaints.",
+            "name": "Sarah M.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "stars": 4.5,
+            "quote": "Bought one, then bought a second for my sister. That is the whole review.",
+            "name": "Priya R.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        },
+        "review_ANE7at": {
+          "type": "review",
+          "settings": {
+            "image": "",
+            "stars": 4.5,
+            "quote": "Simple, well made, and I use it every single day. Worth it.",
+            "name": "Alex M.",
+            "meta": "Verified purchase",
+            "verified": true,
+            "verified_text": "Verified buyer"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "review_ANE7at"
+      ],
+      "settings": {
+        "kicker": "FROM REAL CUSTOMERS",
+        "title": "SEEN IN THEIR HOMES",
+        "subtext": "Photos and words from people who already bought it.",
+        "show_summary": true,
+        "summary_rating": 4.8,
+        "summary_text": "based on verified reviews",
+        "columns": 4,
+        "image_ratio": "1 / 1",
+        "radius": 16,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "card": "#f3f7ff",
+        "line": "#dde6f5",
+        "muted": "#5b6b8c",
+        "star": "#ffc107"
+      }
+    },
+    "modes": {
+      "type": "lc-steps",
+      "blocks": {
+        "m1": {
+          "type": "step",
+          "settings": {
+            "title": "FEATURE ONE",
+            "text": "Short benefit"
+          }
+        },
+        "m2": {
+          "type": "step",
+          "settings": {
+            "title": "FEATURE TWO",
+            "text": "Short benefit"
+          }
+        },
+        "m3": {
+          "type": "step",
+          "settings": {
+            "title": "FEATURE THREE",
+            "text": "Short benefit"
+          }
+        },
+        "m4": {
+          "type": "step",
+          "settings": {
+            "title": "FEATURE FOUR",
+            "text": "Short benefit"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ],
+      "settings": {
+        "layout": "grid",
+        "video": "",
+        "video_url": "",
+        "media_side": "left",
+        "media_width": 760,
+        "media_ratio": "1 / 1",
+        "kicker": "HOW IT WORKS",
+        "heading": "FOUR THINGS IT DOES",
+        "subheading": "One short line under the heading.",
+        "note": "",
+        "cta_text": "",
+        "cta_link": "",
+        "columns": 4,
+        "pad_top": 52,
+        "pad_bottom": 52,
+        "bg": "#f3f7ff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "muted": "#5b6b8c",
+        "card": "#f3f7ff",
+        "line": "#dde6f5",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429",
+        "radius": 16,
+        "card_style": "strip"
+      }
+    },
+    "howto": {
+      "type": "lc-steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "UNBOX IT",
+            "text": "Everything you need is in the box."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "SET IT UP",
+            "text": "One short step, no tools, no app."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "USE IT",
+            "text": "And that is the whole process."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "layout": "media",
+        "video": "",
+        "video_url": "",
+        "media_side": "left",
+        "media_width": 760,
+        "media_ratio": "4 / 5",
+        "kicker": "UP AND RUNNING FAST",
+        "heading": "THREE STEPS, THAT IS IT",
+        "subheading": "From the box to using it, in under two minutes.",
+        "note": "",
+        "cta_text": "GET STARTED",
+        "cta_link": "#lc-buy",
+        "columns": 3,
+        "pad_top": 64,
+        "pad_bottom": 64,
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "muted": "#5b6b8c",
+        "card": "#f3f7ff",
+        "line": "#dde6f5",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429",
+        "radius": 16
+      }
+    },
+    "faq": {
+      "type": "lc-faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "q": "What exactly do I get?",
+            "a": "List what is in the box, plainly."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "q": "How long does shipping take?",
+            "a": "Give a real range and say where you ship from."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "q": "Does it come with a warranty?",
+            "a": "State the length and what it covers."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I return it?",
+            "a": "30 days, no questions. Say who pays the return postage."
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "q": "How do I look after it?",
+            "a": "One or two lines of care instructions."
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "q": "Still not sure?",
+            "a": "Tell them how to reach you and how fast you reply."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "heading": "YOUR QUESTIONS ANSWERED",
+        "open_first": true,
+        "pad_top": 56,
+        "pad_bottom": 56,
+        "bg": "#ffffff",
+        "ink": "#10204a",
+        "blue": "#1742a2",
+        "muted": "#5b6b8c",
+        "line": "#dde6f5",
+        "radius": 14
+      }
+    },
+    "finalcta": {
+      "type": "lc-cta",
+      "settings": {
+        "overlay": 0.5,
+        "eyebrow": "NO REASON TO WAIT",
+        "heading": "MAKE IT YOURS",
+        "body": "",
+        "cta_text": "ADD TO CART",
+        "cta_link": "#lc-buy",
+        "trust": "Free shipping · 30-day money-back guarantee",
+        "pad_top": 80,
+        "pad_bottom": 80,
+        "bg": "#f3f7ff",
+        "ink": "#10204a",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429"
+      }
+    },
+    "sticky": {
+      "type": "lc-sticky",
+      "settings": {
+        "product": "",
+        "label": "",
+        "button_text": "BUY NOW",
+        "show_after": 600,
+        "bar_bg": "#0b1429",
+        "accent": "#bfff0f",
+        "accent_ink": "#0b1429"
+      }
     }
   },
   "order": [
-    "hero"
+    "hero",
+    "benefits",
+    "features",
+    "reviews",
+    "modes",
+    "howto",
+    "faq",
+    "finalcta",
+    "sticky"
   ]
 }
